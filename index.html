@@ -1,35 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>MKG Kuwait</title>
+  <meta charset="UTF-8" />
+  <title>MKG Kuwait | Mubarak Al-Kabeer Governorate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto; background:#0b0b0b;color:#f5c16c}
-    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center}
-    .card{max-width:520px;padding:28px;text-align:center}
-    img{max-width:180px}
-    h1{margin:16px 0 8px}
-    p{color:#cfcfcf}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-    a.btn{display:block;padding:14px;border-radius:12px;background:#121212;color:#f5c16c;text-decoration:none}
-    .lang{position:fixed;top:12px;right:12px;color:#f5c16c}
+    body {
+      margin: 0;
+      font-family: "Tahoma", Arial, sans-serif;
+      background: #0b0b0b;
+      color: #f5c77a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      text-align: center;
+      max-width: 420px;
+      padding: 30px;
+    }
+    img {
+      width: 180px;
+      margin-bottom: 25px;
+    }
+    h1 {
+      margin: 10px 0;
+      font-size: 26px;
+    }
+    h2 {
+      margin: 0 0 25px;
+      font-size: 18px;
+      color: #cccccc;
+      font-weight: normal;
+    }
+    .links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 25px;
+    }
+    .link {
+      background: #111;
+      border-radius: 14px;
+      padding: 18px;
+      text-decoration: none;
+      color: #f5c77a;
+      border: 1px solid #333;
+      transition: 0.2s;
+    }
+    .link:hover {
+      background: #1a1a1a;
+    }
+    footer {
+      margin-top: 35px;
+      font-size: 13px;
+      color: #777;
+    }
+    @media (max-width: 480px) {
+      .links {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <div class="lang">English</div>
-  <div class="wrap">
-    <div class="card">
-      <img src="logo.png" alt="MKG Kuwait"/>
-      <h1>شكراً لكم</h1>
-      <p>نراكم في الفعاليات القادمة</p>
-      <div class="grid">
-        <a class="btn" href="https://www.instagram.com/mkgkuwait">Instagram</a>
-        <a class="btn" href="https://x.com/mkgkuwait">X</a>
-        <a class="btn" href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5">موقع المحافظة</a>
-        <a class="btn" href="mailto:mkgkuwait@outlook.com">البريد الإلكتروني</a>
-      </div>
+  <div class="container">
+    <img src="logo.png" alt="Mubarak Al-Kabeer Governorate Logo" />
+
+    <h1>محافظة مبارك الكبير</h1>
+    <h2>Mubarak Al-Kabeer Governorate</h2>
+
+    <div class="links">
+      <a class="link" href="https://www.instagram.com/mkgkuwait" target="_blank">Instagram</a>
+      <a class="link" href="https://x.com/mkgkuwait" target="_blank">X</a>
+      <a class="link" href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5" target="_blank">موقع المحافظة</a>
+      <a class="link" href="mailto:mkgkuwait@outlook.com">البريد الإلكتروني</a>
     </div>
+
+    <footer>
+      © State of Kuwait – Mubarak Al-Kabeer Governorate
+    </footer>
   </div>
 </body>
 </html>
