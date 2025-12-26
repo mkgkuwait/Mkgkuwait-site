@@ -10,117 +10,95 @@
 <meta name="theme-color" content="#000000">
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #000;
-  color: #fff;
-  font-family: Tahoma, Arial, sans-serif;
+html,body{
+  margin:0;padding:0;background:#000;color:#fff;
+  font-family:Tahoma,Arial,sans-serif;
 }
-.container {
-  max-width: 420px;
-  margin: 40px auto;
-  padding: 30px;
+.container{
+  max-width:420px;
+  margin:40px auto;
+  padding:30px;
+  padding-bottom:100px;
 }
-.logo {
-  width: 140px;
-  display: block;
-  margin: 0 auto 20px;
+.logo{width:140px;display:block;margin:0 auto 20px}
+h1,h2{text-align:center;color:#f5c77a}
+h2{font-size:16px;font-weight:normal;margin-bottom:25px}
+label{display:block;margin:14px 0 6px;font-size:14px}
+input,select{
+  width:100%;padding:12px;
+  background:#111;color:#fff;
+  border:1px solid #444;border-radius:8px;
 }
-h1, h2 {
-  text-align: center;
-  color: #f5c77a;
+button{
+  width:100%;margin-top:25px;padding:14px;
+  background:#f5c77a;color:#000;
+  border:none;border-radius:10px;
+  font-size:16px;font-weight:bold;
 }
-h2 {
-  font-size: 16px;
-  font-weight: normal;
-  margin-bottom: 25px;
+
+/* ===== الشريط السفلي ===== */
+.footer-bar{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  height:70px;
+  background:#0b0b0b;
+  border-top:1px solid #222;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:28px;
 }
-label {
-  display: block;
-  margin: 14px 0 6px;
-  font-size: 14px;
-}
-input, select {
-  width: 100%;
-  padding: 12px;
-  background: #111;
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 8px;
-}
-button {
-  width: 100%;
-  margin-top: 25px;
-  padding: 14px;
-  background: #f5c77a;
-  color: #000;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
-button:hover {
-  background: #fff;
-}
+.footer-bar a{color:#aaa;font-size:20px;text-decoration:none}
+.footer-bar a:hover{color:#f5c77a}
 </style>
 </head>
 
 <body>
 <div class="container">
-
-  <a href="index.html">
-    <img src="logo.png" alt="MKG Kuwait" class="logo">
-  </a>
+  <a href="index.html"><img src="logo.png" class="logo"></a>
 
   <h1>التسجيل في الفرق التطوعية</h1>
   <h2>Volunteer Registration</h2>
 
   <form action="https://formsubmit.co/mkgsports@zohomail.com" method="POST">
-
-    <label>الاسم الكامل / Full Name</label>
+    <label>الاسم الكامل</label>
     <input type="text" name="Full_Name" required>
 
-    <label>رقم الهاتف / Phone</label>
+    <label>رقم الهاتف</label>
     <input type="tel" name="Phone" required>
 
-    <label>العمر / Age</label>
+    <label>العمر</label>
     <input type="number" name="Age" min="10" max="70" required>
 
-    <label>الجنس / Gender</label>
+    <label>الجنس</label>
     <select name="Gender" required>
       <option value="">اختر</option>
       <option>ذكر</option>
       <option>أنثى</option>
     </select>
 
-    <label>نوع التطوع / Volunteer Type</label>
+    <label>نوع التطوع</label>
     <select name="Volunteer_Type" required>
       <option value="">اختر</option>
       <option>زراعة تجميلية</option>
       <option>صيانة مرافق وخدمات عامة</option>
     </select>
 
-    <label>منطقة السكن / Area</label>
-    <input type="text" name="Area">
+    <label>الرقم المدني</label>
+    <input type="text" name="Civil_ID" pattern="[0-9]{12}" required>
 
-    <label>الرقم المدني / Civil ID</label>
-    <input type="text" name="Civil_ID" pattern="[0-9]{12}" placeholder="12 رقم" required>
-
-    <label>
-      <input type="checkbox" name="Guardian_Approval">
-      أقر بموافقة ولي الأمر لمن هم دون 18 سنة
-    </label>
-
-    <input type="hidden" name="_subject" value="طلب تطوع جديد – محافظة مبارك الكبير">
-    <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_next" value="thankyou.html">
     <input type="hidden" name="_captcha" value="false">
 
     <button type="submit">إرسال الطلب</button>
   </form>
+</div>
 
+<div class="footer-bar">
+  <a href="https://www.instagram.com/mkgkuwait">📸</a>
+  <a href="https://x.com/mkgkuwait">𝕏</a>
+  <a href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5">📍</a>
+  <a href="mailto:mkgkuwait@outlook.com">✉️</a>
 </div>
 </body>
 </html>
