@@ -2,99 +2,65 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>تم التسجيل بنجاح | Registration Successful</title>
+<title>تم التسجيل بنجاح</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- تحويل تلقائي مضمون بعد 4 ثواني -->
-<meta http-equiv="refresh" content="4;url=https://mkgkuwait.com">
+<meta http-equiv="refresh" content="4;url=index.html">
 
 <style>
-body{
-  margin:0;
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
   font-family: Tahoma, Arial, sans-serif;
-  background:#f2f4f3;
+  height: 100%;
 }
 
-.box{
-  max-width:420px;
-  margin:100px auto;
-  background:#ffffff;
-  padding:40px;
-  text-align:center;
-  border-radius:14px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.1);
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.logo{
-  width:140px;
-  margin-bottom:20px;
+img {
+  width: 160px;
+  margin-bottom: 20px;
 }
 
-h1{
-  color:#0b5f3c;
-  margin-bottom:10px;
+h1 {
+  color: #f5c77a;
 }
 
-h2{
-  color:#0b5f3c;
-  font-size:18px;
-  margin-bottom:20px;
-  font-weight:normal;
+p {
+  color: #ccc;
+  font-size: 15px;
 }
 
-p{
-  color:#333;
-  font-size:14px;
-  line-height:1.9;
-}
-
-.timer{
-  margin-top:20px;
-  font-size:13px;
-  color:#777;
+.count {
+  margin-top: 15px;
+  color: #f5c77a;
 }
 </style>
 
 <script>
-let seconds = 4;
-setInterval(function(){
-  document.getElementById("count").innerText = seconds;
-  seconds--;
-  if(seconds < 0){
-    window.location.href = "https://mkgkuwait.com";
-  }
-},1000);
+let s = 4;
+setInterval(() => {
+  document.getElementById("c").innerText = s;
+  s--;
+}, 1000);
 </script>
 </head>
 
 <body>
-
-<div class="box">
-
-  <img src="logo.png" alt="MKG Kuwait" class="logo">
-
+<div class="container">
+  <img src="logo.png" alt="MKG Kuwait">
   <h1>تم تسجيلك بنجاح</h1>
-  <h2>Registration Successful</h2>
-
-  <p>
-    نشكرك على تسجيلك في الفرق التطوعية بمحافظة مبارك الكبير.<br>
-    سوف يتم التواصل معك قريباً.
-  </p>
-
-  <p>
-    Thank you for registering for the volunteer teams of<br>
-    Mubarak Al-Kabeer Governorate.<br>
-    We will contact you soon.
-  </p>
-
-  <div class="timer">
-    سيتم تحويلك إلى الصفحة الرئيسية خلال
-    <span id="count">4</span>
-    ثواني<br>
-    Redirecting to the homepage in 4 seconds
-  </div>
-
+  <p>Thank you for registering<br>سيتم التواصل معك قريباً</p>
+  <div class="count">التحويل خلال <span id="c">4</span> ثواني</div>
 </div>
-
 </body>
 </html>
