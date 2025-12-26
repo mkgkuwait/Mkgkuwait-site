@@ -10,78 +10,69 @@
 <meta name="theme-color" content="#000000">
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #000;
-  color: #f5c77a;
-  font-family: Tahoma, Arial, sans-serif;
-  height: 100%;
+html,body{
+  margin:0;padding:0;background:#000;color:#f5c77a;
+  font-family:Tahoma,Arial,sans-serif;height:100%;
 }
-.container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.main{
+  min-height:100vh;
+  padding-bottom:80px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
-.logo {
-  width: 180px;
-  margin-bottom: 20px;
+.logo{width:180px;margin-bottom:20px}
+h1{margin:10px 0;font-size:26px}
+h2{margin-bottom:30px;font-size:18px;color:#aaa;font-weight:normal}
+
+.volunteer-btn{
+  width:320px;
+  padding:20px;
+  background:#f5c77a;
+  color:#000;
+  border-radius:16px;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:bold;
 }
-h1 {
-  margin: 10px 0;
-  font-size: 26px;
+.volunteer-btn:hover{background:#fff}
+
+/* ===== الشريط السفلي ===== */
+.footer-bar{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  height:70px;
+  background:#0b0b0b;
+  border-top:1px solid #222;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:28px;
 }
-h2 {
-  margin-bottom: 30px;
-  font-size: 18px;
-  color: #aaa;
-  font-weight: normal;
+.footer-bar a{
+  color:#aaa;
+  font-size:20px;
+  text-decoration:none;
 }
-a.btn {
-  display: block;
-  width: 260px;
-  margin: 10px 0;
-  padding: 16px;
-  background: #111;
-  color: #f5c77a;
-  border: 1px solid #333;
-  border-radius: 12px;
-  text-decoration: none;
-  font-size: 16px;
-}
-a.btn:hover {
-  background: #222;
-}
-footer {
-  margin-top: 30px;
-  font-size: 12px;
-  color: #666;
-}
+.footer-bar a:hover{color:#f5c77a}
 </style>
 </head>
 
 <body>
-<div class="container">
-
-  <a href="index.html">
-    <img src="logo.png" alt="MKG Kuwait" class="logo">
-  </a>
-
+<div class="main">
+  <a href="index.html"><img src="logo.png" class="logo"></a>
   <h1>محافظة مبارك الكبير</h1>
   <h2>Mubarak Al-Kabeer Governorate</h2>
+  <a href="volunteer.html" class="volunteer-btn">التسجيل في الفرق التطوعية</a>
+</div>
 
-  <a class="btn" href="volunteer.html">التسجيل في الفرق التطوعية</a>
-  <a class="btn" href="https://www.instagram.com/mkgkuwait" target="_blank">Instagram</a>
-  <a class="btn" href="https://x.com/mkgkuwait" target="_blank">X</a>
-  <a class="btn" href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5" target="_blank">موقع المحافظة</a>
-  <a class="btn" href="mailto:mkgkuwait@outlook.com">mkgkuwait@outlook.com</a>
-
-  <footer>
-    © State of Kuwait – Mubarak Al-Kabeer Governorate
-  </footer>
+<div class="footer-bar">
+  <a href="https://www.instagram.com/mkgkuwait" target="_blank">📸</a>
+  <a href="https://x.com/mkgkuwait" target="_blank">𝕏</a>
+  <a href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5" target="_blank">📍</a>
+  <a href="mailto:mkgkuwait@outlook.com">✉️</a>
 </div>
 </body>
 </html>
