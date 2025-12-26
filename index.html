@@ -5,6 +5,10 @@
 <title>MKG Kuwait | Mubarak Al-Kabeer Governorate</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="theme-color" content="#000000">
+
 <style>
 html, body {
   margin: 0;
@@ -14,7 +18,6 @@ html, body {
   font-family: Tahoma, Arial, sans-serif;
   height: 100%;
 }
-
 .container {
   min-height: 100vh;
   display: flex;
@@ -23,25 +26,21 @@ html, body {
   align-items: center;
   text-align: center;
 }
-
-img {
+.logo {
   width: 180px;
   margin-bottom: 20px;
 }
-
 h1 {
   margin: 10px 0;
   font-size: 26px;
 }
-
 h2 {
   margin-bottom: 30px;
   font-size: 18px;
   color: #aaa;
   font-weight: normal;
 }
-
-a {
+a.btn {
   display: block;
   width: 260px;
   margin: 10px 0;
@@ -53,11 +52,9 @@ a {
   text-decoration: none;
   font-size: 16px;
 }
-
-a:hover {
+a.btn:hover {
   background: #222;
 }
-
 footer {
   margin-top: 30px;
   font-size: 12px;
@@ -68,16 +65,19 @@ footer {
 
 <body>
 <div class="container">
-  <img src="logo.png" alt="MKG Kuwait">
+
+  <a href="index.html">
+    <img src="logo.png" alt="MKG Kuwait" class="logo">
+  </a>
 
   <h1>محافظة مبارك الكبير</h1>
   <h2>Mubarak Al-Kabeer Governorate</h2>
 
-  <a href="volunteer.html">التسجيل في الفرق التطوعية</a>
-  <a href="https://www.instagram.com/mkgkuwait" target="_blank">Instagram</a>
-  <a href="https://x.com/mkgkuwait" target="_blank">X</a>
-  <a href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5" target="_blank">موقع المحافظة</a>
-  <a href="mailto:mkgsports@zohomail.com">البريد الإلكتروني</a>
+  <a class="btn" href="volunteer.html">التسجيل في الفرق التطوعية</a>
+  <a class="btn" href="https://www.instagram.com/mkgkuwait" target="_blank">Instagram</a>
+  <a class="btn" href="https://x.com/mkgkuwait" target="_blank">X</a>
+  <a class="btn" href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5" target="_blank">موقع المحافظة</a>
+  <a class="btn" href="mailto:mkgkuwait@outlook.com">mkgkuwait@outlook.com</a>
 
   <footer>
     © State of Kuwait – Mubarak Al-Kabeer Governorate
