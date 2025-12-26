@@ -5,6 +5,9 @@
 <title>تم التسجيل بنجاح | Registration Successful</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- تحويل تلقائي مضمون بعد 4 ثواني -->
+<meta http-equiv="refresh" content="4;url=https://mkgkuwait.com">
+
 <style>
 body{
   margin:0;
@@ -54,14 +57,13 @@ p{
 
 <script>
 let seconds = 4;
-function countdown(){
+setInterval(function(){
   document.getElementById("count").innerText = seconds;
   seconds--;
   if(seconds < 0){
     window.location.href = "https://mkgkuwait.com";
   }
-}
-setInterval(countdown, 1000);
+},1000);
 </script>
 </head>
 
