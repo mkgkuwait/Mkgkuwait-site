@@ -5,6 +5,10 @@
 <title>تم التسجيل بنجاح</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="theme-color" content="#000000">
+
 <meta http-equiv="refresh" content="4;url=index.html">
 
 <style>
@@ -16,7 +20,6 @@ html, body {
   font-family: Tahoma, Arial, sans-serif;
   height: 100%;
 }
-
 .container {
   height: 100%;
   display: flex;
@@ -25,21 +28,17 @@ html, body {
   align-items: center;
   text-align: center;
 }
-
-img {
+.logo {
   width: 160px;
   margin-bottom: 20px;
 }
-
 h1 {
   color: #f5c77a;
 }
-
 p {
   color: #ccc;
   font-size: 15px;
 }
-
 .count {
   margin-top: 15px;
   color: #f5c77a;
@@ -49,7 +48,8 @@ p {
 <script>
 let s = 4;
 setInterval(() => {
-  document.getElementById("c").innerText = s;
+  const el = document.getElementById("c");
+  if (el) el.innerText = s;
   s--;
 }, 1000);
 </script>
@@ -57,10 +57,15 @@ setInterval(() => {
 
 <body>
 <div class="container">
-  <img src="logo.png" alt="MKG Kuwait">
+
+  <a href="index.html">
+    <img src="logo.png" alt="MKG Kuwait" class="logo">
+  </a>
+
   <h1>تم تسجيلك بنجاح</h1>
   <p>Thank you for registering<br>سيتم التواصل معك قريباً</p>
   <div class="count">التحويل خلال <span id="c">4</span> ثواني</div>
+
 </div>
 </body>
 </html>
