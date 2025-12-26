@@ -1,1 +1,98 @@
-<input type="hidden" name="_next" value="thankyou.html">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تم التسجيل بنجاح | Registration Successful</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: Tahoma, Arial, sans-serif;
+  background:#f2f4f3;
+}
+
+.box{
+  max-width:420px;
+  margin:100px auto;
+  background:#ffffff;
+  padding:40px;
+  text-align:center;
+  border-radius:14px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
+
+.logo{
+  width:140px;
+  margin-bottom:20px;
+}
+
+h1{
+  color:#0b5f3c;
+  margin-bottom:10px;
+}
+
+h2{
+  color:#0b5f3c;
+  font-size:18px;
+  margin-bottom:20px;
+  font-weight:normal;
+}
+
+p{
+  color:#333;
+  font-size:14px;
+  line-height:1.9;
+}
+
+.timer{
+  margin-top:20px;
+  font-size:13px;
+  color:#777;
+}
+</style>
+
+<script>
+let seconds = 4;
+function countdown(){
+  document.getElementById("count").innerText = seconds;
+  seconds--;
+  if(seconds < 0){
+    window.location.href = "https://mkgkuwait.com";
+  }
+}
+setInterval(countdown, 1000);
+</script>
+</head>
+
+<body>
+
+<div class="box">
+
+  <img src="logo.png" alt="MKG Kuwait" class="logo">
+
+  <h1>تم تسجيلك بنجاح</h1>
+  <h2>Registration Successful</h2>
+
+  <p>
+    نشكرك على تسجيلك في الفرق التطوعية بمحافظة مبارك الكبير.<br>
+    سوف يتم التواصل معك قريباً.
+  </p>
+
+  <p>
+    Thank you for registering for the volunteer teams of<br>
+    Mubarak Al-Kabeer Governorate.<br>
+    We will contact you soon.
+  </p>
+
+  <div class="timer">
+    سيتم تحويلك إلى الصفحة الرئيسية خلال
+    <span id="count">4</span>
+    ثواني<br>
+    Redirecting to the homepage in 4 seconds
+  </div>
+
+</div>
+
+</body>
+</html>
