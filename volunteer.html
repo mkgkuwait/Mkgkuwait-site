@@ -2,105 +2,89 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>التسجيل في الفرق التطوعية | Volunteer Registration</title>
+<title>التطوع | Volunteer Registration</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-  margin:0;
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
   font-family: Tahoma, Arial, sans-serif;
-  background:#f2f4f3;
 }
 
-.container{
-  max-width:450px;
-  margin:40px auto;
-  background:#ffffff;
-  padding:30px;
-  border-radius:14px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.1);
+.container {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 30px;
 }
 
-.logo{
-  display:block;
-  margin:0 auto 20px;
-  width:140px;
+img {
+  width: 140px;
+  display: block;
+  margin: 0 auto 20px;
 }
 
-h1{
-  text-align:center;
-  color:#0b5f3c;
-  margin-bottom:5px;
+h1, h2 {
+  text-align: center;
+  color: #f5c77a;
 }
 
-h2{
-  text-align:center;
-  color:#0b5f3c;
-  font-size:16px;
-  font-weight:normal;
-  margin-bottom:25px;
+h2 {
+  font-size: 16px;
+  font-weight: normal;
+  margin-bottom: 25px;
 }
 
-label{
-  display:block;
-  margin:14px 0 6px;
-  font-size:14px;
-  color:#333;
+label {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 14px;
 }
 
-input, select{
-  width:100%;
-  padding:12px;
-  font-size:14px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  box-sizing:border-box;
+input, select {
+  width: 100%;
+  padding: 12px;
+  background: #111;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 8px;
 }
 
-.checkbox{
-  margin-top:15px;
-  font-size:13px;
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  background: #f5c77a;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.checkbox input{
-  width:auto;
-  margin-left:6px;
-}
-
-button{
-  width:100%;
-  margin-top:25px;
-  padding:14px;
-  background:#0b5f3c;
-  color:#fff;
-  border:none;
-  border-radius:10px;
-  font-size:16px;
-  cursor:pointer;
-}
-
-button:hover{
-  background:#094c31;
+button:hover {
+  background: #fff;
 }
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
-  <img src="logo.png" alt="MKG Kuwait" class="logo">
+  <img src="logo.png" alt="MKG Kuwait">
 
   <h1>التسجيل في الفرق التطوعية</h1>
   <h2>Volunteer Registration</h2>
 
-  <!-- الفورم -->
   <form action="https://formsubmit.co/mkgsports@zohomail.com" method="POST">
 
     <label>الاسم الكامل / Full Name</label>
     <input type="text" name="الاسم الكامل" required>
 
-    <label>رقم الهاتف / Phone Number</label>
+    <label>رقم الهاتف / Phone</label>
     <input type="tel" name="رقم الهاتف" required>
 
     <label>العمر / Age</label>
@@ -108,14 +92,14 @@ button:hover{
 
     <label>الجنس / Gender</label>
     <select name="الجنس" required>
-      <option value="">اختر / Select</option>
-      <option>ذكر / Male</option>
-      <option>أنثى / Female</option>
+      <option value="">اختر</option>
+      <option>ذكر</option>
+      <option>أنثى</option>
     </select>
 
     <label>نوع التطوع / Volunteer Type</label>
     <select name="نوع التطوع" required>
-      <option value="">اختر / Select</option>
+      <option value="">اختر</option>
       <option>زراعة تجميلية</option>
       <option>صيانة مرافق وخدمات عامة</option>
     </select>
@@ -124,27 +108,21 @@ button:hover{
     <input type="text" name="منطقة السكن">
 
     <label>الرقم المدني / Civil ID</label>
-    <input type="text" name="الرقم المدني" pattern="[0-9]{12}" placeholder="12 digits" required>
+    <input type="text" name="الرقم المدني" pattern="[0-9]{12}" placeholder="12 رقم" required>
 
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" name="إقرار ولي الأمر">
-        أقر بموافقة ولي الأمر لمن هم دون 18 سنة<br>
-        I confirm guardian approval if applicant is under 18
-      </label>
-    </div>
+    <label>
+      <input type="checkbox" name="إقرار">
+      أقر بموافقة ولي الأمر لمن هم دون 18 سنة
+    </label>
 
-    <!-- إعدادات FormSubmit -->
     <input type="hidden" name="_subject" value="طلب تطوع جديد – محافظة مبارك الكبير">
     <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_next" value="https://mkgkuwait.com/thankyou.html">
+    <input type="hidden" name="_next" value="thankyou.html">
     <input type="hidden" name="_captcha" value="false">
 
-    <button type="submit">إرسال الطلب | Submit</button>
-
+    <button type="submit">إرسال الطلب</button>
   </form>
 
 </div>
-
 </body>
 </html>
