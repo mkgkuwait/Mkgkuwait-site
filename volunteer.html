@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>التسجيل في الفرق التطوعية</title>
+<title>التسجيل في الفرق التطوعية | Volunteer Registration</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -13,23 +13,37 @@ body{
 }
 
 .container{
-  max-width:420px;
+  max-width:450px;
   margin:40px auto;
   background:#ffffff;
   padding:30px;
-  border-radius:12px;
+  border-radius:14px;
   box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
+
+.logo{
+  display:block;
+  margin:0 auto 20px;
+  width:140px;
 }
 
 h1{
   text-align:center;
   color:#0b5f3c;
+  margin-bottom:5px;
+}
+
+h2{
+  text-align:center;
+  color:#0b5f3c;
+  font-size:16px;
+  font-weight:normal;
   margin-bottom:25px;
 }
 
 label{
   display:block;
-  margin:15px 0 5px;
+  margin:14px 0 6px;
   font-size:14px;
   color:#333;
 }
@@ -43,14 +57,14 @@ input, select{
   box-sizing:border-box;
 }
 
-input[type="checkbox"]{
-  width:auto;
-  margin-left:8px;
-}
-
 .checkbox{
   margin-top:15px;
   font-size:13px;
+}
+
+.checkbox input{
+  width:auto;
+  margin-left:6px;
 }
 
 button{
@@ -74,54 +88,62 @@ button:hover{
 <body>
 
 <div class="container">
-  <h1>التسجيل في الفرق التطوعية</h1>
 
+  <img src="logo.png" alt="MKG Kuwait" class="logo">
+
+  <h1>التسجيل في الفرق التطوعية</h1>
+  <h2>Volunteer Registration</h2>
+
+  <!-- الفورم -->
   <form action="https://formsubmit.co/mkgsports@zohomail.com" method="POST">
 
-    <label>الاسم الكامل</label>
+    <label>الاسم الكامل / Full Name</label>
     <input type="text" name="الاسم الكامل" required>
 
-    <label>رقم الهاتف</label>
+    <label>رقم الهاتف / Phone Number</label>
     <input type="tel" name="رقم الهاتف" required>
 
-    <label>العمر</label>
+    <label>العمر / Age</label>
     <input type="number" name="العمر" min="10" max="70" required>
 
-    <label>الجنس</label>
+    <label>الجنس / Gender</label>
     <select name="الجنس" required>
-      <option value="">اختر</option>
-      <option>ذكر</option>
-      <option>أنثى</option>
+      <option value="">اختر / Select</option>
+      <option>ذكر / Male</option>
+      <option>أنثى / Female</option>
     </select>
 
-    <label>نوع التطوع</label>
+    <label>نوع التطوع / Volunteer Type</label>
     <select name="نوع التطوع" required>
-      <option value="">اختر</option>
+      <option value="">اختر / Select</option>
       <option>زراعة تجميلية</option>
       <option>صيانة مرافق وخدمات عامة</option>
     </select>
 
-    <label>منطقة السكن</label>
+    <label>منطقة السكن / Area</label>
     <input type="text" name="منطقة السكن">
 
-    <label>الرقم المدني</label>
-    <input type="text" name="الرقم المدني" pattern="[0-9]{12}" placeholder="12 رقم" required>
+    <label>الرقم المدني / Civil ID</label>
+    <input type="text" name="الرقم المدني" pattern="[0-9]{12}" placeholder="12 digits" required>
 
     <div class="checkbox">
       <label>
         <input type="checkbox" name="إقرار ولي الأمر">
-        أقر بموافقة ولي الأمر لمن هم دون 18 سنة
+        أقر بموافقة ولي الأمر لمن هم دون 18 سنة<br>
+        I confirm guardian approval if applicant is under 18
       </label>
     </div>
 
     <!-- إعدادات FormSubmit -->
     <input type="hidden" name="_subject" value="طلب تطوع جديد – محافظة مبارك الكبير">
     <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_next" value="/thankyou.html">
+    <input type="hidden" name="_next" value="https://mkgkuwait.com/thankyou.html">
     <input type="hidden" name="_captcha" value="false">
 
-    <button type="submit">إرسال الطلب</button>
+    <button type="submit">إرسال الطلب | Submit</button>
+
   </form>
+
 </div>
 
 </body>
