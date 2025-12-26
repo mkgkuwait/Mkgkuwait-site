@@ -1,110 +1,87 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <title>MKG Kuwait | Mubarak Al-Kabeer Governorate</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body {
-      margin: 0;
-      font-family: "Tahoma", Arial, sans-serif;
-      background: #0b0b0b;
-      color: #f5c77a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-    .container {
-      text-align: center;
-      max-width: 420px;
-      padding: 30px;
-    }
-    img {
-      width: 180px;
-      margin-bottom: 25px;
-    }
-    h1 {
-      margin: 10px 0;
-      font-size: 26px;
-    }
-    h2 {
-      margin: 0 0 25px;
-      font-size: 18px;
-      color: #cccccc;
-      font-weight: normal;
-    }
+<meta charset="UTF-8">
+<title>MKG Kuwait | Mubarak Al-Kabeer Governorate</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    /* زر التطوع */
-    .volunteer-btn {
-      display: block;
-      margin: 20px 0 30px;
-      padding: 18px;
-      background: #f5c77a;
-      color: #0b0b0b;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 14px;
-      transition: 0.2s;
-    }
-    .volunteer-btn:hover {
-      background: #e6b860;
-    }
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #f5c77a;
+  font-family: Tahoma, Arial, sans-serif;
+  height: 100%;
+}
 
-    .links {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 10px;
-    }
-    .link {
-      background: #111;
-      border-radius: 14px;
-      padding: 18px;
-      text-decoration: none;
-      color: #f5c77a;
-      border: 1px solid #333;
-      transition: 0.2s;
-    }
-    .link:hover {
-      background: #1a1a1a;
-    }
-    footer {
-      margin-top: 35px;
-      font-size: 13px;
-      color: #777;
-    }
-    @media (max-width: 480px) {
-      .links {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+img {
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 10px 0;
+  font-size: 26px;
+}
+
+h2 {
+  margin-bottom: 30px;
+  font-size: 18px;
+  color: #aaa;
+  font-weight: normal;
+}
+
+a {
+  display: block;
+  width: 260px;
+  margin: 10px 0;
+  padding: 16px;
+  background: #111;
+  color: #f5c77a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+a:hover {
+  background: #222;
+}
+
+footer {
+  margin-top: 30px;
+  font-size: 12px;
+  color: #666;
+}
+</style>
 </head>
 
 <body>
-  <div class="container">
-    <img src="logo.png" alt="MKG Kuwait">
+<div class="container">
+  <img src="logo.png" alt="MKG Kuwait">
 
-    <h1>محافظة مبارك الكبير</h1>
-    <h2>Mubarak Al-Kabeer Governorate</h2>
+  <h1>محافظة مبارك الكبير</h1>
+  <h2>Mubarak Al-Kabeer Governorate</h2>
 
-    <!-- زر التسجيل في الفرق التطوعية -->
-    <a href="/volunteer.html" class="volunteer-btn">
-      التسجيل في الفرق التطوعية
-    </a>
+  <a href="volunteer.html">التسجيل في الفرق التطوعية</a>
+  <a href="https://www.instagram.com/mkgkuwait" target="_blank">Instagram</a>
+  <a href="https://x.com/mkgkuwait" target="_blank">X</a>
+  <a href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5" target="_blank">موقع المحافظة</a>
+  <a href="mailto:mkgsports@zohomail.com">البريد الإلكتروني</a>
 
-    <div class="links">
-      <a class="link" href="https://www.instagram.com/mkgkuwait" target="_blank">Instagram</a>
-      <a class="link" href="https://x.com/mkgkuwait" target="_blank">X</a>
-      <a class="link" href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5" target="_blank">موقع المحافظة</a>
-      <a class="link" href="mailto:mkgkuwait@outlook.com">البريد الإلكتروني</a>
-    </div>
-
-    <footer>
-      © State of Kuwait – Mubarak Al-Kabeer Governorate
-    </footer>
-  </div>
+  <footer>
+    © State of Kuwait – Mubarak Al-Kabeer Governorate
+  </footer>
+</div>
 </body>
 </html>
