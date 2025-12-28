@@ -2,60 +2,124 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>التطوع | Volunteer Registration</title>
+<title>التطوع</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" type="image/png" href="favicon.png">
-<meta name="theme-color" content="#000000">
-
 <style>
-html,body{margin:0;padding:0;background:#000;color:#fff;font-family:Tahoma,Arial,sans-serif}
-.container{max-width:420px;margin:40px auto;padding:30px;padding-bottom:100px}
-.logo{width:140px;display:block;margin:0 auto 20px}
-h1,h2{text-align:center;color:#f5c77a}
-h2{font-size:16px;font-weight:normal;margin-bottom:25px}
-label{display:block;margin:14px 0 6px;font-size:14px}
-input,select{width:100%;padding:12px;background:#111;color:#fff;border:1px solid #444;border-radius:8px}
-button{width:100%;margin-top:25px;padding:14px;background:#f5c77a;color:#000;border:none;border-radius:10px;font-size:16px;font-weight:bold}
-
-/* الشريط */
-.footer-bar{
-  position:fixed;bottom:0;left:0;right:0;height:70px;
-  background:#0b0b0b;border-top:1px solid #222;
-  display:flex;justify-content:center;align-items:center;gap:26px
+body{
+  margin:0;
+  background:#000;
+  color:#fff;
+  font-family:Tahoma, Arial, sans-serif;
 }
-.footer-bar svg{width:22px;height:22px;fill:#f5c77a}
-.footer-bar a:hover svg{fill:#fff}
+.container{
+  max-width:500px;
+  margin:40px auto;
+  padding:20px;
+}
+h2{
+  text-align:center;
+}
+label{
+  display:block;
+  margin-top:15px;
+  font-size:14px;
+}
+input, select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  background:#000;
+  color:#fff;
+  border:1px solid #fff;
+}
+button{
+  width:100%;
+  margin-top:25px;
+  padding:12px;
+  background:#fff;
+  color:#000;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+}
+#guardian{
+  display:none;
+  margin-top:20px;
+  padding-top:15px;
+  border-top:1px solid #fff;
+}
 </style>
 </head>
 
 <body>
+
 <div class="container">
-  <a href="index.html"><img src="logo.png" class="logo"></a>
-  <h1>التسجيل في الفرق التطوعية</h1>
-  <h2>Volunteer Registration</h2>
+<h2>نموذج التسجيل في التطوع</h2>
 
-  <form action="https://formsubmit.co/mkgsports@zohomail.com" method="POST">
-    <label>الاسم الكامل</label><input type="text" name="Full_Name" required>
-    <label>رقم الهاتف</label><input type="tel" name="Phone" required>
-    <label>العمر</label><input type="number" name="Age" min="10" max="70" required>
-    <label>الجنس</label>
-    <select name="Gender" required><option value="">اختر</option><option>ذكر</option><option>أنثى</option></select>
-    <label>نوع التطوع</label>
-    <select name="Volunteer_Type" required><option value="">اختر</option><option>زراعة تجميلية</option><option>صيانة مرافق وخدمات عامة</option></select>
-    <label>الرقم المدني</label><input type="text" name="Civil_ID" pattern="[0-9]{12}" required>
+<form id="form">
 
-    <input type="hidden" name="_next" value="thankyou.html">
-    <input type="hidden" name="_captcha" value="false">
-    <button type="submit">إرسال الطلب</button>
-  </form>
+<label>الاسم الكامل</label>
+<input type="text" required>
+
+<label>الرقم المدني</label>
+<input type="text" required>
+
+<label>العمر</label>
+<input type="number" id="age" required>
+
+<label>رقم الهاتف</label>
+<input type="tel" required>
+
+<label>نوع التطوع</label>
+<select required>
+  <option value="">اختر</option>
+  <option>الزراعة التجميلية</option>
+  <option>صيانة المرافق والخدمات العامة</option>
+</select>
+
+<div id="guardian">
+<h3>إقرار ولي الأمر</h3>
+
+<label>اسم ولي الأمر</label>
+<input type="text">
+
+<label>الرقم المدني لولي الأمر</label>
+<input type="text">
+
+<label>رقم هاتف ولي الأمر</label>
+<input type="tel">
+
+<label>
+<input type="checkbox" id="consent">
+ أقر أنا ولي الأمر بالموافقة على مشاركة المتطوع في الأعمال التطوعية
+</label>
 </div>
 
-<div class="footer-bar">
-  <a href="https://www.instagram.com/mkgkuwait"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/></svg></a>
-  <a href="https://x.com/mkgkuwait"><svg viewBox="0 0 24 24"><path d="M18.3 2H21l-6.5 7.4L22 22h-6.2l-4.8-6.2L5.6 22H3l6.9-7.9L2 2h6.3l4.3 5.6L18.3 2z"/></svg></a>
-  <a href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13z"/></svg></a>
-  <a href="mailto:mkgkuwait@outlook.com"><svg viewBox="0 0 24 24"><path d="M2 4h20v16H2z"/></svg></a>
+<button type="submit">إرسال</button>
+
+</form>
 </div>
+
+<script>
+const age = document.getElementById("age");
+const guardian = document.getElementById("guardian");
+const consent = document.getElementById("consent");
+const form = document.getElementById("form");
+
+age.addEventListener("input",()=>{
+  guardian.style.display = age.value < 18 ? "block" : "none";
+});
+
+form.addEventListener("submit",(e)=>{
+  e.preventDefault();
+  if(age.value < 18 && !consent.checked){
+    alert("موافقة ولي الأمر مطلوبة");
+    return;
+  }
+  window.location.href="thankyou.html";
+});
+</script>
+
 </body>
 </html>
