@@ -14,14 +14,11 @@ body{
 }
 .container{
   max-width:500px;
-  margin:40px auto 120px;
+  margin:40px auto 140px;
   padding:20px;
 }
-label{
-  display:block;
-  margin-top:15px;
-}
-input, select{
+label{display:block;margin-top:15px;}
+input,select{
   width:100%;
   padding:10px;
   margin-top:5px;
@@ -43,24 +40,20 @@ button{
   border-top:1px solid #C9A24D;
   padding-top:15px;
 }
-.site-footer{
+footer{
   position:fixed;
   bottom:0;
   width:100%;
-  background:#000;
   border-top:1px solid #C9A24D;
   padding:12px 0;
+  background:#000;
 }
 .footer-icons{
   display:flex;
   justify-content:center;
-  gap:18px;
+  gap:20px;
 }
-.footer-icons svg{
-  width:22px;
-  height:22px;
-  fill:#C9A24D;
-}
+.footer-icons svg{width:22px;height:22px;fill:#C9A24D;}
 </style>
 </head>
 
@@ -97,16 +90,16 @@ button{
 <input>
 <label>رقم هاتف ولي الأمر</label>
 <input>
-<label><input type="checkbox" id="consent"> أوافق</label>
+<label><input type="checkbox" id="consent"> أوافق على مشاركة المتطوع</label>
 </div>
 
 <button type="submit">إرسال</button>
 </form>
 </div>
 
-<footer class="site-footer">
+<footer>
   <div class="footer-icons">
-    <!-- نفس أيقونات الصفحة الرئيسية -->
+    <!-- نفس أيقونات الصفحة الرئيسية (انسخها كما هي إن رغبت) -->
   </div>
 </footer>
 
@@ -114,7 +107,7 @@ button{
 const age=document.getElementById("age");
 const guardian=document.getElementById("guardian");
 const consent=document.getElementById("consent");
-document.getElementById("form").onsubmit=e=>{
+form.onsubmit=e=>{
 e.preventDefault();
 if(age.value<18 && !consent.checked){alert("موافقة ولي الأمر مطلوبة");return;}
 location.href="thankyou.html";
