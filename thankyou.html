@@ -8,15 +8,13 @@
 body{
   margin:0;
   height:100vh;
-  background:#0b3d2e;
+  background:#000;
+  color:#fff;
   display:flex;
   justify-content:center;
   align-items:center;
-  color:#fff;
-  font-family:Tahoma, Arial, sans-serif;
-}
-.box{
   text-align:center;
+  font-family:Tahoma;
 }
 img{
   width:160px;
@@ -25,18 +23,16 @@ img{
 </style>
 
 <script>
-setTimeout(function(){
-  window.location.href = "index.html";
-},5000);
+setTimeout(()=>{window.location.href="index.html";},5000);
 </script>
 </head>
 
 <body>
 
-<div class="box">
-  <img src="logo.png" alt="شعار المحافظة">
-  <h2>تم استلام طلب التسجيل</h2>
-  <p>سيتم تحويلك إلى الصفحة الرئيسية</p>
+<div>
+<img src="logo.png">
+<h2>تم استلام طلب التسجيل</h2>
+<p>سيتم تحويلك إلى الصفحة الرئيسية</p>
 </div>
 
 </body>
