@@ -13,24 +13,13 @@ body{
   color:#C9A24D;
   font-family:Tahoma, Arial, sans-serif;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
 }
-.container img{
-  width:160px;
-  margin-bottom:20px;
-}
-h1{
-  margin:10px 0 5px;
-  color:#C9A24D;
-}
-h2{
-  margin:0 0 30px;
-  font-weight:normal;
-  font-size:18px;
-  color:#C9A24D;
-}
+img{width:160px;margin-bottom:20px;}
+h1,h2{margin:5px 0;}
 .buttons a{
   display:inline-block;
   margin:10px;
@@ -39,11 +28,8 @@ h2{
   color:#C9A24D;
   text-decoration:none;
 }
-.buttons a:hover{
-  background:#C9A24D;
-  color:#000;
-}
-.site-footer{
+.buttons a:hover{background:#C9A24D;color:#000;}
+footer{
   position:absolute;
   bottom:0;
   width:100%;
@@ -53,7 +39,7 @@ h2{
 .footer-icons{
   display:flex;
   justify-content:center;
-  gap:18px;
+  gap:20px;
 }
 .footer-icons svg{
   width:22px;
@@ -65,34 +51,53 @@ h2{
 
 <body>
 
-<div class="container">
-  <img src="logo.png" alt="شعار المحافظة">
-  <h1>محافظة مبارك الكبير</h1>
-  <h2>Mubarak Al-Kabeer Governorate</h2>
+<img src="logo.png" alt="شعار المحافظة">
+<h1>محافظة مبارك الكبير</h1>
+<h2>Mubarak Al-Kabeer Governorate</h2>
 
-  <div class="buttons">
-    <a href="volunteer.html">التطوع</a>
-    <a href="contact.html">التواصل</a>
-  </div>
+<div class="buttons">
+  <a href="volunteer.html">التطوع</a>
+  <a href="contact.html">التواصل</a>
 </div>
 
-<footer class="site-footer">
+<footer>
   <div class="footer-icons">
+
+    <!-- Instagram -->
     <a href="https://www.instagram.com/mkgkuwait" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+      </svg>
     </a>
+
+    <!-- X -->
     <a href="https://x.com/mkgkuwait" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.2l-4.9-6.4L6.1 22H3l7.7-8.8L1 2h6.3z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M18.9 2H22l-7.2 8.2L23 22h-6.2l-4.9-6.4L6.1 22H3l7.7-8.8L1 2h6.3l4.4 5.8z"/>
+      </svg>
     </a>
+
+    <!-- Email -->
     <a href="mailto:mkgkuwait@outlook.com">
-      <svg viewBox="0 0 24 24"><path d="M2 6h20v12H2z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M2 6h20v12H2z"/><path d="M2 6l10 7 10-7"/>
+      </svg>
     </a>
+
+    <!-- Phone -->
     <a href="tel:25473556">
-      <svg viewBox="0 0 24 24"><path d="M6 2h4l2 5-3 2a14 14 0 0 0 6 6l2-3 5 2v4z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M6 2h4l2 5-3 2a14 14 0 0 0 6 6l2-3 5 2v4c0 1-1 2-2 2C10 20 4 14 4 4c0-1 1-2 2-2z"/>
+      </svg>
     </a>
+
+    <!-- Location -->
     <a href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+      </svg>
     </a>
+
   </div>
 </footer>
 
