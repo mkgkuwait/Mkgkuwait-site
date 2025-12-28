@@ -8,173 +8,54 @@
 <style>
 body{
   margin:0;
+  height:100vh;
+  background:#000;
+  color:#fff;
   font-family:Tahoma, Arial, sans-serif;
-  background:#f5f5f5;
-  color:#222;
-}
-header{
-  background:#0b3d2e;
-  color:#fff;
-  padding:20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   text-align:center;
 }
-nav{
-  background:#145a44;
-  padding:10px;
-  text-align:center;
+.container img{
+  width:160px;
+  margin-bottom:20px;
 }
-nav a{
+h1{
+  margin:10px 0 5px;
+}
+h2{
+  margin:0 0 30px;
+  font-weight:normal;
+  font-size:18px;
+}
+.buttons a{
+  display:inline-block;
+  margin:10px;
+  padding:12px 30px;
+  border:1px solid #fff;
   color:#fff;
-  margin:0 10px;
   text-decoration:none;
 }
-section{
-  max-width:900px;
-  margin:30px auto;
+.buttons a:hover{
   background:#fff;
-  padding:25px;
-  border-radius:6px;
-}
-h2,h3{
-  color:#0b3d2e;
-}
-label{
-  display:block;
-  margin-top:15px;
-  font-size:14px;
-}
-input, select{
-  width:100%;
-  padding:10px;
-  margin-top:5px;
-  border:1px solid #ccc;
-  border-radius:4px;
-}
-button{
-  margin-top:20px;
-  background:#0b3d2e;
-  color:#fff;
-  border:none;
-  padding:12px;
-  width:100%;
-  font-size:16px;
-  cursor:pointer;
-}
-button:hover{
-  background:#145a44;
-}
-#guardianSection{
-  display:none;
-  margin-top:20px;
-  padding-top:15px;
-  border-top:1px solid #ccc;
-}
-footer{
-  background:#0b3d2e;
-  color:#fff;
-  text-align:center;
-  padding:15px;
-  font-size:13px;
+  color:#000;
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<div class="container">
+  <img src="logo.png" alt="شعار المحافظة">
   <h1>محافظة مبارك الكبير</h1>
-  <div>دولة الكويت</div>
-</header>
+  <h2>Mubarak Al-Kabeer Governorate</h2>
 
-<nav>
-  <a href="#">الرئيسية</a>
-  <a href="#volunteer">التطوع</a>
-  <a href="#contact">التواصل</a>
-</nav>
-
-<section>
-  <h2>التسجيل في الفرق التطوعية</h2>
-  <p>
-    يسر محافظة مبارك الكبير استقبال طلبات الراغبين بالانضمام
-    إلى الفرق التطوعية في المجالات التالية:
-  </p>
-  <ul>
-    <li>الزراعة التجميلية</li>
-    <li>صيانة المرافق والخدمات العامة</li>
-  </ul>
-</section>
-
-<section id="volunteer">
-  <h3>نموذج تسجيل المتطوعين</h3>
-
-  <form id="volunteerForm">
-
-    <label>الاسم الكامل</label>
-    <input type="text" required>
-
-    <label>العمر</label>
-    <input type="number" id="age" required>
-
-    <label>رقم الهاتف</label>
-    <input type="tel" required>
-
-    <label>نوع التطوع</label>
-    <select required>
-      <option value="">اختر</option>
-      <option>الزراعة التجميلية</option>
-      <option>صيانة المرافق والخدمات العامة</option>
-    </select>
-
-    <!-- ولي الأمر -->
-    <div id="guardianSection">
-      <h4>بيانات ولي الأمر (لمن هم دون 18 سنة)</h4>
-
-      <label>اسم ولي الأمر</label>
-      <input type="text">
-
-      <label>رقم هاتف ولي الأمر</label>
-      <input type="tel">
-
-      <label style="margin-top:10px;">
-        <input type="checkbox" id="consent">
-        أقر أنا ولي الأمر بالموافقة على مشاركة المتطوع
-        في الأعمال التطوعية التابعة لمحافظة مبارك الكبير
-      </label>
-    </div>
-
-    <button type="submit">إرسال الطلب</button>
-
-  </form>
-</section>
-
-<footer id="contact">
-  <div>© محافظة مبارك الكبير – جميع الحقوق محفوظة</div>
-  <div>البريد الإلكتروني: mkgkuwait@outlook.com</div>
-</footer>
-
-<script>
-const ageInput = document.getElementById("age");
-const guardianSection = document.getElementById("guardianSection");
-const form = document.getElementById("volunteerForm");
-const consent = document.getElementById("consent");
-
-ageInput.addEventListener("input", function(){
-  if(this.value < 18){
-    guardianSection.style.display = "block";
-  } else {
-    guardianSection.style.display = "none";
-  }
-});
-
-form.addEventListener("submit", function(e){
-  e.preventDefault();
-  if(ageInput.value < 18 && !consent.checked){
-    alert("يجب موافقة ولي الأمر لإتمام التسجيل");
-    return;
-  }
-  window.location.href = "thankyou.html";
-});
-</script>
+  <div class="buttons">
+    <a href="volunteer.html">التطوع</a>
+    <a href="contact.html">التواصل</a>
+  </div>
+</div>
 
 </body>
 </html>
