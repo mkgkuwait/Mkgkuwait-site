@@ -2,145 +2,41 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>تم التسجيل بنجاح</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="icon" type="image/png" href="favicon.png">
-<meta name="theme-color" content="#000000">
-
-<!-- تحويل تلقائي -->
-<meta http-equiv="refresh" content="4;url=index.html">
+<title>تم التسجيل</title>
 
 <style>
-html,body{
+body{
   margin:0;
-  padding:0;
-  background:#000;
-  color:#fff;
-  font-family:Tahoma,Arial,sans-serif;
-  height:100%;
-}
-
-/* المحتوى */
-.container{
-  height:100%;
-  padding-bottom:80px;
+  height:100vh;
+  background:#0b3d2e;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
+  color:#fff;
+  font-family:Tahoma, Arial, sans-serif;
+}
+.box{
   text-align:center;
 }
-
-.logo{
+img{
   width:160px;
   margin-bottom:20px;
-}
-
-h1{
-  color:#f5c77a;
-  margin-bottom:10px;
-}
-
-p{
-  color:#ccc;
-  font-size:15px;
-}
-
-.count{
-  margin-top:12px;
-  color:#f5c77a;
-  font-size:14px;
-}
-
-/* الشريط السفلي */
-.footer-bar{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:70px;
-  background:#0b0b0b;
-  border-top:1px solid #222;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:26px;
-}
-
-.footer-bar a svg{
-  width:22px;
-  height:22px;
-  fill:#f5c77a;
-  transition:.2s;
-}
-
-.footer-bar a:hover svg{
-  fill:#fff;
 }
 </style>
 
 <script>
-let s = 4;
-setInterval(() => {
-  const el = document.getElementById("sec");
-  if(el) el.innerText = s;
-  s--;
-}, 1000);
+setTimeout(function(){
+  window.location.href = "index.html";
+},5000);
 </script>
 </head>
 
 <body>
 
-<div class="container">
-
-  <a href="index.html">
-    <img src="logo.png" alt="MKG Kuwait" class="logo">
-  </a>
-
-  <h1>تم تسجيلك بنجاح</h1>
-  <p>
-    Thank you for registering<br>
-    سيتم التواصل معك قريباً
-  </p>
-
-  <div class="count">
-    سيتم تحويلك خلال <span id="sec">4</span> ثواني
-  </div>
-
-</div>
-
-<!-- الشريط السفلي -->
-<div class="footer-bar">
-
-  <!-- Instagram -->
-  <a href="https://www.instagram.com/mkgkuwait" target="_blank" aria-label="Instagram">
-    <svg viewBox="0 0 24 24">
-      <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.5-.9a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/>
-    </svg>
-  </a>
-
-  <!-- X -->
-  <a href="https://x.com/mkgkuwait" target="_blank" aria-label="X">
-    <svg viewBox="0 0 24 24">
-      <path d="M18.3 2H21l-6.5 7.4L22 22h-6.2l-4.8-6.2L5.6 22H3l6.9-7.9L2 2h6.3l4.3 5.6L18.3 2z"/>
-    </svg>
-  </a>
-
-  <!-- Location -->
-  <a href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5" target="_blank" aria-label="Location">
-    <svg viewBox="0 0 24 24">
-      <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/>
-    </svg>
-  </a>
-
-  <!-- Email -->
-  <a href="mailto:mkgkuwait@outlook.com" aria-label="Email">
-    <svg viewBox="0 0 24 24">
-      <path d="M2 4h20v16H2V4zm10 7L4 6v12h16V6l-8 5z"/>
-    </svg>
-  </a>
-
+<div class="box">
+  <img src="logo.png" alt="شعار المحافظة">
+  <h2>تم استلام طلب التسجيل</h2>
+  <p>سيتم تحويلك إلى الصفحة الرئيسية</p>
 </div>
 
 </body>
