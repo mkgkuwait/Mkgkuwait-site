@@ -1,40 +1,111 @@
-body{
+:root{
+  --bg:#000;
+  --card:#0f0f0f;
+  --text:#f2f2f2;
+  --muted:#bdbdbd;
+  --accent:#ffffff;
+}
+
+*{box-sizing:border-box}
+
+html,body{
   margin:0;
-  background:#000;
-  color:#fff;
-  font-family:Arial;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Segoe UI",Tahoma,Arial;
+}
+
+.page{
+  min-height:100vh;
+  padding-bottom:90px;
+  animation:fadeSlide .6s ease both;
+}
+
+header{
+  padding:80px 16px 24px;
   text-align:center;
 }
 
 header img{
   width:120px;
-  margin:20px;
+  margin:0 auto 10px;
+  display:block;
 }
 
+h1{margin:8px 0 4px}
+h2{margin:0;color:var(--muted);font-weight:400}
+
 .btn{
+  display:inline-block;
+  margin-top:26px;
+  padding:14px 36px;
   background:#fff;
   color:#000;
-  padding:15px 30px;
   text-decoration:none;
-  display:inline-block;
-  margin-top:20px;
+  border-radius:30px;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 24px rgba(255,255,255,.18);
+}
+
+.lang-toggle{
+  position:fixed;
+  top:14px;
+  right:14px;
+  z-index:1000;
+  border:1px solid #fff;
+  background:transparent;
+  color:#fff;
+  padding:6px 16px;
+  border-radius:20px;
+  cursor:pointer;
 }
 
 form{
-  max-width:400px;
-  margin:20px auto;
+  max-width:420px;
+  margin:10px auto 0;
+  padding:16px;
 }
 
 input,select,button{
   width:100%;
-  padding:12px;
-  margin:6px 0;
+  padding:13px;
+  margin:7px 0;
+  border-radius:8px;
   border:none;
+  font-size:15px;
 }
 
+input,select{
+  background:var(--card);
+  color:#fff;
+  border:1px solid #222;
+}
+
+button.submit{
+  background:#fff;
+  color:#000;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.consent{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  text-align:right;
+  margin:14px 0;
+  font-size:14px;
+}
+.consent input{width:auto;margin-top:3px}
+
 canvas{
-  border:1px solid #fff;
-  margin:10px 0;
+  background:#fff;
+  border:1px solid #ccc;
+  border-radius:6px;
+  margin:8px 0;
 }
 
 footer{
@@ -42,11 +113,25 @@ footer{
   bottom:0;
   width:100%;
   background:#000;
-  padding:10px;
+  border-top:1px solid #111;
+  padding:12px 0;
+  display:flex;
+  justify-content:center;
+  gap:22px;
 }
 
-footer a{
-  color:#fff;
-  margin:0 8px;
-  text-decoration:none;
+footer a svg{
+  width:22px;
+  height:22px;
+  fill:#fff;
+  transition:transform .2s ease, opacity .2s ease;
+}
+footer a:hover svg{
+  transform:translateY(-3px);
+  opacity:.85;
+}
+
+@keyframes fadeSlide{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:none}
 }
