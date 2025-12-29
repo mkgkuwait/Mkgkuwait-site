@@ -4,110 +4,28 @@
 <meta charset="UTF-8">
 <title>تسجيل متطوع</title>
 
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 <style>
-body{
-  background:#0f1b24;
-  color:#fff;
-  font-family:Tahoma, Arial;
-  margin:0;
-}
-.page{
-  max-width:520px;
-  margin:40px auto;
-  background:#13232f;
-  padding:30px;
-  border-radius:12px;
-}
-header{
-  text-align:center;
-  margin-bottom:20px;
-}
-header img{
-  height:70px;
-}
-input, select{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border-radius:6px;
-  border:none;
-}
-button{
-  padding:10px 18px;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-}
-.submit{
-  width:100%;
-  background:#c9a24d;
-  color:#000;
-  font-size:16px;
-  margin-top:15px;
-}
-.lang-toggle{
-  position:fixed;
-  top:15px;
-  right:15px;
-}
-.consent-box{
-  background:#1d3342;
-  padding:15px;
-  border-radius:8px;
-  font-size:15px;
-  margin-top:10px;
-}
-canvas{
-  display:block;
-  margin-top:10px;
-}
-footer{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  margin:25px 0;
-}
-footer svg{
-  width:22px;
-  height:22px;
-  fill:#fff;
-}
+body{background:#0f1b24;color:#fff;font-family:Tahoma;margin:0}
+.page{max-width:520px;margin:40px auto;background:#13232f;padding:30px;border-radius:12px}
+input,select,button{width:100%;padding:10px;margin:8px 0;border-radius:6px;border:none}
+.submit{background:#c9a24d;color:#000;font-size:16px}
+.consent-box{background:#1d3342;padding:15px;border-radius:8px}
+canvas{background:#fff;border:1px solid #aaa}
 </style>
-
-<script>
-const LANG_KEY="site_lang";
-function toggleLang(){
-  const l=(localStorage.getItem(LANG_KEY)||"ar")==="ar"?"en":"ar";
-  localStorage.setItem(LANG_KEY,l);
-  document.documentElement.dir=l==="ar"?"rtl":"ltr";
-}
-(function(){
-  document.documentElement.dir=(localStorage.getItem(LANG_KEY)||"ar")==="ar"?"rtl":"ltr";
-})();
-</script>
-
 </head>
+
 <body>
 
-<button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
-
 <div class="page">
+<h2 style="text-align:center">تسجيل متطوع</h2>
 
-<header>
-  <a href="index.html"><img src="logo.png"></a>
-  <h1>تسجيل متطوع</h1>
-  <h2>Volunteer Registration</h2>
-</header>
-
-<form action="https://formsubmit.co/mkgsports@zohomail.com" method="POST">
-
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_next" value="thankyou.html">
-<input type="hidden" name="Guardian_Signature_Base64" id="guardian_signature">
+<form id="volunteerForm">
 
 <input name="Full_Name" required placeholder="الاسم الكامل">
 <input name="Civil_ID" required placeholder="الرقم المدني">
-<input type="number" id="age" name="Age" required placeholder="العمر (10–70)">
+<input type="number" id="age" name="Age" required placeholder="العمر">
 
 <select name="Volunteer_Type" required>
   <option value="">اختر مجال التطوع</option>
@@ -118,27 +36,20 @@ function toggleLang(){
 <!-- ولي الأمر -->
 <div id="guardian" style="display:none">
 
-  <h3>بيانات ولي الأمر</h3>
+<h3>بيانات ولي الأمر</h3>
+<input name="Guardian_Name" placeholder="اسم ولي الأمر">
+<input name="Guardian_Phone" placeholder="رقم هاتف ولي الأمر">
 
-  <input name="Guardian_Name" placeholder="اسم ولي الأمر">
-  <input name="Guardian_Phone" placeholder="رقم هاتف ولي الأمر">
+<div class="consent-box">
+<label>
+<input type="checkbox" id="guardianAgree">
+أقر أنا ولي أمر المتقدم بموافقتي الكاملة على المشاركة وأتحمل المسؤولية القانونية.
+</label>
+</div>
 
-  <div class="consent-box">
-    <label>
-      <input type="checkbox" id="guardianAgree">
-      أقر أنا ولي أمر المتقدم، بموافقتي الكاملة على مشاركة ابني/ابنتي
-      في الأعمال التطوعية التابعة لمحافظة مبارك الكبير،
-      وأتحمل كامل المسؤولية القانونية المترتبة على ذلك،
-      وأتعهد بالالتزام بجميع الأنظمة والتعليمات المعمول بها.
-    </label>
-  </div>
-
-  <p><strong>توقيع ولي الأمر:</strong></p>
-
-  <canvas id="sig" width="400" height="150"
-    style="background:#fff;border:1px solid #aaa"></canvas>
-
-  <button type="button" onclick="clearSig()">مسح التوقيع</button>
+<p><strong>توقيع ولي الأمر:</strong></p>
+<canvas id="sig" width="400" height="150"></canvas>
+<button type="button" onclick="clearSig()">مسح التوقيع</button>
 
 </div>
 
@@ -147,52 +58,47 @@ function toggleLang(){
 </form>
 </div>
 
-<footer>
-  <a href="https://instagram.com/mkgkuwait"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/></svg></a>
-  <a href="https://x.com/mkgkuwait"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.8l-5.3-6.5L5.7 22H2.6l7.7-8.8L1 2h7z"/></svg></a>
-  <a href="tel:25473556"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2z"/></svg></a>
-</footer>
-
 <script>
+emailjs.init("Xi6nq5svDk-vUU0b4");
+
+const SERVICE_ID="service_3jvh0md";
+const TEMPLATE_ID="template_jznlquo";
+
 const age=document.getElementById("age");
 const guardian=document.getElementById("guardian");
 const agree=document.getElementById("guardianAgree");
+
 const canvas=document.getElementById("sig");
-const hidden=document.getElementById("guardian_signature");
+const ctx=canvas.getContext("2d");
+let drawing=false;
 
-let ctx=null, drawing=false;
+// تجهيز التوقيع
+ctx.fillStyle="#fff";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.strokeStyle="#000";
+ctx.lineWidth=2;
+ctx.lineCap="round";
 
-if(canvas){
-  ctx=canvas.getContext("2d");
+canvas.onmousedown=e=>{
+  drawing=true;
+  ctx.beginPath();
+  ctx.moveTo(e.offsetX,e.offsetY);
+};
+canvas.onmousemove=e=>{
+  if(!drawing) return;
+  ctx.lineTo(e.offsetX,e.offsetY);
+  ctx.stroke();
+};
+canvas.onmouseup=()=>drawing=false;
+canvas.onmouseleave=()=>drawing=false;
 
-  function resetCanvas(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="#ffffff";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.strokeStyle="#000000";
-    ctx.lineWidth=2;
-    ctx.lineCap="round";
-  }
-  resetCanvas();
-
-  canvas.addEventListener("mousedown",e=>{
-    drawing=true;
-    ctx.beginPath();
-    ctx.moveTo(e.offsetX,e.offsetY);
-  });
-  canvas.addEventListener("mousemove",e=>{
-    if(!drawing) return;
-    ctx.lineTo(e.offsetX,e.offsetY);
-    ctx.stroke();
-  });
-  ["mouseup","mouseleave"].forEach(ev=>{
-    canvas.addEventListener(ev,()=>drawing=false);
-  });
-
-  window.clearSig = resetCanvas;
+function clearSig(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 }
 
-age.addEventListener("input",()=>{
+// منطق العمر
+age.oninput=()=>{
   const a=parseInt(age.value,10);
   if(a>=10 && a<=17){
     guardian.style.display="block";
@@ -200,21 +106,31 @@ age.addEventListener("input",()=>{
   }else{
     guardian.style.display="none";
     agree.required=false;
-    hidden.value="";
-    if(typeof clearSig==="function") clearSig();
+    clearSig();
   }
-});
+};
 
-document.querySelector("form").addEventListener("submit",(e)=>{
+// الإرسال
+document.getElementById("volunteerForm").addEventListener("submit",e=>{
+  e.preventDefault();
+
   const a=parseInt(age.value,10);
+  const data=new FormData(e.target);
+
   if(a>=10 && a<=17){
-    if(!agree.checked){
-      alert("يجب الموافقة على الإقرار");
-      e.preventDefault();
-      return;
-    }
-    hidden.value = canvas.toDataURL("image/png");
+    data.append("Guardian_Signature", canvas.toDataURL("image/png"));
+  }else{
+    data.append("Guardian_Signature","");
   }
+
+  emailjs.send(SERVICE_ID,TEMPLATE_ID,Object.fromEntries(data))
+  .then(()=>{
+    window.location.href="thankyou.html";
+  })
+  .catch(err=>{
+    alert("فشل الإرسال");
+    console.error(err);
+  });
 });
 </script>
 
