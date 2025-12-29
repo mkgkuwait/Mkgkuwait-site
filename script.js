@@ -22,7 +22,7 @@ const TEMPLATE_ID="template_jznlquo";
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-  /* ========= منطق العمر ========= */
+  /* ========= العمر ========= */
   const age = document.getElementById("age");
   const guardian = document.getElementById("guardian");
 
@@ -40,42 +40,67 @@ document.addEventListener("DOMContentLoaded",()=>{
     });
   }
 
-  /* ========= التوقيع ========= */
+  /* ========= التوقيع (Touch + Mouse) ========= */
   const canvas = document.getElementById("sig");
   let ctx, drawing=false;
 
   if(canvas){
     ctx = canvas.getContext("2d");
 
-    /* خلفية بيضاء ثابتة */
-    ctx.fillStyle="#ffffff";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    /* قلم أسود واضح */
-    ctx.strokeStyle="#000000";
-    ctx.lineWidth=2;
-    ctx.lineCap="round";
-
-    canvas.addEventListener("mousedown",(e)=>{
-      drawing=true;
-      ctx.beginPath();
-      ctx.moveTo(e.offsetX,e.offsetY);
-    });
-
-    canvas.addEventListener("mousemove",(e)=>{
-      if(drawing){
-        ctx.lineTo(e.offsetX,e.offsetY);
-        ctx.stroke();
-      }
-    });
-
-    canvas.addEventListener("mouseup",()=>drawing=false);
-    canvas.addEventListener("mouseleave",()=>drawing=false);
-
-    window.clearSig=()=>{
-      ctx.clearRect(0,0,canvas.width,canvas.height);
+    function initCanvas(){
       ctx.fillStyle="#ffffff";
       ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.strokeStyle="#000000";
+      ctx.lineWidth=2;
+      ctx.lineCap="round";
+    }
+    initCanvas();
+
+    function getPos(e){
+      if(e.touches){
+        const r = canvas.getBoundingClientRect();
+        return {
+          x: e.touches[0].clientX - r.left,
+          y: e.touches[0].clientY - r.top
+        };
+      }
+      return { x: e.offsetX, y: e.offsetY };
+    }
+
+    function startDraw(e){
+      e.preventDefault();
+      drawing=true;
+      const p = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(p.x,p.y);
+    }
+
+    function drawMove(e){
+      if(!drawing) return;
+      e.preventDefault();
+      const p = getPos(e);
+      ctx.lineTo(p.x,p.y);
+      ctx.stroke();
+    }
+
+    function endDraw(){
+      drawing=false;
+    }
+
+    // Mouse
+    canvas.addEventListener("mousedown",startDraw);
+    canvas.addEventListener("mousemove",drawMove);
+    canvas.addEventListener("mouseup",endDraw);
+    canvas.addEventListener("mouseleave",endDraw);
+
+    // Touch
+    canvas.addEventListener("touchstart",startDraw,{passive:false});
+    canvas.addEventListener("touchmove",drawMove,{passive:false});
+    canvas.addEventListener("touchend",endDraw);
+
+    window.clearSig = ()=>{
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      initCanvas();
     };
   }
 
@@ -85,13 +110,19 @@ document.addEventListener("DOMContentLoaded",()=>{
     form.addEventListener("submit",(e)=>{
       e.preventDefault();
 
+      const a = parseInt(form.age.value,10);
+      if(isNaN(a)){
+        alert("يرجى إدخال العمر");
+        return;
+      }
+
       emailjs.send(SERVICE_ID,TEMPLATE_ID,{
         name: form.name.value,
         civil: form.civil.value,
         age: form.age.value,
         field: form.field.value,
-        gname: form.gname.value || "",
-        gphone: form.gphone.value || "",
+        gname: form.gname?.value || "",
+        gphone: form.gphone?.value || "",
         signature: canvas ? canvas.toDataURL("image/png") : ""
       }).then(()=>{
         window.location.href="thankyou.html";
