@@ -1,4 +1,3 @@
-// حفظ اللغة
 const LANG_KEY="site_lang";
 function setLang(l){
   localStorage.setItem(LANG_KEY,l);
@@ -9,7 +8,6 @@ function toggleLang(){
 }
 (function(){ setLang(localStorage.getItem(LANG_KEY)||"ar"); })();
 
-// منطق العمر + التوقيع
 document.addEventListener("DOMContentLoaded",()=>{
   const age=document.getElementById("age");
   const guardian=document.getElementById("guardian");
