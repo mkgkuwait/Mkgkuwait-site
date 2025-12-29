@@ -34,24 +34,39 @@ document.addEventListener("DOMContentLoaded",()=>{
     age.oninput=()=>guardian.style.display = age.value<18?"block":"none";
   }
 
-  /* التوقيع */
-  const canvas=document.getElementById("sig");
-  let ctx, draw=false;
-  if(canvas){
-    ctx=canvas.getContext("2d");
-    ctx.strokeStyle="#000";
-    ctx.lineWidth=2;
+/* التوقيع */
+const canvas=document.getElementById("sig");
+let ctx, draw=false;
 
-    canvas.onmousedown=()=>draw=true;
-    canvas.onmouseup=()=>draw=false;
-    canvas.onmousemove=e=>{
-      if(draw){
-        ctx.lineTo(e.offsetX,e.offsetY);
-        ctx.stroke();
-      }
-    };
-    window.clearSig=()=>ctx.clearRect(0,0,canvas.width,canvas.height);
-  }
+if(canvas){
+  ctx=canvas.getContext("2d");
+
+  /* خلفية بيضاء ثابتة */
+  ctx.fillStyle="#fff";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  /* لون التوقيع أسود */
+  ctx.strokeStyle="#000";
+  ctx.lineWidth=2;
+  ctx.lineCap="round";
+
+  canvas.onmousedown=()=>draw=true;
+  canvas.onmouseup=()=>draw=false;
+  canvas.onmouseleave=()=>draw=false;
+
+  canvas.onmousemove=e=>{
+    if(draw){
+      ctx.lineTo(e.offsetX,e.offsetY);
+      ctx.stroke();
+    }
+  };
+
+  window.clearSig=()=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#fff";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+  };
+}
 
   /* الإرسال */
   const form=document.getElementById("volunteerForm");
