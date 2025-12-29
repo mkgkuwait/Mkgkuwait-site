@@ -107,7 +107,6 @@ function toggleLang(){
 
 <input name="Full_Name" required placeholder="الاسم الكامل">
 <input name="Civil_ID" required placeholder="الرقم المدني">
-
 <input type="number" id="age" name="Age" required placeholder="العمر (10–70)">
 
 <select name="Volunteer_Type" required>
@@ -160,36 +159,40 @@ const guardian=document.getElementById("guardian");
 const agree=document.getElementById("guardianAgree");
 const canvas=document.getElementById("sig");
 const hidden=document.getElementById("guardian_signature");
-let ctx,drawing=false;
+
+let ctx=null, drawing=false;
 
 if(canvas){
   ctx=canvas.getContext("2d");
-  ctx.fillStyle="#fff";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.strokeStyle="#000";
-  ctx.lineWidth=2;
-  ctx.lineCap="round";
 
-  canvas.onmousedown=e=>{
+  function resetCanvas(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#ffffff";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.strokeStyle="#000000";
+    ctx.lineWidth=2;
+    ctx.lineCap="round";
+  }
+  resetCanvas();
+
+  canvas.addEventListener("mousedown",e=>{
     drawing=true;
     ctx.beginPath();
     ctx.moveTo(e.offsetX,e.offsetY);
-  };
-  canvas.onmousemove=e=>{
+  });
+  canvas.addEventListener("mousemove",e=>{
     if(!drawing) return;
     ctx.lineTo(e.offsetX,e.offsetY);
     ctx.stroke();
-  };
-  canvas.onmouseup=()=>drawing=false;
-  canvas.onmouseleave=()=>drawing=false;
+  });
+  ["mouseup","mouseleave"].forEach(ev=>{
+    canvas.addEventListener(ev,()=>drawing=false);
+  });
+
+  window.clearSig = resetCanvas;
 }
 
-function clearSig(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-}
-
-age.oninput=()=>{
+age.addEventListener("input",()=>{
   const a=parseInt(age.value,10);
   if(a>=10 && a<=17){
     guardian.style.display="block";
@@ -198,13 +201,19 @@ age.oninput=()=>{
     guardian.style.display="none";
     agree.required=false;
     hidden.value="";
-    clearSig();
+    if(typeof clearSig==="function") clearSig();
   }
-};
+});
 
-document.querySelector("form").addEventListener("submit",()=>{
-  if(guardian.style.display==="block"){
-    hidden.value=canvas.toDataURL("image/png");
+document.querySelector("form").addEventListener("submit",(e)=>{
+  const a=parseInt(age.value,10);
+  if(a>=10 && a<=17){
+    if(!agree.checked){
+      alert("يجب الموافقة على الإقرار");
+      e.preventDefault();
+      return;
+    }
+    hidden.value = canvas.toDataURL("image/png");
   }
 });
 </script>
