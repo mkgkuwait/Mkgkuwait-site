@@ -40,11 +40,6 @@ button{
   font-size:16px;
   margin-top:15px;
 }
-.lang-toggle{
-  position:fixed;
-  top:15px;
-  right:15px;
-}
 .consent-box{
   background:#1d3342;
   padding:15px;
@@ -55,6 +50,8 @@ button{
 canvas{
   display:block;
   margin-top:10px;
+  background:#fff;
+  border:1px solid #aaa;
 }
 footer{
   display:flex;
@@ -68,11 +65,9 @@ footer svg{
   fill:#fff;
 }
 </style>
+
 </head>
-
 <body>
-
-<button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
 
 <div class="page">
 
@@ -82,12 +77,7 @@ footer svg{
   <h2>Volunteer Registration</h2>
 </header>
 
-<form action="https://formsubmit.co/mkgsports@zohomail.com" method="POST">
-
-<!-- إعدادات FormSubmit -->
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_next" value="https://www.mkgkuwait.com/thankyou.html">
-<input type="hidden" name="Guardian_Signature_Base64" id="guardian_signature">
+<form id="volunteerForm">
 
 <input name="Full_Name" required placeholder="الاسم الكامل">
 <input name="Civil_ID" required placeholder="الرقم المدني">
@@ -118,8 +108,7 @@ footer svg{
 
   <p><strong>توقيع ولي الأمر:</strong></p>
 
-  <canvas id="sig" width="400" height="150"
-    style="background:#fff;border:1px solid #aaa"></canvas>
+  <canvas id="sig" width="400" height="150"></canvas>
 
   <button type="button" onclick="clearSig()">مسح التوقيع</button>
 
@@ -143,41 +132,14 @@ footer svg{
 </footer>
 
 <script>
-/* تبديل اللغة */
-function toggleLang(){
-  document.documentElement.dir =
-    document.documentElement.dir==="rtl" ? "ltr" : "rtl";
-}
-
-/* العمر + ولي الأمر */
 const age = document.getElementById("age");
 const guardian = document.getElementById("guardian");
 const agree = document.getElementById("guardianAgree");
-
-/* التوقيع */
 const canvas = document.getElementById("sig");
-const hidden = document.getElementById("guardian_signature");
-let ctx, drawing=false;
+const ctx = canvas.getContext("2d");
+let drawing = false;
 
-if(canvas){
-  ctx = canvas.getContext("2d");
-  resetCanvas();
-
-  canvas.addEventListener("mousedown",e=>{
-    drawing=true;
-    ctx.beginPath();
-    ctx.moveTo(e.offsetX,e.offsetY);
-  });
-  canvas.addEventListener("mousemove",e=>{
-    if(!drawing) return;
-    ctx.lineTo(e.offsetX,e.offsetY);
-    ctx.stroke();
-  });
-  ["mouseup","mouseleave"].forEach(ev=>{
-    canvas.addEventListener(ev,()=>drawing=false);
-  });
-}
-
+/* تهيئة التوقيع */
 function resetCanvas(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle="#fff";
@@ -186,8 +148,25 @@ function resetCanvas(){
   ctx.lineWidth=2;
   ctx.lineCap="round";
 }
+resetCanvas();
+
+canvas.addEventListener("mousedown",e=>{
+  drawing=true;
+  ctx.beginPath();
+  ctx.moveTo(e.offsetX,e.offsetY);
+});
+canvas.addEventListener("mousemove",e=>{
+  if(!drawing) return;
+  ctx.lineTo(e.offsetX,e.offsetY);
+  ctx.stroke();
+});
+["mouseup","mouseleave"].forEach(ev=>{
+  canvas.addEventListener(ev,()=>drawing=false);
+});
+
 function clearSig(){ resetCanvas(); }
 
+/* منطق العمر */
 age.addEventListener("input",()=>{
   const a = parseInt(age.value,10);
   if(a>=10 && a<=17){
@@ -196,21 +175,37 @@ age.addEventListener("input",()=>{
   }else{
     guardian.style.display="none";
     agree.required=false;
-    hidden.value="";
-    if(canvas) resetCanvas();
+    resetCanvas();
   }
 });
 
-document.querySelector("form").addEventListener("submit",(e)=>{
+/* الإرسال إلى Google Script */
+document.getElementById("volunteerForm").addEventListener("submit",function(e){
+  e.preventDefault();
+
+  const form = e.target;
+  const data = new FormData(form);
   const a = parseInt(age.value,10);
+
   if(a>=10 && a<=17){
     if(!agree.checked){
-      e.preventDefault();
       alert("يجب موافقة ولي الأمر");
       return;
     }
-    hidden.value = canvas.toDataURL("image/png");
+    data.append(
+      "Guardian_Signature_Base64",
+      canvas.toDataURL("image/png")
+    );
   }
+
+  fetch(
+    "https://script.google.com/macros/s/AKfycbygn8i590rV6sLcHtjZV2HrcUVSE-VILFyrqqj-bvpIotdPMxK9TpNbvSWeGuMtO_YYMA/exec",
+    { method:"POST", body:data }
+  ).then(()=>{
+    window.location.href="thankyou.html";
+  }).catch(()=>{
+    alert("فشل الإرسال");
+  });
 });
 </script>
 
