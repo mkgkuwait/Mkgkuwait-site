@@ -2,117 +2,95 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>التطوع</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body{
-  margin:0;
-  background:#000;
-  color:#C9A24D;
-  font-family:Tahoma;
-}
-.container{
-  max-width:500px;
-  margin:40px auto 140px;
-  padding:20px;
-}
-label{display:block;margin-top:15px;}
-input,select{
-  width:100%;
-  padding:10px;
-  margin-top:5px;
-  background:#000;
-  color:#C9A24D;
-  border:1px solid #C9A24D;
-}
-button{
-  width:100%;
-  margin-top:25px;
-  padding:12px;
-  background:#C9A24D;
-  color:#000;
-  border:none;
-}
-#guardian{
-  display:none;
-  margin-top:20px;
-  border-top:1px solid #C9A24D;
-  padding-top:15px;
-}
-footer{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  border-top:1px solid #C9A24D;
-  padding:12px 0;
-  background:#000;
-}
-.footer-icons{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-}
-.footer-icons svg{width:22px;height:22px;fill:#C9A24D;}
-</style>
+<title>تسجيل متطوع</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="container">
-<h2>نموذج التسجيل في التطوع</h2>
+<header>
+  <a href="index.html"><img src="logo.png"></a>
+  <h1>تسجيل متطوع</h1>
+  <h2>Volunteer Registration</h2>
+</header>
 
-<form id="form">
-<label>الاسم الكامل</label>
-<input required>
+<form action="https://formsubmit.co/mkgsports@zohomail.com" method="POST">
 
-<label>الرقم المدني</label>
-<input required>
+  <!-- إعدادات FormSubmit -->
+  <input type="hidden" name="_next" value="https://www.mkgkuwait.com/thankyou.html">
+  <input type="hidden" name="_captcha" value="false">
 
-<label>العمر</label>
-<input type="number" id="age" required>
+  <input name="Full_Name" required placeholder="الاسم الكامل">
+  <input name="Civil_ID" required placeholder="الرقم المدني">
+  <input type="number" name="Age" id="age" required placeholder="العمر">
 
-<label>رقم الهاتف</label>
-<input required>
+  <select name="Volunteer_Type" required>
+    <option value="">اختر مجال التطوع</option>
+    <option>الزراعة التجميلية</option>
+    <option>صيانة مرافق وخدمات عامة</option>
+  </select>
 
-<label>نوع التطوع</label>
-<select required>
-<option value="">اختر</option>
-<option>الزراعة التجميلية</option>
-<option>صيانة المرافق والخدمات العامة</option>
-</select>
+  <!-- بيانات ولي الأمر -->
+  <div id="guardian">
+    <h3>بيانات ولي الأمر (لمن هم أقل من 18)</h3>
 
-<div id="guardian">
-<h3>إقرار ولي الأمر</h3>
-<label>اسم ولي الأمر</label>
-<input>
-<label>الرقم المدني لولي الأمر</label>
-<input>
-<label>رقم هاتف ولي الأمر</label>
-<input>
-<label><input type="checkbox" id="consent"> أوافق على مشاركة المتطوع</label>
-</div>
+    <input name="Guardian_Name" placeholder="اسم ولي الأمر">
+    <input name="Guardian_Civil_ID" placeholder="الرقم المدني لولي الأمر">
+    <input name="Guardian_Phone" placeholder="رقم هاتف ولي الأمر">
 
-<button type="submit">إرسال</button>
+    <p>
+      أقر أنا ولي أمر المتقدم بالموافقة على مشاركته
+      في الأعمال التطوعية تحت إشراف محافظة مبارك الكبير،
+      وأتحمل كامل المسؤولية القانونية.
+    </p>
+
+    <canvas id="sig" width="300" height="120"></canvas>
+    <button type="button" onclick="clearSig()">مسح التوقيع</button>
+  </div>
+
+  <!-- التوقيع كنص -->
+  <input type="hidden" name="Guardian_Signature_Base64" id="guardian_signature">
+
+  <button type="submit">إرسال</button>
 </form>
-</div>
 
 <footer>
-  <div class="footer-icons">
-    <!-- نفس أيقونات الصفحة الرئيسية (انسخها كما هي إن رغبت) -->
-  </div>
+  <a href="https://instagram.com/mkgkuwait">IG</a>
+  <a href="https://x.com/mkgkuwait">X</a>
+  <a href="mailto:mkgkuwait@outlook.com">Mail</a>
+  <a href="tel:25473556">Call</a>
+  <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7">Map</a>
 </footer>
 
 <script>
-const age=document.getElementById("age");
-const guardian=document.getElementById("guardian");
-const consent=document.getElementById("consent");
-form.onsubmit=e=>{
-e.preventDefault();
-if(age.value<18 && !consent.checked){alert("موافقة ولي الأمر مطلوبة");return;}
-location.href="thankyou.html";
+const age = document.getElementById("age");
+const guardian = document.getElementById("guardian");
+guardian.style.display="none";
+
+age.oninput = () => {
+  guardian.style.display = age.value < 18 ? "block" : "none";
+};
+
+const canvas = document.getElementById("sig");
+const ctx = canvas.getContext("2d");
+let drawing=false;
+
+canvas.onmousedown=()=>drawing=true;
+canvas.onmouseup=()=>drawing=false;
+canvas.onmousemove=e=>{
+  if(drawing){
+    ctx.lineTo(e.offsetX,e.offsetY);
+    ctx.stroke();
+  }
+};
+
+function clearSig(){
+  ctx.clearRect(0,0,300,120);
 }
-age.oninput=()=>guardian.style.display=age.value<18?"block":"none";
+
+document.querySelector("form").addEventListener("submit",()=>{
+  document.getElementById("guardian_signature").value =
+    canvas.toDataURL("image/png");
+});
 </script>
 
 </body>
