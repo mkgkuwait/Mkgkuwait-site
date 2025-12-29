@@ -13,114 +13,79 @@ function toggleLang(){
 
 
 /* ======================
-   EmailJS Init
+   EmailJS
 ====================== */
-emailjs.init("Xi6nq5svDk-vUU0b4"); // Public Key
-const SERVICE_ID = "service_3jvh0md";
-const TEMPLATE_ID = "template_jznlquo";
+emailjs.init("Xi6nq5svDk-vUU0b4");
+const SERVICE_ID="service_3jvh0md";
+const TEMPLATE_ID="template_jznlquo";
 
 
-/* ======================
-   Page Logic
-====================== */
 document.addEventListener("DOMContentLoaded",()=>{
 
-  /* عناصر العمر */
+  /* ========= منطق العمر ========= */
   const age = document.getElementById("age");
   const guardian = document.getElementById("guardian");
-  const ageNote = document.getElementById("ageNote");
 
-  if(guardian) guardian.style.display = "none";
-  if(ageNote) ageNote.innerText = "";
+  if(guardian) guardian.style.display="none";
 
-  /* منطق العمر الواضح */
-  if(age && guardian && ageNote){
-    age.addEventListener("input", ()=>{
+  if(age && guardian){
+    age.addEventListener("input",()=>{
       const a = parseInt(age.value,10);
 
-      // أقل من 10
-      if(isNaN(a) || a < 10){
-        guardian.style.display = "none";
-        ageNote.style.color = "#ff4d4d";
-        ageNote.innerText = "التطوع متاح من عمر 10 سنوات فما فوق.";
-      }
-
-      // من 10 إلى 17
-      else if(a >= 10 && a <= 17){
-        guardian.style.display = "block";
-        ageNote.style.color = "#ffcc00";
-        ageNote.innerText = "يتطلب هذا العمر موافقة ولي الأمر والتوقيع.";
-      }
-
-      // من 18 إلى 70
-      else if(a >= 18 && a <= 70){
-        guardian.style.display = "none";
-        ageNote.style.color = "#4caf50";
-        ageNote.innerText = "لا يتطلب هذا العمر موافقة ولي الأمر.";
-      }
-
-      // أكبر من 70
-      else{
-        guardian.style.display = "none";
-        ageNote.style.color = "#ff4d4d";
-        ageNote.innerText = "العمر المدخل خارج نطاق التسجيل.";
+      if(!isNaN(a) && a < 18){
+        guardian.style.display="block";
+      }else{
+        guardian.style.display="none";
       }
     });
   }
 
-  /* ======================
-     التوقيع (أسود / خلفية بيضاء)
-  ====================== */
+  /* ========= التوقيع ========= */
   const canvas = document.getElementById("sig");
-  let ctx, draw=false;
+  let ctx, drawing=false;
 
   if(canvas){
     ctx = canvas.getContext("2d");
 
-    // خلفية بيضاء
-    ctx.fillStyle = "#fff";
+    /* خلفية بيضاء ثابتة */
+    ctx.fillStyle="#ffffff";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    // لون التوقيع أسود
-    ctx.strokeStyle = "#000";
-    ctx.lineWidth = 2;
-    ctx.lineCap = "round";
+    /* قلم أسود واضح */
+    ctx.strokeStyle="#000000";
+    ctx.lineWidth=2;
+    ctx.lineCap="round";
 
-    canvas.onmousedown = ()=> draw=true;
-    canvas.onmouseup   = ()=> draw=false;
-    canvas.onmouseleave= ()=> draw=false;
+    canvas.addEventListener("mousedown",(e)=>{
+      drawing=true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX,e.offsetY);
+    });
 
-    canvas.onmousemove = (e)=>{
-      if(draw){
+    canvas.addEventListener("mousemove",(e)=>{
+      if(drawing){
         ctx.lineTo(e.offsetX,e.offsetY);
         ctx.stroke();
       }
-    };
+    });
 
-    window.clearSig = ()=>{
+    canvas.addEventListener("mouseup",()=>drawing=false);
+    canvas.addEventListener("mouseleave",()=>drawing=false);
+
+    window.clearSig=()=>{
       ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.fillStyle = "#fff";
+      ctx.fillStyle="#ffffff";
       ctx.fillRect(0,0,canvas.width,canvas.height);
     };
   }
 
-  /* ======================
-     الإرسال
-  ====================== */
+  /* ========= الإرسال ========= */
   const form = document.getElementById("volunteerForm");
   if(form){
     form.addEventListener("submit",(e)=>{
       e.preventDefault();
 
-      const a = parseInt(form.age.value,10);
-
-      // منع الإرسال إذا أقل من 10
-      if(isNaN(a) || a < 10){
-        alert("لا يمكن إكمال التسجيل. العمر أقل من 10 سنوات.");
-        return;
-      }
-
-      emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      emailjs.send(SERVICE_ID,TEMPLATE_ID,{
         name: form.name.value,
         civil: form.civil.value,
         age: form.age.value,
@@ -131,7 +96,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       }).then(()=>{
         window.location.href="thankyou.html";
       }).catch(err=>{
-        alert("خطأ في الإرسال");
+        alert("حدث خطأ أثناء الإرسال");
         console.error(err);
       });
     });
