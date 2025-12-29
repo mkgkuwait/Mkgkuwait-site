@@ -3,14 +3,96 @@
 <head>
 <meta charset="UTF-8">
 <title>تسجيل متطوع</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
+
+<style>
+body{
+  background:#0f1b24;
+  color:#fff;
+  font-family:Tahoma, Arial;
+  margin:0;
+}
+.page{
+  max-width:520px;
+  margin:40px auto;
+  background:#13232f;
+  padding:30px;
+  border-radius:12px;
+}
+header{
+  text-align:center;
+  margin-bottom:20px;
+}
+header img{
+  height:70px;
+}
+input, select{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:6px;
+  border:none;
+}
+button{
+  padding:10px 18px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+.submit{
+  width:100%;
+  background:#c9a24d;
+  color:#000;
+  font-size:16px;
+  margin-top:15px;
+}
+.lang-toggle{
+  position:fixed;
+  top:15px;
+  right:15px;
+}
+.consent-box{
+  background:#1d3342;
+  padding:15px;
+  border-radius:8px;
+  font-size:15px;
+  margin-top:10px;
+}
+canvas{
+  display:block;
+  margin-top:10px;
+}
+footer{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin:25px 0;
+}
+footer svg{
+  width:22px;
+  height:22px;
+  fill:#fff;
+}
+</style>
+
+<script>
+const LANG_KEY="site_lang";
+function toggleLang(){
+  const l=(localStorage.getItem(LANG_KEY)||"ar")==="ar"?"en":"ar";
+  localStorage.setItem(LANG_KEY,l);
+  document.documentElement.dir=l==="ar"?"rtl":"ltr";
+}
+(function(){
+  document.documentElement.dir=(localStorage.getItem(LANG_KEY)||"ar")==="ar"?"rtl":"ltr";
+})();
+</script>
+
 </head>
 <body>
 
 <button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
 
 <div class="page">
+
 <header>
   <a href="index.html"><img src="logo.png"></a>
   <h1>تسجيل متطوع</h1>
@@ -18,70 +100,114 @@
 </header>
 
 <form action="https://formsubmit.co/mkgsports@zohomail.com" method="POST">
-  <input type="hidden" name="_next" value="https://www.mkgkuwait.com/thankyou.html">
-  <input type="hidden" name="_captcha" value="false">
 
-  <input name="Full_Name" required placeholder="الاسم الكامل">
-  <input name="Civil_ID" required placeholder="الرقم المدني">
-  <input type="number" name="Age" id="age" required placeholder="العمر">
-  <div id="ageNote"></div>
-<div id="ageNote" style="margin:8px 0;font-size:14px;"></div>
-  <select name="Volunteer_Type" required>
-    <option value="">اختر مجال التطوع</option>
-    <option>الزراعة التجميلية</option>
-    <option>صيانة مرافق وخدمات عامة</option>
-  </select>
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_next" value="thankyou.html">
+<input type="hidden" name="Guardian_Signature_Base64" id="guardian_signature">
 
-<div id="guardian">
+<input name="Full_Name" required placeholder="الاسم الكامل">
+<input name="Civil_ID" required placeholder="الرقم المدني">
+
+<input type="number" id="age" name="Age" required placeholder="العمر (10–70)">
+
+<select name="Volunteer_Type" required>
+  <option value="">اختر مجال التطوع</option>
+  <option>الزراعة التجميلية</option>
+  <option>صيانة مرافق وخدمات عامة</option>
+</select>
+
+<!-- ولي الأمر -->
+<div id="guardian" style="display:none">
 
   <h3>بيانات ولي الأمر</h3>
 
-  <input name="gname" placeholder="اسم ولي الأمر">
-  <input name="gphone" placeholder="رقم هاتف ولي الأمر">
+  <input name="Guardian_Name" placeholder="اسم ولي الأمر">
+  <input name="Guardian_Phone" placeholder="رقم هاتف ولي الأمر">
 
-  <!-- الإقرار -->
   <div class="consent-box">
     <label>
-      <input type="checkbox" id="guardianAgree" required>
-      <span>
-        أقر أنا ولي أمر المتقدم، بموافقتي الكاملة على مشاركة ابني/ابنتي
-        في الأعمال التطوعية التابعة لمحافظة مبارك الكبير،
-        وأتحمل كامل المسؤولية القانونية المترتبة على ذلك،
-        وأتعهد بالالتزام بجميع الأنظمة والتعليمات المعمول بها.
-      </span>
+      <input type="checkbox" id="guardianAgree">
+      أقر أنا ولي أمر المتقدم، بموافقتي الكاملة على مشاركة ابني/ابنتي
+      في الأعمال التطوعية التابعة لمحافظة مبارك الكبير،
+      وأتحمل كامل المسؤولية القانونية المترتبة على ذلك،
+      وأتعهد بالالتزام بجميع الأنظمة والتعليمات المعمول بها.
     </label>
   </div>
 
-  <p style="margin-top:15px;font-weight:bold;">توقيع ولي الأمر:</p>
-  <canvas id="sig" width="320" height="140"></canvas>
+  <p><strong>توقيع ولي الأمر:</strong></p>
+
+  <canvas id="sig" width="400" height="150"
+    style="background:#fff;border:1px solid #aaa"></canvas>
+
   <button type="button" onclick="clearSig()">مسح التوقيع</button>
 
 </div>
-    <canvas id="sig" width="300" height="120"></canvas>
-    <button type="button" onclick="clearSig()">مسح التوقيع</button>
-  </div>
 
-  <input type="hidden" name="Guardian_Signature_Base64" id="guardian_signature">
-  <button class="submit" type="submit">إرسال</button>
+<button class="submit" type="submit">إرسال</button>
+
 </form>
 </div>
 
 <footer>
-  <a href="https://instagram.com/mkgkuwait" aria-label="Instagram">
-    <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
-  </a>
-  <a href="https://x.com/mkgkuwait" aria-label="X">
-    <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.8l-5.3-6.5L5.7 22H2.6l7.7-8.8L1 2h7l4.8 5.9L18.9 2z"/></svg>
-  </a>
-  <a href="tel:25473556" aria-label="Phone">
-    <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C9.4 22 2 14.6 2 5a1 1 0 0 1 1-1h4.6a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.6a1 1 0 0 1-.2 1l-2.4 2.2z"/></svg>
-  </a>
-  <a href="mailto:mkgkuwait@outlook.com" aria-label="Email">
-    <svg viewBox="0 0 24 24"><path d="M2 6.5 12 13l10-6.5V18H2V6.5zm10 4.1L2.8 5h18.4L12 10.6z"/></svg>
-  </a>
-  <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7" aria-label="Location">
-    <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-  </a>
+  <a href="https://instagram.com/mkgkuwait"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/></svg></a>
+  <a href="https://x.com/mkgkuwait"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.8l-5.3-6.5L5.7 22H2.6l7.7-8.8L1 2h7z"/></svg></a>
+  <a href="tel:25473556"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2z"/></svg></a>
 </footer>
+
+<script>
+const age=document.getElementById("age");
+const guardian=document.getElementById("guardian");
+const agree=document.getElementById("guardianAgree");
+const canvas=document.getElementById("sig");
+const hidden=document.getElementById("guardian_signature");
+let ctx,drawing=false;
+
+if(canvas){
+  ctx=canvas.getContext("2d");
+  ctx.fillStyle="#fff";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle="#000";
+  ctx.lineWidth=2;
+  ctx.lineCap="round";
+
+  canvas.onmousedown=e=>{
+    drawing=true;
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX,e.offsetY);
+  };
+  canvas.onmousemove=e=>{
+    if(!drawing) return;
+    ctx.lineTo(e.offsetX,e.offsetY);
+    ctx.stroke();
+  };
+  canvas.onmouseup=()=>drawing=false;
+  canvas.onmouseleave=()=>drawing=false;
+}
+
+function clearSig(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+}
+
+age.oninput=()=>{
+  const a=parseInt(age.value,10);
+  if(a>=10 && a<=17){
+    guardian.style.display="block";
+    agree.required=true;
+  }else{
+    guardian.style.display="none";
+    agree.required=false;
+    hidden.value="";
+    clearSig();
+  }
+};
+
+document.querySelector("form").addEventListener("submit",()=>{
+  if(guardian.style.display==="block"){
+    hidden.value=canvas.toDataURL("image/png");
+  }
+});
+</script>
+
 </body>
 </html>
