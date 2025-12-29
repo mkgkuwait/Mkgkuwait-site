@@ -52,6 +52,7 @@ canvas{
   margin-top:10px;
   background:#fff;
   border:1px solid #aaa;
+  touch-action:none; /* مهم للآيفون */
 }
 footer{
   display:flex;
@@ -65,8 +66,8 @@ footer svg{
   fill:#fff;
 }
 </style>
-
 </head>
+
 <body>
 
 <div class="page">
@@ -139,32 +140,68 @@ const canvas = document.getElementById("sig");
 const ctx = canvas.getContext("2d");
 let drawing = false;
 
-/* تهيئة التوقيع */
-function resetCanvas(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+/* دعم Retina + iOS */
+function prepareCanvas(){
+  const ratio = window.devicePixelRatio || 1;
+  const w = canvas.width;
+  const h = canvas.height;
+
+  canvas.width = w * ratio;
+  canvas.height = h * ratio;
+  canvas.style.width = w + "px";
+  canvas.style.height = h + "px";
+
+  ctx.setTransform(ratio,0,0,ratio,0,0);
   ctx.fillStyle="#fff";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillRect(0,0,w,h);
   ctx.strokeStyle="#000";
   ctx.lineWidth=2;
   ctx.lineCap="round";
 }
-resetCanvas();
+prepareCanvas();
 
-canvas.addEventListener("mousedown",e=>{
-  drawing=true;
+function getPos(e){
+  const rect = canvas.getBoundingClientRect();
+  if(e.touches){
+    return {
+      x: e.touches[0].clientX - rect.left,
+      y: e.touches[0].clientY - rect.top
+    };
+  }
+  return { x: e.offsetX, y: e.offsetY };
+}
+
+function startDraw(e){
+  e.preventDefault();
+  drawing = true;
+  const p = getPos(e);
   ctx.beginPath();
-  ctx.moveTo(e.offsetX,e.offsetY);
-});
-canvas.addEventListener("mousemove",e=>{
+  ctx.moveTo(p.x, p.y);
+}
+function draw(e){
   if(!drawing) return;
-  ctx.lineTo(e.offsetX,e.offsetY);
+  e.preventDefault();
+  const p = getPos(e);
+  ctx.lineTo(p.x, p.y);
   ctx.stroke();
-});
-["mouseup","mouseleave"].forEach(ev=>{
-  canvas.addEventListener(ev,()=>drawing=false);
-});
+}
+function stopDraw(){
+  drawing = false;
+}
 
-function clearSig(){ resetCanvas(); }
+canvas.addEventListener("mousedown", startDraw);
+canvas.addEventListener("mousemove", draw);
+canvas.addEventListener("mouseup", stopDraw);
+canvas.addEventListener("mouseleave", stopDraw);
+
+canvas.addEventListener("touchstart", startDraw, {passive:false});
+canvas.addEventListener("touchmove", draw, {passive:false});
+canvas.addEventListener("touchend", stopDraw);
+
+function clearSig(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  prepareCanvas();
+}
 
 /* منطق العمر */
 age.addEventListener("input",()=>{
@@ -175,16 +212,15 @@ age.addEventListener("input",()=>{
   }else{
     guardian.style.display="none";
     agree.required=false;
-    resetCanvas();
+    clearSig();
   }
 });
 
-/* الإرسال إلى Google Script */
+/* الإرسال */
 document.getElementById("volunteerForm").addEventListener("submit",function(e){
   e.preventDefault();
 
-  const form = e.target;
-  const data = new FormData(form);
+  const data = new FormData(this);
   const a = parseInt(age.value,10);
 
   if(a>=10 && a<=17){
@@ -192,10 +228,7 @@ document.getElementById("volunteerForm").addEventListener("submit",function(e){
       alert("يجب موافقة ولي الأمر");
       return;
     }
-    data.append(
-      "Guardian_Signature_Base64",
-      canvas.toDataURL("image/png")
-    );
+    data.append("Guardian_Signature_Base64", canvas.toDataURL("image/png"));
   }
 
   fetch(
