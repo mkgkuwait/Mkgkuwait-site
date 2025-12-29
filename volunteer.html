@@ -18,14 +18,9 @@ body{
   padding:30px;
   border-radius:12px;
 }
-header{
-  text-align:center;
-  margin-bottom:20px;
-}
-header img{
-  height:70px;
-}
-input, select{
+header{text-align:center;margin-bottom:20px;}
+header img{height:70px;}
+input,select{
   width:100%;
   padding:10px;
   margin:8px 0;
@@ -60,8 +55,6 @@ button{
 canvas{
   display:block;
   margin-top:10px;
-  background:#fff;
-  border:1px solid #aaa;
 }
 footer{
   display:flex;
@@ -75,8 +68,8 @@ footer svg{
   fill:#fff;
 }
 </style>
-
 </head>
+
 <body>
 
 <button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
@@ -98,7 +91,7 @@ footer svg{
 
 <input name="Full_Name" required placeholder="الاسم الكامل">
 <input name="Civil_ID" required placeholder="الرقم المدني">
-<input type="number" id="age" name="Age" required placeholder="العمر (10 – 70)">
+<input type="number" id="age" name="Age" required placeholder="العمر (10–70)">
 
 <select name="Volunteer_Type" required>
   <option value="">اختر مجال التطوع</option>
@@ -109,15 +102,15 @@ footer svg{
 <!-- ولي الأمر -->
 <div id="guardian" style="display:none">
 
-  <h3>بيانات ولي الأمر (إلزامي لمن هم دون 18 سنة)</h3>
+  <h3>بيانات ولي الأمر</h3>
 
   <input name="Guardian_Name" placeholder="اسم ولي الأمر">
   <input name="Guardian_Phone" placeholder="رقم هاتف ولي الأمر">
 
   <div class="consent-box">
     <label>
-      <input type="checkbox" id="guardianAgree">
-      أقر أنا ولي أمر المتقدم بموافقتي الكاملة على مشاركة ابني/ابنتي
+      <input type="checkbox" id="guardianAgree" name="Guardian_Consent">
+      أقر أنا ولي أمر المتقدم، بموافقتي الكاملة على مشاركة ابني/ابنتي
       في الأعمال التطوعية التابعة لمحافظة مبارك الكبير، وأتحمل كامل
       المسؤولية القانونية، وأتعهد بالالتزام بجميع الأنظمة والتعليمات.
     </label>
@@ -125,7 +118,8 @@ footer svg{
 
   <p><strong>توقيع ولي الأمر:</strong></p>
 
-  <canvas id="sig" width="400" height="150"></canvas>
+  <canvas id="sig" width="400" height="150"
+    style="background:#fff;border:1px solid #aaa"></canvas>
 
   <button type="button" onclick="clearSig()">مسح التوقيع</button>
 
@@ -137,31 +131,52 @@ footer svg{
 </div>
 
 <footer>
-  <a href="https://instagram.com/mkgkuwait"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/></svg></a>
-  <a href="https://x.com/mkgkuwait"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.8l-5.3-6.5L5.7 22H2.6l7.7-8.8L1 2h7z"/></svg></a>
-  <a href="tel:25473556"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2z"/></svg></a>
+  <a href="https://instagram.com/mkgkuwait">
+    <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/></svg>
+  </a>
+  <a href="https://x.com/mkgkuwait">
+    <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.8l-5.3-6.5L5.7 22H2.6l7.7-8.8L1 2h7z"/></svg>
+  </a>
+  <a href="tel:25473556">
+    <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2z"/></svg>
+  </a>
 </footer>
 
 <script>
-/* اللغة */
-const LANG_KEY="site_lang";
+/* تبديل اللغة */
 function toggleLang(){
-  const l=(localStorage.getItem(LANG_KEY)||"ar")==="ar"?"en":"ar";
-  localStorage.setItem(LANG_KEY,l);
-  document.documentElement.dir=l==="ar"?"rtl":"ltr";
+  document.documentElement.dir =
+    document.documentElement.dir==="rtl" ? "ltr" : "rtl";
 }
-document.documentElement.dir=(localStorage.getItem(LANG_KEY)||"ar")==="ar"?"rtl":"ltr";
 
 /* العمر + ولي الأمر */
-const age=document.getElementById("age");
-const guardian=document.getElementById("guardian");
-const agree=document.getElementById("guardianAgree");
+const age = document.getElementById("age");
+const guardian = document.getElementById("guardian");
+const agree = document.getElementById("guardianAgree");
 
 /* التوقيع */
-const canvas=document.getElementById("sig");
-const hidden=document.getElementById("guardian_signature");
-const ctx=canvas.getContext("2d");
-let drawing=false;
+const canvas = document.getElementById("sig");
+const hidden = document.getElementById("guardian_signature");
+let ctx, drawing=false;
+
+if(canvas){
+  ctx = canvas.getContext("2d");
+  resetCanvas();
+
+  canvas.addEventListener("mousedown",e=>{
+    drawing=true;
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX,e.offsetY);
+  });
+  canvas.addEventListener("mousemove",e=>{
+    if(!drawing) return;
+    ctx.lineTo(e.offsetX,e.offsetY);
+    ctx.stroke();
+  });
+  ["mouseup","mouseleave"].forEach(ev=>{
+    canvas.addEventListener(ev,()=>drawing=false);
+  });
+}
 
 function resetCanvas(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -171,26 +186,10 @@ function resetCanvas(){
   ctx.lineWidth=2;
   ctx.lineCap="round";
 }
-resetCanvas();
-
-canvas.addEventListener("mousedown",e=>{
-  drawing=true;
-  ctx.beginPath();
-  ctx.moveTo(e.offsetX,e.offsetY);
-});
-canvas.addEventListener("mousemove",e=>{
-  if(!drawing) return;
-  ctx.lineTo(e.offsetX,e.offsetY);
-  ctx.stroke();
-});
-["mouseup","mouseleave"].forEach(ev=>{
-  canvas.addEventListener(ev,()=>drawing=false);
-});
-
 function clearSig(){ resetCanvas(); }
 
 age.addEventListener("input",()=>{
-  const a=parseInt(age.value,10);
+  const a = parseInt(age.value,10);
   if(a>=10 && a<=17){
     guardian.style.display="block";
     agree.required=true;
@@ -198,13 +197,19 @@ age.addEventListener("input",()=>{
     guardian.style.display="none";
     agree.required=false;
     hidden.value="";
-    resetCanvas();
+    if(canvas) resetCanvas();
   }
 });
 
-document.querySelector("form").addEventListener("submit",()=>{
-  if(guardian.style.display==="block"){
-    hidden.value=canvas.toDataURL("image/png");
+document.querySelector("form").addEventListener("submit",(e)=>{
+  const a = parseInt(age.value,10);
+  if(a>=10 && a<=17){
+    if(!agree.checked){
+      e.preventDefault();
+      alert("يجب موافقة ولي الأمر");
+      return;
+    }
+    hidden.value = canvas.toDataURL("image/png");
   }
 });
 </script>
