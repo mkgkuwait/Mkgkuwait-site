@@ -29,11 +29,47 @@ document.addEventListener("DOMContentLoaded",()=>{
   /* عمر المتطوع */
   const age=document.getElementById("age");
   const guardian=document.getElementById("guardian");
-  if(age && guardian){
-    guardian.style.display="none";
-    age.oninput=()=>guardian.style.display = age.value<18?"block":"none";
-  }
+  /* ======================
+   منطق العمر الواضح
+====================== */
+const ageNote = document.getElementById("ageNote");
 
+if(age && guardian && ageNote){
+  guardian.style.display = "none";
+  ageNote.innerText = "";
+
+  age.addEventListener("input", ()=>{
+    const a = parseInt(age.value,10);
+
+    // أقل من 10
+    if(isNaN(a) || a < 10){
+      guardian.style.display = "none";
+      ageNote.style.color = "#ff4d4d";
+      ageNote.innerText = "التطوع متاح من عمر 10 سنوات فما فوق.";
+    }
+
+    // من 10 إلى 17
+    else if(a >= 10 && a <= 17){
+      guardian.style.display = "block";
+      ageNote.style.color = "#ffcc00";
+      ageNote.innerText = "يتطلب هذا العمر موافقة ولي الأمر والتوقيع.";
+    }
+
+    // من 18 إلى 70
+    else if(a >= 18 && a <= 70){
+      guardian.style.display = "none";
+      ageNote.style.color = "#4caf50";
+      ageNote.innerText = "لا يتطلب هذا العمر موافقة ولي الأمر.";
+    }
+
+    // أكبر من 70
+    else{
+      guardian.style.display = "none";
+      ageNote.style.color = "#ff4d4d";
+      ageNote.innerText = "العمر المدخل خارج نطاق التسجيل.";
+    }
+  });
+}
 /* التوقيع */
 const canvas=document.getElementById("sig");
 let ctx, draw=false;
