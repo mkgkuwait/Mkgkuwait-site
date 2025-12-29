@@ -32,16 +32,31 @@
     <option>صيانة مرافق وخدمات عامة</option>
   </select>
 
-  <div id="guardian">
-    <input name="Guardian_Name" placeholder="اسم ولي الأمر">
-    <input name="Guardian_Civil_ID" placeholder="الرقم المدني لولي الأمر">
-    <input name="Guardian_Phone" placeholder="رقم هاتف ولي الأمر">
+<div id="guardian">
 
-    <div class="consent">
-      <input type="checkbox" required>
-      <label>أقر بالموافقة وأتحمل المسؤولية القانونية.</label>
-    </div>
+  <h3>بيانات ولي الأمر</h3>
 
+  <input name="gname" placeholder="اسم ولي الأمر">
+  <input name="gphone" placeholder="رقم هاتف ولي الأمر">
+
+  <!-- الإقرار -->
+  <div class="consent-box">
+    <label>
+      <input type="checkbox" id="guardianAgree" required>
+      <span>
+        أقر أنا ولي أمر المتقدم، بموافقتي الكاملة على مشاركة ابني/ابنتي
+        في الأعمال التطوعية التابعة لمحافظة مبارك الكبير،
+        وأتحمل كامل المسؤولية القانونية المترتبة على ذلك،
+        وأتعهد بالالتزام بجميع الأنظمة والتعليمات المعمول بها.
+      </span>
+    </label>
+  </div>
+
+  <p style="margin-top:15px;font-weight:bold;">توقيع ولي الأمر:</p>
+  <canvas id="sig" width="320" height="140"></canvas>
+  <button type="button" onclick="clearSig()">مسح التوقيع</button>
+
+</div>
     <canvas id="sig" width="300" height="120"></canvas>
     <button type="button" onclick="clearSig()">مسح التوقيع</button>
   </div>
