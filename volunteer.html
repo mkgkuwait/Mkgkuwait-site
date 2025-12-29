@@ -4,9 +4,13 @@
 <meta charset="UTF-8">
 <title>تسجيل متطوع</title>
 <link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
 </head>
 <body>
 
+<button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
+
+<div class="page">
 <header>
   <a href="index.html"><img src="logo.png"></a>
   <h1>تسجيل متطوع</h1>
@@ -14,8 +18,6 @@
 </header>
 
 <form action="https://formsubmit.co/mkgsports@zohomail.com" method="POST">
-
-  <!-- إعدادات FormSubmit -->
   <input type="hidden" name="_next" value="https://www.mkgkuwait.com/thankyou.html">
   <input type="hidden" name="_captcha" value="false">
 
@@ -29,69 +31,25 @@
     <option>صيانة مرافق وخدمات عامة</option>
   </select>
 
-  <!-- بيانات ولي الأمر -->
   <div id="guardian">
-    <h3>بيانات ولي الأمر (لمن هم أقل من 18)</h3>
-
     <input name="Guardian_Name" placeholder="اسم ولي الأمر">
     <input name="Guardian_Civil_ID" placeholder="الرقم المدني لولي الأمر">
     <input name="Guardian_Phone" placeholder="رقم هاتف ولي الأمر">
 
-    <p>
-      أقر أنا ولي أمر المتقدم بالموافقة على مشاركته
-      في الأعمال التطوعية تحت إشراف محافظة مبارك الكبير،
-      وأتحمل كامل المسؤولية القانونية.
-    </p>
+    <div class="consent">
+      <input type="checkbox" required>
+      <label>أقر بالموافقة وأتحمل المسؤولية القانونية.</label>
+    </div>
 
     <canvas id="sig" width="300" height="120"></canvas>
     <button type="button" onclick="clearSig()">مسح التوقيع</button>
   </div>
 
-  <!-- التوقيع كنص -->
   <input type="hidden" name="Guardian_Signature_Base64" id="guardian_signature">
-
-  <button type="submit">إرسال</button>
+  <button class="submit" type="submit">إرسال</button>
 </form>
+</div>
 
-<footer>
-  <a href="https://instagram.com/mkgkuwait">IG</a>
-  <a href="https://x.com/mkgkuwait">X</a>
-  <a href="mailto:mkgkuwait@outlook.com">Mail</a>
-  <a href="tel:25473556">Call</a>
-  <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7">Map</a>
-</footer>
-
-<script>
-const age = document.getElementById("age");
-const guardian = document.getElementById("guardian");
-guardian.style.display="none";
-
-age.oninput = () => {
-  guardian.style.display = age.value < 18 ? "block" : "none";
-};
-
-const canvas = document.getElementById("sig");
-const ctx = canvas.getContext("2d");
-let drawing=false;
-
-canvas.onmousedown=()=>drawing=true;
-canvas.onmouseup=()=>drawing=false;
-canvas.onmousemove=e=>{
-  if(drawing){
-    ctx.lineTo(e.offsetX,e.offsetY);
-    ctx.stroke();
-  }
-};
-
-function clearSig(){
-  ctx.clearRect(0,0,300,120);
-}
-
-document.querySelector("form").addEventListener("submit",()=>{
-  document.getElementById("guardian_signature").value =
-    canvas.toDataURL("image/png");
-});
-</script>
-
+<!-- FOOTER -->
 </body>
 </html>
