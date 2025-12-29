@@ -1,19 +1,36 @@
 document.addEventListener("DOMContentLoaded", ()=>{
 
-  /* ===== منطق العمر ===== */
+  /* =====================
+     منطق العمر
+  ===================== */
   const age = document.getElementById("age");
   const guardian = document.getElementById("guardian");
+  const agree = document.getElementById("guardianAgree");
+  const hiddenSig = document.getElementById("guardian_signature");
 
   function checkAge(){
     const a = parseInt(age.value,10);
-    guardian.style.display = (!isNaN(a) && a < 18) ? "block" : "none";
+
+    if(!isNaN(a) && a >= 10 && a <= 17){
+      guardian.style.display = "block";
+      if(agree) agree.required = true;
+    }else{
+      guardian.style.display = "none";
+      if(agree) agree.required = false;
+      if(hiddenSig) hiddenSig.value = "";
+      if(typeof clearSig === "function") clearSig();
+    }
   }
 
-  age.addEventListener("input", checkAge);
-  age.addEventListener("change", checkAge);
-  checkAge();
+  if(age){
+    age.addEventListener("input", checkAge);
+    age.addEventListener("change", checkAge);
+    checkAge();
+  }
 
-  /* ===== التوقيع (Mouse فقط – ويندوز مضمون) ===== */
+  /* =====================
+     التوقيع (Mouse فقط)
+  ===================== */
   const canvas = document.getElementById("sig");
   if(!canvas) return;
 
@@ -22,9 +39,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   function resetCanvas(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = "#ffffff";   // خلفية بيضاء
     ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.strokeStyle = "#000";
+    ctx.strokeStyle = "#000000"; // قلم أسود
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
   }
@@ -47,6 +64,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
     canvas.addEventListener(ev, ()=> drawing=false);
   });
 
+  /* زر مسح التوقيع */
   window.clearSig = resetCanvas;
+
+  /* =====================
+     حفظ التوقيع قبل الإرسال
+  ===================== */
+  const form = document.querySelector("form");
+  if(form){
+    form.addEventListener("submit", ()=>{
+      const a = parseInt(age.value,10);
+      if(a >= 10 && a <= 17 && hiddenSig){
+        hiddenSig.value = canvas.toDataURL("image/png");
+      }
+    });
+  }
 
 });
