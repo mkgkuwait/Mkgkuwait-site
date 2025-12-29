@@ -110,19 +110,28 @@ button.submit{
   cursor:pointer;
 }
 
-/* الإقرار */
-.consent{
-  display:flex;gap:10px;align-items:flex-start;
-  text-align:right;margin:14px 0;font-size:14px;
+/* صندوق الإقرار */
+.consent-box{
+  background:#111;
+  border:1px solid #444;
+  padding:15px;
+  margin-top:15px;
+  text-align:right;
+  line-height:1.8;
+  font-size:15px;
 }
-.consent input{width:auto;margin-top:3px}
+
+.consent-box input{
+  margin-left:10px;
+  transform:scale(1.2);
+}
 
 /* التوقيع */
 canvas{
-  background:#fff;
-  border-radius:8px;
-  border:1px solid #ccc;
-  margin:8px 0;
+  background:#ffffff;   /* أبيض صريح */
+  border:2px solid #000;
+  display:block;
+  margin-top:10px;
 }
 
 /* الفوتر */
