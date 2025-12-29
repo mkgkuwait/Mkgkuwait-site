@@ -1,137 +1,152 @@
 :root{
-  --bg:#000;
-  --card:#0f0f0f;
-  --text:#f2f2f2;
-  --muted:#bdbdbd;
-  --accent:#ffffff;
+  --bg:#0a0a0a;
+  --card:#121212;
+  --text:#eaeaea;
+  --muted:#b8b8b8;
+  --accent:#e6e6e6;
+  --glow:0 0 30px rgba(255,255,255,.08);
 }
 
 *{box-sizing:border-box}
 
 html,body{
   margin:0;
-  background:var(--bg);
+  background:radial-gradient(circle at top,#111 0%,#000 60%);
   color:var(--text);
   font-family:"Segoe UI",Tahoma,Arial;
 }
 
 .page{
   min-height:100vh;
-  padding-bottom:90px;
-  animation:fadeSlide .6s ease both;
+  padding-bottom:92px;
+  animation:fadeUp .7s ease both;
 }
 
+/* زر اللغة + الخط */
+.lang-wrap{
+  position:fixed;
+  top:0; right:0; left:0;
+  height:56px;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  padding:0 16px;
+  background:linear-gradient(to bottom,rgba(0,0,0,.7),transparent);
+  z-index:1000;
+}
+.lang-toggle{
+  border:none;
+  background:transparent;
+  color:#fff;
+  font-weight:600;
+  letter-spacing:.5px;
+  cursor:pointer;
+}
+.lang-line{
+  position:fixed;
+  top:56px; left:0; right:0;
+  height:1px;
+  background:linear-gradient(to right,transparent,#333,transparent);
+}
+
+/* الهيدر */
 header{
-  padding:80px 16px 24px;
+  padding:96px 16px 28px;
   text-align:center;
 }
-
 header img{
   width:120px;
-  margin:0 auto 10px;
   display:block;
+  margin:0 auto 12px;
+  filter:drop-shadow(var(--glow));
 }
-
 h1{margin:8px 0 4px}
 h2{margin:0;color:var(--muted);font-weight:400}
 
+/* زر */
 .btn{
   display:inline-block;
   margin-top:26px;
-  padding:14px 36px;
-  background:#fff;
+  padding:14px 38px;
+  background:linear-gradient(145deg,#fff,#dcdcdc);
   color:#000;
   text-decoration:none;
   border-radius:30px;
-  transition:transform .2s ease, box-shadow .2s ease;
+  box-shadow:0 10px 24px rgba(0,0,0,.6), inset 0 1px 0 #fff;
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 .btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 24px rgba(255,255,255,.18);
+  transform:translateY(-4px);
+  box-shadow:0 18px 36px rgba(0,0,0,.7), inset 0 1px 0 #fff;
 }
 
-.lang-toggle{
-  position:fixed;
-  top:14px;
-  right:14px;
-  z-index:1000;
-  border:1px solid #fff;
-  background:transparent;
-  color:#fff;
-  padding:6px 16px;
-  border-radius:20px;
-  cursor:pointer;
-}
-
+/* الفورم */
 form{
   max-width:420px;
-  margin:10px auto 0;
-  padding:16px;
+  margin:12px auto 0;
+  padding:18px;
+  background:linear-gradient(180deg,#111,#0c0c0c);
+  border-radius:18px;
+  box-shadow:0 20px 40px rgba(0,0,0,.7);
 }
 
 input,select,button{
   width:100%;
   padding:13px;
   margin:7px 0;
-  border-radius:8px;
+  border-radius:10px;
   border:none;
   font-size:15px;
 }
-
 input,select{
-  background:var(--card);
-  color:#fff;
-  border:1px solid #222;
+  background:#151515;
+  color:var(--text);
+  border:1px solid #1f1f1f;
 }
-
 button.submit{
-  background:#fff;
+  background:linear-gradient(145deg,#fff,#dcdcdc);
   color:#000;
   font-weight:700;
   cursor:pointer;
 }
 
+/* الإقرار */
 .consent{
-  display:flex;
-  gap:10px;
-  align-items:flex-start;
-  text-align:right;
-  margin:14px 0;
-  font-size:14px;
+  display:flex;gap:10px;align-items:flex-start;
+  text-align:right;margin:14px 0;font-size:14px;
 }
 .consent input{width:auto;margin-top:3px}
 
+/* التوقيع */
 canvas{
   background:#fff;
+  border-radius:8px;
   border:1px solid #ccc;
-  border-radius:6px;
   margin:8px 0;
 }
 
+/* الفوتر */
 footer{
   position:fixed;
-  bottom:0;
-  width:100%;
-  background:#000;
-  border-top:1px solid #111;
-  padding:12px 0;
+  bottom:0; left:0; right:0;
+  background:linear-gradient(to top,#000,#0000);
+  padding:14px 0 10px;
   display:flex;
   justify-content:center;
   gap:22px;
 }
-
 footer a svg{
-  width:22px;
-  height:22px;
-  fill:#fff;
-  transition:transform .2s ease, opacity .2s ease;
+  width:22px;height:22px;
+  fill:var(--accent);
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,.8));
+  transition:transform .25s ease, opacity .25s ease;
 }
 footer a:hover svg{
-  transform:translateY(-3px);
+  transform:translateY(-4px);
   opacity:.85;
 }
 
-@keyframes fadeSlide{
-  from{opacity:0;transform:translateY(12px)}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px)}
   to{opacity:1;transform:none}
 }
