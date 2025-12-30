@@ -3,7 +3,6 @@
 :root{
   --gold:#d4af37;
   --dark:#0b0b0b;
-  --card:#121212;
 }
 
 html,body{
@@ -23,7 +22,7 @@ html,body{
   background:var(--gold);
   color:#000;
   border:none;
-  border-radius:24px;
+  border-radius:22px;
   padding:8px 18px;
   font-weight:700;
   cursor:pointer;
@@ -33,21 +32,41 @@ html,body{
 .page{
   max-width:900px;
   margin:auto;
-  padding:100px 16px 140px; /* مساحة كافية للفوتر */
+  padding:100px 16px 140px;
 }
 
 /* الشعار */
 .logo{
   display:block;
-  margin:0 auto 24px;
+  margin:0 auto 26px;
   height:120px;
 }
 
 /* العناوين */
 h1{
   text-align:center;
-  margin:0 0 24px;
+  margin:0 0 26px;
   font-size:26px;
+}
+
+/* زر رئيسي (موحد) */
+.btn,
+.submit,
+button[type="button"]{
+  display:inline-block;
+  width:100%;
+  max-width:320px;
+  margin:16px auto 0;
+  padding:16px;
+  border-radius:30px;
+  background:var(--gold);
+  color:#000;
+  font-size:18px;
+  font-weight:700;
+  border:none;
+  cursor:pointer;
+  text-align:center;
+  text-decoration:none;
 }
 
 /* الحقول */
@@ -82,23 +101,7 @@ canvas{
   direction:ltr;
 }
 
-/* زرار ذهبية */
-.submit,
-button[type="button"]{
-  display:block;
-  width:100%;
-  margin-top:14px;
-  padding:16px;
-  border-radius:30px;
-  border:none;
-  background:var(--gold);
-  color:#000;
-  font-size:18px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-/* شريط التواصل – موحّد وثابت */
+/* شريط التواصل الموحد */
 .footer-fixed{
   position:fixed;
   bottom:14px;
@@ -110,24 +113,14 @@ button[type="button"]{
   display:flex;
   gap:22px;
   align-items:center;
-  z-index:1500; /* أعلى من أي عنصر */
-  box-shadow:0 0 20px rgba(0,0,0,.6);
+  z-index:1500;
 }
 
-/* أيقونات */
-.footer-fixed a{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
+/* أيقونات SVG رسمية */
 .footer-fixed svg{
   width:20px;
   height:20px;
   fill:#fff;
   opacity:.95;
 }
-
-.footer-fixed svg:hover{
-  opacity:1;
-}
+.footer-fixed svg:hover{opacity:1;}
