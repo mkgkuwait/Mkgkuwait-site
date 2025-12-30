@@ -13,74 +13,65 @@
 
 <body>
 
+<!-- زر تغيير اللغة -->
 <button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
 
 <div class="page">
 
-<a href="index.html">
-  <img src="logo.png" class="logo" alt="logo">
-</a>
-
-<h1
-  data-ar="محافظة مبارك الكبير"
-  data-en="Mubarak Al-Kabeer Governorate">
-محافظة مبارك الكبير
-</h1>
-
-<div style="text-align:center">
-  <a href="volunteer.html"
-     class="btn"
-     data-ar="تسجيل متطوع"
-     data-en="Volunteer Registration">
-     تسجيل متطوع
+  <!-- الشعار (بالنص + يودّي للرئيسية) -->
+  <a href="index.html">
+    <img src="logo.png" class="logo" alt="logo">
   </a>
-</div>
+
+  <!-- العنوان -->
+  <h1
+    data-ar="محافظة مبارك الكبير"
+    data-en="Mubarak Al-Kabeer Governorate">
+    محافظة مبارك الكبير
+  </h1>
+
+  <!-- زر التطوع (ذهبي احترافي) -->
+  <div style="text-align:center">
+    <a href="volunteer.html"
+       class="btn"
+       data-ar="تسجيل متطوع"
+       data-en="Volunteer Registration">
+       تسجيل متطوع
+    </a>
+  </div>
 
 </div>
 
-<!-- شريط التواصل الموحد -->
+<!-- ===== شريط التواصل الرسمي الموحد (واحد فقط) ===== -->
 <div class="footer-fixed">
   <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7" aria-label="Location">
-    <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13z"/></svg>
-  </a>
-  <a href="mailto:mkgkuwait@outlook.com" aria-label="Email">
-    <svg viewBox="0 0 24 24"><path d="M2 6h20v12H2z"/></svg>
-  </a>
-  <a href="tel:25473556" aria-label="Phone">
-    <svg viewBox="0 0 24 24"><path d="M6 10a14 14 0 0 0 8 8z"/></svg>
-  </a>
-  <a href="https://x.com/mkgkuwait" aria-label="X">
-    <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.8z"/></svg>
-  </a>
-  <a href="https://instagram.com/mkgkuwait" aria-label="Instagram">
-    <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10z"/></svg>
-  </a>
-</div>
-<!-- ===== Official Contact Bar ===== -->
-<div class="contact-bar">
-  <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7" aria-label="Location">
-    <!-- Location -->
-    <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13z"/>
+    </svg>
   </a>
 
   <a href="mailto:mkgkuwait@outlook.com" aria-label="Email">
-    <!-- Email -->
-    <svg viewBox="0 0 24 24"><path d="M2 6h20v12H2V6zm10 5L2.8 7h18.4L12 11z"/></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M2 6h20v12H2z"/>
+    </svg>
   </a>
 
   <a href="tel:25473556" aria-label="Phone">
-    <!-- Phone -->
-    <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C9.4 22 2 14.6 2 5a1 1 0 0 1 1-1h4.6a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.6a1 1 0 0 1-.2 1l-2.4 2.2z"/></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6z"/>
+    </svg>
   </a>
 
   <a href="https://x.com/mkgkuwait" aria-label="X">
-    <!-- X -->
-    <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.8l-5.3-6.5L5.7 22H2.6l7.7-8.8L1 2h7l4.8 5.9L18.9 2z"/></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M18.9 2H22l-7.2 8.2L23 22h-6.8z"/>
+    </svg>
   </a>
 
   <a href="https://instagram.com/mkgkuwait" aria-label="Instagram">
-    <!-- Instagram -->
-    <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M7 2h10a5 5 0 0 1 5 5v10z"/>
+    </svg>
   </a>
 </div>
 
