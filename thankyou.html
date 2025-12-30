@@ -11,35 +11,33 @@
 
 <body>
 
-<!-- الشريط العلوي (شعار + لغة) -->
-<div class="top-bar">
-  <a href="index.html">
-    <img src="logo.png" alt="شعار محافظة مبارك الكبير">
-  </a>
-  <button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
-</div>
+<button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
 
 <div class="page">
-  <header>
-    <h1
-      data-ar="تم استلام طلبكم بنجاح"
-      data-en="Your request has been received successfully">
-      تم استلام طلبكم بنجاح
-    </h1>
 
-    <h2
-      data-ar="شكرًا لتسجيلكم"
-      data-en="Thank you for registering">
-      شكرًا لتسجيلكم
-    </h2>
-  </header>
+<a href="index.html">
+  <img src="logo.png" class="logo" alt="logo">
+</a>
+
+<h1
+  data-ar="تم استلام طلبكم بنجاح"
+  data-en="Your request has been received successfully">
+  تم استلام طلبكم بنجاح
+</h1>
+
+<p style="text-align:center;font-size:18px;opacity:.9"
+   data-ar="سيتم التواصل معكم في حال القبول."
+   data-en="You will be contacted if accepted.">
+   سيتم التواصل معكم في حال القبول.
+</p>
+
 </div>
 
-<!-- البنر السفلي الرسمي (واحد فقط) -->
+<!-- شريط التواصل الموحد -->
 <div class="footer-fixed">
   <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7" aria-label="Location">
     <svg viewBox="0 0 24 24">
-      <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13z"/>
+      <path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13z"/>
     </svg>
   </a>
 
@@ -51,7 +49,7 @@
 
   <a href="tel:25473556" aria-label="Phone">
     <svg viewBox="0 0 24 24">
-      <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6z"/>
+      <path d="M6 10a14 14 0 0 0 8 8z"/>
     </svg>
   </a>
 
