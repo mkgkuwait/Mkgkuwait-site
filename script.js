@@ -38,14 +38,22 @@ document.addEventListener("DOMContentLoaded",()=>{
   const agree    = document.getElementById("agree");
   const canvas   = document.getElementById("sig");
 
-  /* ===== إظهار ولي الأمر حسب العمر ===== */
+  /* ===== ولي الأمر حسب العمر ===== */
   if(age && guardian){
     guardian.style.display = "none";
 
     age.addEventListener("input",()=>{
       const a = parseInt(age.value,10);
 
-      if(a >= 10 && a <= 17){
+      if(a < 10){
+        alert("لا يسمح بالتسجيل لمن هم أقل من 10 سنوات");
+        age.value = "";
+        guardian.style.display = "none";
+        if(agree) agree.required = false;
+        return;
+      }
+
+      if(a <= 17){
         guardian.style.display = "block";
         if(agree) agree.required = true;
       } else {
@@ -56,7 +64,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
 
   /* ======================
-     Signature Canvas (Stable)
+     Signature Canvas (FIXED)
   ====================== */
   let ctx, drawing = false;
 
@@ -147,11 +155,14 @@ document.addEventListener("DOMContentLoaded",()=>{
       }
 
       fetch(
-        "https://script.google.com/macros/s/AKfycbwJQLOFZB-fala3st-O6O3Wq0Yky7KS91FXyV5GZbtc/dev",
-        { method:"POST", body:data }
+        "https://script.google.com/macros/s/AKfycbyDCbO5OAaeY8391ZxiIskjA1L_57P4e6nHOEK6dQoYoHm27HGqiYYUwxOi7h0XWs7WUQ/exec",
+        {
+          method: "POST",
+          body: data
+        }
       )
-      .then(()=> window.location.href="thankyou.html")
-      .catch(()=> alert("فشل إرسال البيانات، حاول مجددًا"));
+      .then(()=> window.location.href = "thankyou.html")
+      .catch(()=> alert("فشل إرسال البيانات، حاول مرة أخرى"));
     });
   }
 
