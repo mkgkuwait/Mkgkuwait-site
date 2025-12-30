@@ -14,7 +14,7 @@
 
 <body>
 
-<!-- زر تغيير اللغة (موحد في كل الصفحات) -->
+<!-- زر تغيير اللغة (موحد بكل الصفحات) -->
 <button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
 
 <div class="page">
@@ -31,7 +31,7 @@
     تسجيل متطوع
   </h1>
 
-  <!-- نموذج التسجيل -->
+  <!-- الفورم -->
   <form id="volunteerForm">
 
     <!-- بيانات المتطوع -->
@@ -87,7 +87,7 @@
       </option>
     </select>
 
-    <!-- ولي الأمر (يظهر فقط من 10 إلى 17) -->
+    <!-- ===== ولي الأمر (يظهر فقط من 10 إلى 17) ===== -->
     <div id="guardian" style="display:none">
 
       <h3
@@ -125,10 +125,12 @@
         </label>
       </div>
 
-      <p
-        data-ar="توقيع ولي الأمر:"
-        data-en="Guardian Signature:">
-        <strong>توقيع ولي الأمر:</strong>
+      <p>
+        <strong
+          data-ar="توقيع ولي الأمر:"
+          data-en="Guardian Signature:">
+          توقيع ولي الأمر:
+        </strong>
       </p>
 
       <canvas id="sig" width="380" height="150"></canvas>
@@ -136,6 +138,7 @@
       <button
         type="button"
         onclick="clearSig()"
+        class="submit"
         data-ar="مسح التوقيع"
         data-en="Clear Signature">
         مسح التوقيع
@@ -153,7 +156,6 @@
     </button>
 
   </form>
-
 </div>
 
 <!-- ===== شريط التواصل الرسمي الموحد ===== -->
@@ -184,10 +186,29 @@
 
   <a href="https://instagram.com/mkgkuwait" aria-label="Instagram">
     <svg viewBox="0 0 24 24">
-      <path d="M7 2h10a5 5 0 0 1 5 5v10z"/>
+      <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/>
     </svg>
   </a>
 </div>
+
+<!-- ===== منطق العمر فقط (بسيط وآمن) ===== -->
+<script>
+const age = document.getElementById("age");
+const guardian = document.getElementById("guardian");
+const agree = document.getElementById("agree");
+
+age.addEventListener("input", () => {
+  const a = parseInt(age.value, 10);
+
+  if (a >= 10 && a <= 17) {
+    guardian.style.display = "block";
+    agree.required = true;
+  } else {
+    guardian.style.display = "none";
+    agree.required = false;
+  }
+});
+</script>
 
 </body>
 </html>
