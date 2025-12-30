@@ -70,64 +70,76 @@ document.addEventListener("DOMContentLoaded",()=>{
   /* ======================
      Signature Canvas (FIXED)
   ====================== */
-  let ctx, drawing = false;
+/* ======================
+   Signature Canvas (FINAL FIX)
+====================== */
 
-  if(canvas){
-    ctx = canvas.getContext("2d");
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("sig");
+  if (!canvas) return;
 
-    function resetCanvas(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.fillStyle = "#fff";
-      ctx.fillRect(0,0,canvas.width,canvas.height);
-      ctx.strokeStyle = "#000";
-      ctx.lineWidth = 2;
-      ctx.lineCap = "round";
-    }
-    resetCanvas();
+  const ctx = canvas.getContext("2d");
+  let drawing = false;
 
-    function getPos(e){
-      const rect = canvas.getBoundingClientRect();
-      const scaleX = canvas.width / rect.width;
-      const scaleY = canvas.height / rect.height;
-      const p = e.touches ? e.touches[0] : e;
-
-      return {
-        x: (p.clientX - rect.left) * scaleX,
-        y: (p.clientY - rect.top)  * scaleY
-      };
-    }
-
-    function startDraw(e){
-      e.preventDefault();
-      drawing = true;
-      const pos = getPos(e);
-      ctx.beginPath();
-      ctx.moveTo(pos.x, pos.y);
-    }
-
-    function drawMove(e){
-      if(!drawing) return;
-      e.preventDefault();
-      const pos = getPos(e);
-      ctx.lineTo(pos.x, pos.y);
-      ctx.stroke();
-    }
-
-    function endDraw(){
-      drawing = false;
-    }
-
-    canvas.addEventListener("mousedown", startDraw);
-    canvas.addEventListener("mousemove", drawMove);
-    canvas.addEventListener("mouseup", endDraw);
-    canvas.addEventListener("mouseleave", endDraw);
-
-    canvas.addEventListener("touchstart", startDraw, {passive:false});
-    canvas.addEventListener("touchmove", drawMove, {passive:false});
-    canvas.addEventListener("touchend", endDraw);
-
-    window.clearSig = resetCanvas;
+  // ضبط خلفية بيضاء وقلم أسود
+  function resetCanvas() {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
   }
+
+  resetCanvas();
+
+  function getPosition(event) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    const e = event.touches ? event.touches[0] : event;
+
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY
+    };
+  }
+
+  function startDraw(e) {
+    e.preventDefault();
+    drawing = true;
+    const pos = getPosition(e);
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+  }
+
+  function draw(e) {
+    if (!drawing) return;
+    e.preventDefault();
+    const pos = getPosition(e);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+  }
+
+  function endDraw() {
+    drawing = false;
+  }
+
+  // Mouse
+  canvas.addEventListener("mousedown", startDraw);
+  canvas.addEventListener("mousemove", draw);
+  canvas.addEventListener("mouseup", endDraw);
+  canvas.addEventListener("mouseleave", endDraw);
+
+  // Touch (iPhone / iPad)
+  canvas.addEventListener("touchstart", startDraw, { passive: false });
+  canvas.addEventListener("touchmove", draw, { passive: false });
+  canvas.addEventListener("touchend", endDraw);
+
+  window.clearSig = resetCanvas;
+});
 
   /* ======================
      Submit → Google Script
