@@ -16,7 +16,8 @@ function applyLang(lang){
 }
 
 function toggleLang(){
-  const next = (localStorage.getItem(LANG_KEY) || "ar") === "ar" ? "en" : "ar";
+  const next =
+    (localStorage.getItem(LANG_KEY) || "ar") === "ar" ? "en" : "ar";
   localStorage.setItem(LANG_KEY, next);
   applyLang(next);
 }
@@ -31,18 +32,19 @@ document.addEventListener("DOMContentLoaded",()=>{
 ====================== */
 document.addEventListener("DOMContentLoaded",()=>{
 
-  const form = document.getElementById("volunteerForm");
-  const age = document.getElementById("age");
+  const form     = document.getElementById("volunteerForm");
+  const age      = document.getElementById("age");
   const guardian = document.getElementById("guardian");
-  const agree = document.getElementById("agree");
-  const canvas = document.getElementById("sig");
+  const agree    = document.getElementById("agree");
+  const canvas   = document.getElementById("sig");
 
-  /* ===== عرض ولي الأمر حسب العمر ===== */
+  /* ===== إظهار ولي الأمر حسب العمر ===== */
   if(age && guardian){
     guardian.style.display = "none";
 
     age.addEventListener("input",()=>{
       const a = parseInt(age.value,10);
+
       if(a >= 10 && a <= 17){
         guardian.style.display = "block";
         if(agree) agree.required = true;
@@ -54,7 +56,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
 
   /* ======================
-     Signature Canvas Script (FIXED)
+     Signature Canvas (Stable)
   ====================== */
   let ctx, drawing = false;
 
@@ -71,34 +73,31 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
     resetCanvas();
 
-    /* ===== التعديل المهم هنا ===== */
     function getPos(e){
       const rect = canvas.getBoundingClientRect();
-
       const scaleX = canvas.width / rect.width;
       const scaleY = canvas.height / rect.height;
-
-      const point = e.touches ? e.touches[0] : e;
+      const p = e.touches ? e.touches[0] : e;
 
       return {
-        x: (point.clientX - rect.left) * scaleX,
-        y: (point.clientY - rect.top) * scaleY
+        x: (p.clientX - rect.left) * scaleX,
+        y: (p.clientY - rect.top)  * scaleY
       };
     }
 
     function startDraw(e){
       e.preventDefault();
       drawing = true;
-      const p = getPos(e);
+      const pos = getPos(e);
       ctx.beginPath();
-      ctx.moveTo(p.x,p.y);
+      ctx.moveTo(pos.x, pos.y);
     }
 
     function drawMove(e){
       if(!drawing) return;
       e.preventDefault();
-      const p = getPos(e);
-      ctx.lineTo(p.x,p.y);
+      const pos = getPos(e);
+      ctx.lineTo(pos.x, pos.y);
       ctx.stroke();
     }
 
@@ -119,10 +118,10 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
 
   /* ======================
-     Submit to Google Script
+     Submit → Google Script
   ====================== */
   if(form){
-    form.addEventListener("submit",function(e){
+    form.addEventListener("submit",(e)=>{
       e.preventDefault();
 
       const a = parseInt(age.value,10);
@@ -149,16 +148,10 @@ document.addEventListener("DOMContentLoaded",()=>{
 
       fetch(
         "https://script.google.com/macros/s/AKfycbygn8i590rV6sLcHtjZV2HrcUVSE-VILFyrqqj-bvpIotdPMxK9TpNbvSWeGuMtO_YYMA/exec",
-        {
-          method:"POST",
-          body:data
-        }
-      ).then(()=>{
-        window.location.href="thankyou.html";
-      }).catch(()=>{
-        alert("فشل إرسال البيانات، حاول مجددًا");
-      });
-
+        { method:"POST", body:data }
+      )
+      .then(()=> window.location.href="thankyou.html")
+      .catch(()=> alert("فشل إرسال البيانات، حاول مجددًا"));
     });
   }
 
