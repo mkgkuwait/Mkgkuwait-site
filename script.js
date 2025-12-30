@@ -1,77 +1,96 @@
-/* ===== اللغة ===== */
-const LANG_KEY="site_lang";
+/* =====================
+   Language (AR / EN)
+===================== */
+const LANG_KEY = "site_lang";
 
 function applyLang(lang){
-  document.documentElement.dir = lang==="ar"?"rtl":"ltr";
+  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
 
+  // النصوص
   document.querySelectorAll("[data-ar]").forEach(el=>{
-    el.textContent = lang==="ar" ? el.dataset.ar : el.dataset.en;
+    el.textContent = (lang === "ar") ? el.dataset.ar : el.dataset.en;
   });
 
+  // placeholders
   document.querySelectorAll("[data-ph-ar]").forEach(el=>{
-    el.placeholder = lang==="ar" ? el.dataset.phAr : el.dataset.phEn;
+    el.placeholder = (lang === "ar") ? el.dataset.phAr : el.dataset.phEn;
   });
 }
 
 function toggleLang(){
-  const next = (localStorage.getItem(LANG_KEY)||"ar")==="ar"?"en":"ar";
-  localStorage.setItem(LANG_KEY,next);
+  const current = localStorage.getItem(LANG_KEY) || "ar";
+  const next = (current === "ar") ? "en" : "ar";
+  localStorage.setItem(LANG_KEY, next);
   applyLang(next);
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-  applyLang(localStorage.getItem(LANG_KEY)||"ar");
+document.addEventListener("DOMContentLoaded", ()=>{
+  applyLang(localStorage.getItem(LANG_KEY) || "ar");
 });
 
-/* ===== التوقيع ===== */
-document.addEventListener("DOMContentLoaded",()=>{
-  const canvas=document.getElementById("sig");
-  if(!canvas) return;
 
-  const ctx=canvas.getContext("2d");
-  let drawing=false;
+/* =====================
+   Signature Canvas
+   (Windows + iOS)
+===================== */
+document.addEventListener("DOMContentLoaded", ()=>{
 
-  function reset(){
+  const canvas = document.getElementById("sig");
+  if(!canvas) return; // فقط صفحة التسجيل
+
+  const ctx = canvas.getContext("2d");
+  let drawing = false;
+
+  function initCanvas(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="#fff";
+    ctx.fillStyle = "#ffffff";
     ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.strokeStyle="#000";
-    ctx.lineWidth=2;
-    ctx.lineCap="round";
+    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
   }
-  reset();
+  initCanvas();
 
-  function pos(e){
-    const r=canvas.getBoundingClientRect();
-    const t=e.touches?e.touches[0]:e;
-    return {x:t.clientX-r.left,y:t.clientY-r.top};
+  function getPos(e){
+    const rect = canvas.getBoundingClientRect();
+    const p = e.touches ? e.touches[0] : e;
+    return {
+      x: p.clientX - rect.left,
+      y: p.clientY - rect.top
+    };
   }
 
-  function start(e){
+  function startDraw(e){
     e.preventDefault();
-    drawing=true;
-    const p=pos(e);
+    drawing = true;
+    const pos = getPos(e);
     ctx.beginPath();
-    ctx.moveTo(p.x,p.y);
+    ctx.moveTo(pos.x, pos.y);
   }
 
-  function move(e){
+  function drawMove(e){
     if(!drawing) return;
     e.preventDefault();
-    const p=pos(e);
-    ctx.lineTo(p.x,p.y);
+    const pos = getPos(e);
+    ctx.lineTo(pos.x, pos.y);
     ctx.stroke();
   }
 
-  function end(){ drawing=false; }
+  function endDraw(){
+    drawing = false;
+  }
 
-  canvas.addEventListener("mousedown",start);
-  canvas.addEventListener("mousemove",move);
-  canvas.addEventListener("mouseup",end);
-  canvas.addEventListener("mouseleave",end);
-  canvas.addEventListener("touchstart",start,{passive:false});
-  canvas.addEventListener("touchmove",move,{passive:false});
-  canvas.addEventListener("touchend",end);
+  // Mouse
+  canvas.addEventListener("mousedown", startDraw);
+  canvas.addEventListener("mousemove", drawMove);
+  canvas.addEventListener("mouseup", endDraw);
+  canvas.addEventListener("mouseleave", endDraw);
 
-  window.clearSig=reset;
+  // Touch (iOS)
+  canvas.addEventListener("touchstart", startDraw, {passive:false});
+  canvas.addEventListener("touchmove", drawMove, {passive:false});
+  canvas.addEventListener("touchend", endDraw);
+
+  // مسح التوقيع
+  window.clearSig = initCanvas;
 });
