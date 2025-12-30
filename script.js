@@ -155,12 +155,13 @@ document.addEventListener("DOMContentLoaded",()=>{
       }
 
       fetch(
-        "https://script.google.com/macros/s/AKfycbyDCbO5OAaeY8391ZxiIskjA1L_57P4e6nHOEK6dQoYoHm27HGqiYYUwxOi7h0XWs7WUQ/exec",
-        {
-          method: "POST",
-          body: data
-        }
-      )
+  "https://script.google.com/macros/s/AKfycbwvv1UCMcNhFy_LNV8FTBVBjsEpOnBA0Q1Ssjq5FdRBC41tCGBsqNxeKHuPKVI67T8oIQ/exec",
+  {
+    method: "POST",
+    body: data
+  }
+)
+
       .then(()=> window.location.href = "thankyou.html")
       .catch(()=> alert("فشل إرسال البيانات، حاول مرة أخرى"));
     });
