@@ -75,15 +75,15 @@ document.addEventListener("DOMContentLoaded",()=>{
 ====================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+
   const canvas = document.getElementById("sig");
   if (!canvas) return;
 
   const ctx = canvas.getContext("2d");
   let drawing = false;
 
-  // ضبط خلفية بيضاء وقلم أسود
-  function resetCanvas() {
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
+  // تهيئة الكانفس
+  function initCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -92,54 +92,59 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.lineCap = "round";
   }
 
-  resetCanvas();
+  initCanvas();
 
-  function getPosition(event) {
+  function getPos(evt) {
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
 
-    const e = event.touches ? event.touches[0] : event;
+    if (evt.touches && evt.touches.length > 0) {
+      return {
+        x: (evt.touches[0].clientX - rect.left) * scaleX,
+        y: (evt.touches[0].clientY - rect.top) * scaleY
+      };
+    }
 
     return {
-      x: (e.clientX - rect.left) * scaleX,
-      y: (e.clientY - rect.top) * scaleY
+      x: (evt.clientX - rect.left) * scaleX,
+      y: (evt.clientY - rect.top) * scaleY
     };
   }
 
-  function startDraw(e) {
+  function start(e) {
     e.preventDefault();
     drawing = true;
-    const pos = getPosition(e);
+    const pos = getPos(e);
     ctx.beginPath();
     ctx.moveTo(pos.x, pos.y);
   }
 
-  function draw(e) {
+  function move(e) {
     if (!drawing) return;
     e.preventDefault();
-    const pos = getPosition(e);
+    const pos = getPos(e);
     ctx.lineTo(pos.x, pos.y);
     ctx.stroke();
   }
 
-  function endDraw() {
+  function end() {
     drawing = false;
   }
 
   // Mouse
-  canvas.addEventListener("mousedown", startDraw);
-  canvas.addEventListener("mousemove", draw);
-  canvas.addEventListener("mouseup", endDraw);
-  canvas.addEventListener("mouseleave", endDraw);
+  canvas.addEventListener("mousedown", start);
+  canvas.addEventListener("mousemove", move);
+  window.addEventListener("mouseup", end);
 
-  // Touch (iPhone / iPad)
-  canvas.addEventListener("touchstart", startDraw, { passive: false });
-  canvas.addEventListener("touchmove", draw, { passive: false });
-  canvas.addEventListener("touchend", endDraw);
+  // Touch
+  canvas.addEventListener("touchstart", start, { passive: false });
+  canvas.addEventListener("touchmove", move, { passive: false });
+  canvas.addEventListener("touchend", end);
 
-  window.clearSig = resetCanvas;
+  window.clearSig = initCanvas;
 });
+
 
   /* ======================
      Submit → Google Script
