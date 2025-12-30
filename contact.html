@@ -7,9 +7,42 @@
 
 <hr>
 
-<h3>بيانات ولي الأمر</h3>
-<p><strong>الاسم:</strong> {{gname}}</p>
-<p><strong>الهاتف:</strong> {{gphone}}</p>
+<h3>بيانات ولي الأمر (إن وُجد)</h3>
+
+<p>
+  <strong>الاسم:</strong>
+  {{#gname}}{{gname}}{{/gname}}
+  {{^gname}}—{{/gname}}
+</p>
+
+<p>
+  <strong>الهاتف:</strong>
+  {{#gphone}}{{gphone}}{{/gphone}}
+  {{^gphone}}—{{/gphone}}
+</p>
 
 <p><strong>التوقيع:</strong></p>
-<img src="{{signature}}" style="border:1px solid #ccc;max-width:320px;background:#fff">
+
+{{#signature}}
+  <img
+    src="{{signature}}"
+    alt="توقيع ولي الأمر"
+    style="
+      border:1px solid #ccc;
+      max-width:320px;
+      background:#ffffff;
+      padding:6px;
+    ">
+{{/signature}}
+
+{{^signature}}
+  <p style="color:#888;font-style:italic;">
+    لا يوجد توقيع (المتقدم بعمر 18 سنة فأكثر)
+  </p>
+{{/signature}}
+
+<hr>
+
+<p style="font-size:12px;color:#666;">
+تم إرسال هذا الطلب عبر نموذج التسجيل الإلكتروني لمحافظة مبارك الكبير.
+</p>
