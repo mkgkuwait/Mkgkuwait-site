@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>تسجيل متطوع</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-ar="تسجيل متطوع" data-en="Volunteer Registration">تسجيل متطوع</title>
 
 <style>
 body{
@@ -11,37 +11,22 @@ body{
   color:#fff;
   font-family:Tahoma, Arial;
   margin:0;
-  padding-bottom:80px; /* مساحة للفوتر */
+  padding-bottom:90px;
 }
-
-/* زر اللغة */
-.lang-toggle{
-  position:fixed;
-  top:15px;
-  right:15px;
-  z-index:1000;
-  background:#c9a24d;
-  color:#000;
-  border:none;
-  padding:8px 14px;
-  border-radius:20px;
-  font-size:14px;
-  cursor:pointer;
-}
-
-/* المحتوى */
 .page{
-  max-width:560px;
+  max-width:520px;
   margin:30px auto;
   background:#13232f;
-  padding:30px;
+  padding:25px;
   border-radius:14px;
 }
-header{text-align:center;margin-bottom:25px;}
-header img{height:90px;}
-h1{margin:10px 0 5px}
-h2{margin:0;font-size:15px;color:#ccc}
-
+header{
+  text-align:center;
+  margin-bottom:20px;
+}
+header img{
+  max-width:140px;
+}
 input,select{
   width:100%;
   padding:14px;
@@ -50,18 +35,19 @@ input,select{
   border:none;
   font-size:16px;
 }
-button.submit{
+button{
+  padding:14px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:18px;
+}
+.submit{
   width:100%;
   background:#c9a24d;
   color:#000;
-  border:none;
-  padding:16px;
-  border-radius:10px;
-  font-size:18px;
-  margin-top:20px;
-  cursor:pointer;
+  margin-top:15px;
 }
-
 .consent-box{
   background:#1d3342;
   padding:15px;
@@ -69,17 +55,24 @@ button.submit{
   font-size:15px;
   margin-top:10px;
 }
-
 canvas{
-  width:100%;
-  height:160px;
+  display:block;
+  margin-top:10px;
   background:#fff;
   border:1px solid #aaa;
-  margin-top:10px;
   touch-action:none;
 }
-
-/* الفوتر – نفس الدزاين */
+.lang-toggle{
+  position:fixed;
+  top:15px;
+  right:15px;
+  background:#c9a24d;
+  color:#000;
+  border:none;
+  border-radius:20px;
+  padding:8px 14px;
+  z-index:9999;
+}
 .footer-fixed{
   position:fixed;
   bottom:0;
@@ -90,12 +83,12 @@ canvas{
   justify-content:space-around;
   align-items:center;
   padding:14px 0;
-  z-index:999;
+  z-index:9999;
 }
-.footer-fixed a svg{
-  width:22px;
-  height:22px;
-  fill:#fff;
+.footer-fixed a{
+  color:#fff;
+  font-size:20px;
+  text-decoration:none;
 }
 </style>
 </head>
@@ -105,149 +98,193 @@ canvas{
 <button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
 
 <div class="page">
+
 <header>
   <img src="logo.png" alt="logo">
   <h1 data-ar="تسجيل متطوع" data-en="Volunteer Registration">تسجيل متطوع</h1>
-  <h2 data-ar="محافظة مبارك الكبير" data-en="Mubarak Al-Kabeer Governorate">
-    محافظة مبارك الكبير
-  </h2>
 </header>
 
 <form id="volunteerForm">
 
-<input name="Full_Name" required placeholder="الاسم الكامل">
-<input name="Volunteer_Phone" required placeholder="رقم هاتف المتطوع">
-<input name="Civil_ID" required placeholder="الرقم المدني للمتطوع">
+<input name="Full_Name"
+  data-ar="الاسم الكامل"
+  data-en="Full Name"
+  placeholder="الاسم الكامل" required>
 
-<input type="number" id="age" name="Age" placeholder="العمر (10 – 70)" required>
+<input name="Civil_ID"
+  data-ar="الرقم المدني"
+  data-en="Civil ID"
+  placeholder="الرقم المدني" required>
+
+<input name="Volunteer_Phone"
+  data-ar="رقم هاتف المتطوع"
+  data-en="Volunteer Phone"
+  placeholder="رقم هاتف المتطوع" required>
+
+<input type="number" id="age" name="Age"
+  data-ar="العمر"
+  data-en="Age"
+  placeholder="العمر" min="10" required>
 
 <select name="Volunteer_Type" required>
-  <option value="">اختر مجال التطوع</option>
-  <option>الزراعة التجميلية</option>
-  <option>صيانة مرافق وخدمات عامة</option>
+  <option value="" data-ar="اختر مجال التطوع" data-en="Select Volunteering Field">اختر مجال التطوع</option>
+  <option data-ar="الزراعة التجميلية" data-en="Landscape Beautification">الزراعة التجميلية</option>
+  <option data-ar="صيانة مرافق وخدمات عامة" data-en="Facilities Maintenance">صيانة مرافق وخدمات عامة</option>
 </select>
 
+<!-- ولي الأمر -->
 <div id="guardian" style="display:none">
 
-  <h3>بيانات ولي الأمر</h3>
-  <input name="Guardian_Name" placeholder="اسم ولي الأمر">
-  <input name="Guardian_Phone" placeholder="رقم هاتف ولي الأمر">
-  <input name="Guardian_Civil_ID" placeholder="الرقم المدني لولي الأمر">
+  <h3 data-ar="بيانات ولي الأمر" data-en="Guardian Information">بيانات ولي الأمر</h3>
+
+  <input name="Guardian_Name"
+    data-ar="اسم ولي الأمر"
+    data-en="Guardian Name"
+    placeholder="اسم ولي الأمر">
+
+  <input name="Guardian_Civil_ID"
+    data-ar="الرقم المدني لولي الأمر"
+    data-en="Guardian Civil ID"
+    placeholder="الرقم المدني لولي الأمر">
+
+  <input name="Guardian_Phone"
+    data-ar="رقم هاتف ولي الأمر"
+    data-en="Guardian Phone"
+    placeholder="رقم هاتف ولي الأمر">
 
   <div class="consent-box">
     <label>
       <input type="checkbox" id="guardianAgree">
-      أقر أنا ولي أمر المتقدم بموافقتي الكاملة على المشاركة وأتحمل المسؤولية القانونية.
+      <span
+        data-ar="أقر أنا ولي أمر المتقدم بموافقتي الكاملة وأتحمل المسؤولية القانونية."
+        data-en="I confirm as guardian my full consent and legal responsibility.">
+        أقر أنا ولي أمر المتقدم بموافقتي الكاملة وأتحمل المسؤولية القانونية.
+      </span>
     </label>
   </div>
 
-  <p><strong>توقيع ولي الأمر:</strong></p>
-  <canvas id="sig"></canvas>
-  <button type="button" onclick="clearSig()">مسح التوقيع</button>
+  <p data-ar="توقيع ولي الأمر:" data-en="Guardian Signature:"><strong>توقيع ولي الأمر:</strong></p>
+  <canvas id="sig" width="380" height="150"></canvas>
+  <button type="button" onclick="clearSig()" data-ar="مسح التوقيع" data-en="Clear Signature">مسح التوقيع</button>
+
 </div>
 
-<button class="submit" type="submit">إرسال</button>
+<button class="submit" type="submit" data-ar="إرسال" data-en="Submit">إرسال</button>
+
 </form>
 </div>
 
-<!-- الفوتر الثابت -->
+<!-- فوتر ثابت -->
 <div class="footer-fixed">
-  <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7">
-    <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13z"/></svg>
-  </a>
-  <a href="mailto:mkgkuwait@outlook.com">
-    <svg viewBox="0 0 24 24"><path d="M2 6h20v12H2z"/></svg>
-  </a>
-  <a href="tel:25473556">
-    <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6z"/></svg>
-  </a>
-  <a href="https://x.com/mkgkuwait">
-    <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.8z"/></svg>
-  </a>
-  <a href="https://instagram.com/mkgkuwait">
-    <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10z"/></svg>
-  </a>
+  <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7">📍</a>
+  <a href="mailto:mkgkuwait@outlook.com">✉️</a>
+  <a href="tel:25473556">📞</a>
+  <a href="https://x.com/mkgkuwait">X</a>
+  <a href="https://instagram.com/mkgkuwait">📷</a>
 </div>
 
 <script>
 /* ===== اللغة ===== */
 const LANG_KEY="site_lang";
-function toggleLang(){
-  const l=(localStorage.getItem(LANG_KEY)||"ar")==="ar"?"en":"ar";
-  setLang(l);
-}
-function setLang(l){
-  localStorage.setItem(LANG_KEY,l);
-  document.documentElement.dir=l==="ar"?"rtl":"ltr";
+function applyLang(l){
+  document.documentElement.dir = l==="ar"?"rtl":"ltr";
   document.querySelectorAll("[data-ar]").forEach(el=>{
     el.textContent = l==="ar"?el.dataset.ar:el.dataset.en;
   });
+  document.querySelectorAll("[placeholder]").forEach(el=>{
+    if(el.dataset.ar){
+      el.placeholder = l==="ar"?el.dataset.ar:el.dataset.en;
+    }
+  });
 }
-setLang(localStorage.getItem(LANG_KEY)||"ar");
+function toggleLang(){
+  const n=(localStorage.getItem(LANG_KEY)||"ar")==="ar"?"en":"ar";
+  localStorage.setItem(LANG_KEY,n);
+  applyLang(n);
+}
+applyLang(localStorage.getItem(LANG_KEY)||"ar");
 
-/* ===== العمر ===== */
+/* ===== منطق العمر ===== */
 const age=document.getElementById("age");
 const guardian=document.getElementById("guardian");
 const agree=document.getElementById("guardianAgree");
 
-age.addEventListener("blur",()=>{
+age.addEventListener("input",()=>{
   const a=parseInt(age.value,10);
-  if(isNaN(a)) return;
-
   if(a<10){
-    alert("العمر أقل من 10 سنوات غير مسموح");
+    alert("لا يسمح بالتسجيل لمن هم أقل من 10 سنوات");
     age.value="";
     guardian.style.display="none";
     return;
   }
-  guardian.style.display = a<=17 ? "block" : "none";
-  agree.required = a<=17;
+  guardian.style.display = (a<=17)?"block":"none";
+  agree.required = (a<=17);
 });
 
-/* ===== التوقيع (يدعم آيفون) ===== */
+/* ===== التوقيع (Mouse + Touch) ===== */
 const canvas=document.getElementById("sig");
 const ctx=canvas.getContext("2d");
 let drawing=false;
 
-function resizeCanvas(){
-  const r=window.devicePixelRatio||1;
-  canvas.width=canvas.offsetWidth*r;
-  canvas.height=160*r;
-  ctx.scale(r,r);
+function resetCanvas(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle="#fff";
-  ctx.fillRect(0,0,canvas.offsetWidth,160);
+  ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.strokeStyle="#000";
   ctx.lineWidth=2;
+  ctx.lineCap="round";
 }
-resizeCanvas();
+resetCanvas();
 
-function pos(e){
+function getPos(e){
   const r=canvas.getBoundingClientRect();
-  const t=e.touches?e.touches[0]:e;
-  return {x:t.clientX-r.left,y:t.clientY-r.top};
+  if(e.touches){
+    return {x:e.touches[0].clientX-r.left,y:e.touches[0].clientY-r.top};
+  }
+  return {x:e.offsetX,y:e.offsetY};
 }
-canvas.addEventListener("mousedown",e=>{drawing=true;ctx.beginPath();const p=pos(e);ctx.moveTo(p.x,p.y);});
-canvas.addEventListener("mousemove",e=>{if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();});
-["mouseup","mouseleave"].forEach(e=>canvas.addEventListener(e,()=>drawing=false));
 
-canvas.addEventListener("touchstart",e=>{e.preventDefault();drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);},{passive:false});
-canvas.addEventListener("touchmove",e=>{e.preventDefault();if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();},{passive:false});
-canvas.addEventListener("touchend",()=>drawing=false);
+function start(e){
+  e.preventDefault();
+  drawing=true;
+  const p=getPos(e);
+  ctx.beginPath();
+  ctx.moveTo(p.x,p.y);
+}
+function move(e){
+  if(!drawing) return;
+  e.preventDefault();
+  const p=getPos(e);
+  ctx.lineTo(p.x,p.y);
+  ctx.stroke();
+}
+function end(){drawing=false;}
 
-function clearSig(){resizeCanvas();}
+canvas.addEventListener("mousedown",start);
+canvas.addEventListener("mousemove",move);
+canvas.addEventListener("mouseup",end);
+canvas.addEventListener("mouseleave",end);
+canvas.addEventListener("touchstart",start,{passive:false});
+canvas.addEventListener("touchmove",move,{passive:false});
+canvas.addEventListener("touchend",end);
+
+function clearSig(){resetCanvas();}
 
 /* ===== الإرسال ===== */
 document.getElementById("volunteerForm").addEventListener("submit",e=>{
   e.preventDefault();
-  const a=parseInt(age.value,10);
-  if(a<=17 && !agree.checked){alert("موافقة ولي الأمر مطلوبة");return;}
   const data=new FormData(e.target);
-  if(a<=17) data.append("Guardian_Signature_Base64",canvas.toDataURL("image/png"));
+  const a=parseInt(age.value,10);
+
+  if(a<=17){
+    if(!agree.checked){alert("يجب موافقة ولي الأمر");return;}
+    data.append("Guardian_Signature_Base64",canvas.toDataURL("image/png"));
+  }
 
   fetch("https://script.google.com/macros/s/AKfycbygn8i590rV6sLcHtjZV2HrcUVSE-VILFyrqqj-bvpIotdPMxK9TpNbvSWeGuMtO_YYMA/exec",
     {method:"POST",body:data})
-    .then(()=>location.href="thankyou.html")
-    .catch(()=>alert("فشل الإرسال"));
+  .then(()=>location.href="thankyou.html")
+  .catch(()=>alert("فشل الإرسال"));
 });
 </script>
 
