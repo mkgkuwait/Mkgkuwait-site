@@ -38,105 +38,100 @@ document.addEventListener("DOMContentLoaded",()=>{
   const agree    = document.getElementById("agree");
   const canvas   = document.getElementById("sig");
 
-  /* ===== ولي الأمر حسب العمر ===== */
-  if age.addEventListener("blur", ()=>{
-  const a = parseInt(age.value,10);
-
-  if(isNaN(a)){
+  /* ===== منطق العمر (بعد الكتابة) ===== */
+  if(age && guardian){
     guardian.style.display = "none";
-    agree.required = false;
-    return;
+
+    age.addEventListener("blur", ()=>{
+      const a = parseInt(age.value,10);
+
+      if(isNaN(a)){
+        guardian.style.display = "none";
+        if(agree) agree.required = false;
+        return;
+      }
+
+      if(a < 10){
+        alert("لا يسمح بالتسجيل لمن هم أقل من 10 سنوات");
+        age.value = "";
+        guardian.style.display = "none";
+        if(agree) agree.required = false;
+        return;
+      }
+
+      if(a >= 10 && a <= 17){
+        guardian.style.display = "block";
+        if(agree) agree.required = true;
+      } else {
+        guardian.style.display = "none";
+        if(agree) agree.required = false;
+      }
+    });
   }
 
-  if(a < 10){
-    alert("لا يسمح بالتسجيل لمن هم أقل من 10 سنوات");
-    age.value = "";
-    guardian.style.display = "none";
-    agree.required = false;
-    return;
+  /* ======================
+     SIGNATURE CANVAS (FIXED)
+  ====================== */
+  if(canvas){
+    const ctx = canvas.getContext("2d");
+    let drawing = false;
+
+    function init(){
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle="#fff";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.strokeStyle="#000";
+      ctx.lineWidth=2;
+      ctx.lineCap="round";
+    }
+    init();
+
+    function getPos(e){
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const p = e.touches ? e.touches[0] : e;
+
+      return {
+        x:(p.clientX - rect.left) * scaleX,
+        y:(p.clientY - rect.top)  * scaleY
+      };
+    }
+
+    function start(e){
+      e.preventDefault();
+      drawing = true;
+      const p = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+    }
+
+    function move(e){
+      if(!drawing) return;
+      e.preventDefault();
+      const p = getPos(e);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+    }
+
+    function end(){
+      drawing = false;
+    }
+
+    canvas.addEventListener("mousedown", start);
+    canvas.addEventListener("mousemove", move);
+    canvas.addEventListener("mouseup", end);
+    canvas.addEventListener("mouseleave", end);
+
+    canvas.addEventListener("touchstart", start, {passive:false});
+    canvas.addEventListener("touchmove", move, {passive:false});
+    canvas.addEventListener("touchend", end);
+
+    window.clearSig = init;
+
+    console.log("Signature READY");
   }
-
-  if(a >= 10 && a <= 17){
-    guardian.style.display = "block";
-    agree.required = true;
-  } else {
-    guardian.style.display = "none";
-    agree.required = false;
-  }
-});
-
-  }
-
-
-// ================== SIGNATURE CANVAS (FINAL FIX) ==================
-document.addEventListener("DOMContentLoaded", () => {
-
-  const canvas = document.getElementById("sig");
-  if(!canvas) return;
-
-  const ctx = canvas.getContext("2d");
-  let drawing = false;
-
-  // تهيئة
-  function init(){
-    ctx.setTransform(1,0,0,1,0,0);
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="#fff";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.strokeStyle="#000";
-    ctx.lineWidth=2;
-    ctx.lineCap="round";
-  }
-  init();
-
-  function getPos(e){
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const p = e.touches ? e.touches[0] : e;
-
-    return {
-      x:(p.clientX - rect.left) * scaleX,
-      y:(p.clientY - rect.top)  * scaleY
-    };
-  }
-
-  function start(e){
-    e.preventDefault();
-    drawing = true;
-    const p = getPos(e);
-    ctx.beginPath();
-    ctx.moveTo(p.x, p.y);
-  }
-
-  function move(e){
-    if(!drawing) return;
-    e.preventDefault();
-    const p = getPos(e);
-    ctx.lineTo(p.x, p.y);
-    ctx.stroke();
-  }
-
-  function end(){
-    drawing = false;
-  }
-
-  // Mouse
-  canvas.addEventListener("mousedown", start);
-  canvas.addEventListener("mousemove", move);
-  canvas.addEventListener("mouseup", end);
-  canvas.addEventListener("mouseleave", end);
-
-  // Touch (iPad / iPhone)
-  canvas.addEventListener("touchstart", start, {passive:false});
-  canvas.addEventListener("touchmove", move, {passive:false});
-  canvas.addEventListener("touchend", end);
-
-  window.clearSig = init;
-
-  console.log("Signature READY");
-});
-
 
   /* ======================
      Submit → Google Script
@@ -168,13 +163,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       fetch(
-  "https://script.google.com/macros/s/AKfycbwvv1UCMcNhFy_LNV8FTBVBjsEpOnBA0Q1Ssjq5FdRBC41tCGBsqNxeKHuPKVI67T8oIQ/exec",
-  {
-    method: "POST",
-    body: data
-  }
-)
-
+        "https://script.google.com/macros/s/AKfycbwvv1UCMcNhFy_LNV8FTBVBjsEpOnBA0Q1Ssjq5FdRBC41tCGBsqNxeKHuPKVI67T8oIQ/exec",
+        { method:"POST", body:data }
+      )
       .then(()=> window.location.href = "thankyou.html")
       .catch(()=> alert("فشل إرسال البيانات، حاول مرة أخرى"));
     });
