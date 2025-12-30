@@ -16,13 +16,16 @@ html,body{
   font-family:"Segoe UI",Tahoma,Arial;
 }
 
-/* مساحة للبنر */
+/* مساحة أسفل الصفحة للبنر */
 .page{
   min-height:100vh;
   padding-bottom:86px;
 }
 
-/* ===== شريط اللغة + الشعار ===== */
+/* =====================
+   الشريط العلوي
+   (شعار + لغة)
+===================== */
 .top-bar{
   position:fixed;
   top:0; left:0; right:0;
@@ -31,7 +34,11 @@ html,body{
   align-items:center;
   justify-content:space-between;
   padding:0 16px;
-  background:linear-gradient(to bottom,rgba(0,0,0,.85),rgba(0,0,0,.2));
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.85),
+    rgba(0,0,0,.25)
+  );
   z-index:1000;
 }
 
@@ -49,7 +56,9 @@ html,body{
   font-size:14px;
 }
 
-/* ===== المحتوى ===== */
+/* =====================
+   المحتوى / الهيدر
+===================== */
 header{
   padding:110px 16px 24px;
   text-align:center;
@@ -64,10 +73,14 @@ header h2{
   margin:0;
   font-size:14px;
   color:var(--muted);
+  font-weight:400;
 }
 
-/* ===== الأزرار ===== */
-.btn, .submit{
+/* =====================
+   الأزرار
+===================== */
+.btn,
+.submit{
   display:inline-block;
   margin-top:20px;
   padding:14px 28px;
@@ -80,7 +93,9 @@ header h2{
   text-decoration:none;
 }
 
-/* ===== الفورم ===== */
+/* =====================
+   الفورم
+===================== */
 input,select{
   width:100%;
   padding:14px;
@@ -89,28 +104,40 @@ input,select{
   border:none;
   background:#1a1a1a;
   color:#fff;
+  font-size:15px;
 }
 
-input::placeholder{color:#999}
+input::placeholder{
+  color:#999;
+}
 
+/* =====================
+   صندوق الإقرار
+===================== */
 .consent-box{
   background:#1a1a1a;
   padding:16px;
   border-radius:14px;
   margin-top:12px;
   font-size:14px;
+  line-height:1.6;
 }
 
+/* =====================
+   Canvas التوقيع
+===================== */
 canvas{
   width:100%;
   height:160px;
-  background:#fff;
+  background:#ffffff;
   border-radius:10px;
   margin-top:10px;
   touch-action:none;
 }
 
-/* ===== البنر السفلي الرسمي ===== */
+/* =====================
+   البنر السفلي الرسمي
+===================== */
 .footer-fixed{
   position:fixed;
   bottom:0; left:0; right:0;
@@ -139,7 +166,14 @@ canvas{
   opacity:1;
 }
 
-/* ===== موبايل ===== */
+/* =====================
+   تحسين الموبايل
+===================== */
 @media(max-width:480px){
-  header{padding-top:120px;}
+  header{
+    padding-top:120px;
+  }
+  .top-bar img{
+    height:46px;
+  }
 }
