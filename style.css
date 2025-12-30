@@ -1,8 +1,15 @@
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
+/* ======================
+   Colors & Base
+====================== */
 :root{
   --gold:#d4af37;
   --dark:#0b0b0b;
+  --card:#111;
+  --field:#1a1a1a;
 }
 
 html,body{
@@ -13,7 +20,9 @@ html,body{
   font-family:"Segoe UI",Tahoma,Arial;
 }
 
-/* زر اللغة */
+/* ======================
+   Language Toggle
+====================== */
 .lang-toggle{
   position:fixed;
   top:14px;
@@ -25,31 +34,41 @@ html,body{
   border-radius:22px;
   padding:8px 18px;
   font-weight:700;
+  font-size:14px;
   cursor:pointer;
 }
 
-/* الصفحة */
+/* ======================
+   Page Wrapper
+====================== */
 .page{
   max-width:720px;
   margin:auto;
-  padding:110px 16px 150px; /* مساحة للبنر السفلي */
+  padding:110px 16px 150px; /* مساحة كافية للبنر السفلي */
 }
 
-/* الشعار */
+/* ======================
+   Logo
+====================== */
 .logo{
   display:block;
   margin:0 auto 22px;
-  height:110px; /* حجم متوازن للموبايل */
+  height:110px;
 }
 
-/* العناوين */
+/* ======================
+   Headings
+====================== */
 h1{
   text-align:center;
   margin:0 0 22px;
   font-size:24px;
+  font-weight:700;
 }
 
-/* زر رئيسي (موحد) */
+/* ======================
+   Buttons (Unified)
+====================== */
 .btn,
 .submit,
 button[type="button"]{
@@ -69,28 +88,40 @@ button[type="button"]{
   text-decoration:none;
 }
 
-/* الحقول */
-input,select{
+/* ======================
+   Form Fields
+====================== */
+input,
+select{
   width:100%;
   padding:16px;
   margin:10px 0;
   border-radius:12px;
   border:none;
-  background:#1a1a1a;
+  background:var(--field);
   color:#fff;
   font-size:16px;
 }
 
-/* ولي الأمر */
+input::placeholder{
+  color:#aaa;
+}
+
+/* ======================
+   Guardian Consent
+====================== */
 .consent-box{
-  background:#1a1a1a;
+  background:var(--field);
   padding:16px;
   border-radius:12px;
   margin-top:12px;
   font-size:14px;
+  line-height:1.6;
 }
 
-/* التوقيع */
+/* ======================
+   Signature Canvas
+====================== */
 canvas{
   width:100%;
   height:170px;
@@ -98,10 +129,13 @@ canvas{
   border-radius:12px;
   margin-top:10px;
   touch-action:none;
-  direction:ltr; /* مهم لمنع الانحراف */
+  direction:ltr; /* يمنع أي انحراف */
 }
 
-/* ===== شريط التواصل الرسمي (مثل الصورة تمامًا) ===== */
+/* ======================
+   Official Contact Bar
+   (مثل الصورة تمامًا)
+====================== */
 .footer-fixed{
   position:fixed;
   bottom:14px;
@@ -116,19 +150,21 @@ canvas{
   z-index:1500;
 }
 
-/* أيقونات SVG واضحة بدون ألوان */
+/* Links */
 .footer-fixed a{
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
+/* SVG Icons */
 .footer-fixed svg{
   width:20px;
   height:20px;
   fill:#fff;
   opacity:.95;
 }
+
 .footer-fixed svg:hover{
   opacity:1;
 }
