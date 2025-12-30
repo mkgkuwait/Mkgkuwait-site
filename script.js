@@ -67,63 +67,53 @@ document.addEventListener("DOMContentLoaded",()=>{
 
   }
 
-  /* ======================
-     Signature Canvas (FIXED)
-  ====================== */
-/* ======================
-   Signature Canvas (STABLE)
-====================== */
+
+// ================== SIGNATURE CANVAS (FINAL FIX) ==================
 document.addEventListener("DOMContentLoaded", () => {
 
   const canvas = document.getElementById("sig");
-  if (!canvas) return;
+  if(!canvas) return;
 
   const ctx = canvas.getContext("2d");
   let drawing = false;
 
-  // تأكيد أبعاد حقيقية
-  function fixCanvasSize(){
-    const rect = canvas.getBoundingClientRect();
-    canvas.width  = rect.width;
-    canvas.height = rect.height;
-  }
-
-  fixCanvasSize();
-  window.addEventListener("resize", fixCanvasSize);
-
-  function resetCanvas(){
+  // تهيئة
+  function init(){
+    ctx.setTransform(1,0,0,1,0,0);
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle="#fff";
     ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.strokeStyle = "#000";
-    ctx.lineWidth = 2;
-    ctx.lineCap = "round";
+    ctx.strokeStyle="#000";
+    ctx.lineWidth=2;
+    ctx.lineCap="round";
   }
-
-  resetCanvas();
+  init();
 
   function getPos(e){
     const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
     const p = e.touches ? e.touches[0] : e;
+
     return {
-      x: p.clientX - rect.left,
-      y: p.clientY - rect.top
+      x:(p.clientX - rect.left) * scaleX,
+      y:(p.clientY - rect.top)  * scaleY
     };
   }
 
   function start(e){
     e.preventDefault();
     drawing = true;
-    const pos = getPos(e);
+    const p = getPos(e);
     ctx.beginPath();
-    ctx.moveTo(pos.x, pos.y);
+    ctx.moveTo(p.x, p.y);
   }
 
   function move(e){
     if(!drawing) return;
     e.preventDefault();
-    const pos = getPos(e);
-    ctx.lineTo(pos.x, pos.y);
+    const p = getPos(e);
+    ctx.lineTo(p.x, p.y);
     ctx.stroke();
   }
 
@@ -137,15 +127,16 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.addEventListener("mouseup", end);
   canvas.addEventListener("mouseleave", end);
 
-  // Touch
+  // Touch (iPad / iPhone)
   canvas.addEventListener("touchstart", start, {passive:false});
   canvas.addEventListener("touchmove", move, {passive:false});
   canvas.addEventListener("touchend", end);
 
-  // مسح التوقيع
-  window.clearSig = resetCanvas;
+  window.clearSig = init;
 
+  console.log("Signature READY");
 });
+
 
   /* ======================
      Submit → Google Script
