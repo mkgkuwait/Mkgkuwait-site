@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       }
 
       fetch(
-        "https://script.google.com/macros/s/AKfycbygn8i590rV6sLcHtjZV2HrcUVSE-VILFyrqqj-bvpIotdPMxK9TpNbvSWeGuMtO_YYMA/exec",
+        "https://script.google.com/macros/s/AKfycbwJQLOFZB-fala3st-O6O3Wq0Yky7KS91FXyV5GZbtc/dev",
         { method:"POST", body:data }
       )
       .then(()=> window.location.href="thankyou.html")
