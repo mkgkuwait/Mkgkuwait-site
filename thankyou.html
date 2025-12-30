@@ -2,38 +2,149 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>تم الإرسال</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-ar="تم الإرسال" data-en="Submitted Successfully">تم الإرسال</title>
+
+<style>
+body{
+  background:#0f1b24;
+  color:#fff;
+  font-family:Tahoma, Arial;
+  margin:0;
+  padding-bottom:80px; /* مساحة للبنر السفلي */
+}
+
+/* زر تبديل اللغة */
+.lang-toggle{
+  position:fixed;
+  top:15px;
+  right:15px;
+  z-index:1000;
+  background:#c9a24d;
+  color:#000;
+  border:none;
+  padding:8px 14px;
+  border-radius:20px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+/* المحتوى */
+.page{
+  max-width:560px;
+  margin:40px auto;
+  background:#13232f;
+  padding:40px 30px;
+  border-radius:14px;
+  text-align:center;
+}
+header img{
+  max-width:150px;
+  margin-bottom:20px;
+}
+h1{margin:0 0 10px 0;}
+h2{
+  margin:0;
+  font-size:16px;
+  font-weight:normal;
+  color:#ccc;
+}
+
+/* البنر السفلي */
+.footer-fixed{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#000;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  padding:14px 0;
+  z-index:999;
+}
+.footer-fixed a svg{
+  width:22px;
+  height:22px;
+  fill:#fff;
+}
+</style>
 </head>
+
 <body>
 
 <button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
 
 <div class="page">
 <header>
-  <a href="index.html"><img src="logo.png"></a>
-  <h1>تم استلام طلبكم بنجاح</h1>
-  <h2>Thank You</h2>
+  <a href="index.html"><img src="logo.png" alt="logo"></a>
+
+  <h1
+    data-ar="تم استلام طلبكم بنجاح"
+    data-en="Your request has been received successfully">
+    تم استلام طلبكم بنجاح
+  </h1>
+
+  <h2
+    data-ar="شكرًا لتسجيلكم"
+    data-en="Thank you for registering">
+    شكرًا لتسجيلكم
+  </h2>
 </header>
 </div>
 
-<footer>
-  <a href="https://instagram.com/mkgkuwait" aria-label="Instagram">
-    <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
-  </a>
-  <a href="https://x.com/mkgkuwait" aria-label="X">
-    <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.8l-5.3-6.5L5.7 22H2.6l7.7-8.8L1 2h7l4.8 5.9L18.9 2z"/></svg>
-  </a>
-  <a href="tel:25473556" aria-label="Phone">
-    <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C9.4 22 2 14.6 2 5a1 1 0 0 1 1-1h4.6a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.6a1 1 0 0 1-.2 1l-2.4 2.2z"/></svg>
+<!-- البنر السفلي الثابت -->
+<div class="footer-fixed">
+  <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7" aria-label="Location">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13z"/>
+    </svg>
   </a>
   <a href="mailto:mkgkuwait@outlook.com" aria-label="Email">
-    <svg viewBox="0 0 24 24"><path d="M2 6.5 12 13l10-6.5V18H2V6.5zm10 4.1L2.8 5h18.4L12 10.6z"/></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M2 6h20v12H2z"/>
+    </svg>
   </a>
-  <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7" aria-label="Location">
-    <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+  <a href="tel:25473556" aria-label="Phone">
+    <svg viewBox="0 0 24 24">
+      <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6z"/>
+    </svg>
   </a>
-</footer>
+  <a href="https://x.com/mkgkuwait" aria-label="X">
+    <svg viewBox="0 0 24 24">
+      <path d="M18.9 2H22l-7.2 8.2L23 22h-6.8z"/>
+    </svg>
+  </a>
+  <a href="https://instagram.com/mkgkuwait" aria-label="Instagram">
+    <svg viewBox="0 0 24 24">
+      <path d="M7 2h10a5 5 0 0 1 5 5v10z"/>
+    </svg>
+  </a>
+</div>
+
+<script>
+/* ===== تبديل اللغة الفعلي ===== */
+const LANG_KEY="site_lang";
+
+function applyLang(lang){
+  document.documentElement.dir = lang==="ar" ? "rtl" : "ltr";
+
+  document.querySelectorAll("[data-ar]").forEach(el=>{
+    el.textContent = lang==="ar" ? el.dataset.ar : el.dataset.en;
+  });
+}
+
+function toggleLang(){
+  const current = localStorage.getItem(LANG_KEY) || "ar";
+  const next = current === "ar" ? "en" : "ar";
+  localStorage.setItem(LANG_KEY, next);
+  applyLang(next);
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  applyLang(localStorage.getItem(LANG_KEY) || "ar");
+});
+</script>
+
 </body>
 </html>
