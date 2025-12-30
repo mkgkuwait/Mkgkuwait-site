@@ -1,96 +1,64 @@
-/* =====================
-   Language (AR / EN)
-===================== */
-const LANG_KEY = "site_lang";
+/* ===== اللغة ===== */
+const LANG_KEY="site_lang";
 
-function applyLang(lang){
-  document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-
-  // النصوص
+function applyLang(l){
+  document.documentElement.dir = l==="ar"?"rtl":"ltr";
   document.querySelectorAll("[data-ar]").forEach(el=>{
-    el.textContent = (lang === "ar") ? el.dataset.ar : el.dataset.en;
+    el.textContent = l==="ar"?el.dataset.ar:el.dataset.en;
   });
-
-  // placeholders
   document.querySelectorAll("[data-ph-ar]").forEach(el=>{
-    el.placeholder = (lang === "ar") ? el.dataset.phAr : el.dataset.phEn;
+    el.placeholder = l==="ar"?el.dataset.phAr:el.dataset.phEn;
   });
 }
-
 function toggleLang(){
-  const current = localStorage.getItem(LANG_KEY) || "ar";
-  const next = (current === "ar") ? "en" : "ar";
-  localStorage.setItem(LANG_KEY, next);
-  applyLang(next);
+  const n=(localStorage.getItem(LANG_KEY)||"ar")==="ar"?"en":"ar";
+  localStorage.setItem(LANG_KEY,n);
+  applyLang(n);
 }
-
-document.addEventListener("DOMContentLoaded", ()=>{
-  applyLang(localStorage.getItem(LANG_KEY) || "ar");
+document.addEventListener("DOMContentLoaded",()=>{
+  applyLang(localStorage.getItem(LANG_KEY)||"ar");
 });
 
+/* ===== التوقيع ===== */
+document.addEventListener("DOMContentLoaded",()=>{
+  const canvas=document.getElementById("sig");
+  if(!canvas) return;
 
-/* =====================
-   Signature Canvas
-   (Windows + iOS)
-===================== */
-document.addEventListener("DOMContentLoaded", ()=>{
+  const ctx=canvas.getContext("2d");
+  let draw=false;
 
-  const canvas = document.getElementById("sig");
-  if(!canvas) return; // فقط صفحة التسجيل
-
-  const ctx = canvas.getContext("2d");
-  let drawing = false;
-
-  function initCanvas(){
+  function reset(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = "#ffffff";
+    ctx.fillStyle="#fff";
     ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.strokeStyle = "#000000";
-    ctx.lineWidth = 2;
-    ctx.lineCap = "round";
+    ctx.strokeStyle="#000";
+    ctx.lineWidth=2;
+    ctx.lineCap="round";
   }
-  initCanvas();
+  reset();
 
-  function getPos(e){
-    const rect = canvas.getBoundingClientRect();
-    const p = e.touches ? e.touches[0] : e;
-    return {
-      x: p.clientX - rect.left,
-      y: p.clientY - rect.top
-    };
+  function pos(e){
+    const r=canvas.getBoundingClientRect();
+    const p=e.touches?e.touches[0]:e;
+    return {x:p.clientX-r.left,y:p.clientY-r.top};
   }
 
-  function startDraw(e){
-    e.preventDefault();
-    drawing = true;
-    const pos = getPos(e);
-    ctx.beginPath();
-    ctx.moveTo(pos.x, pos.y);
-  }
+  canvas.addEventListener("mousedown",e=>{
+    draw=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);
+  });
+  canvas.addEventListener("mousemove",e=>{
+    if(!draw) return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();
+  });
+  canvas.addEventListener("mouseup",()=>draw=false);
+  canvas.addEventListener("mouseleave",()=>draw=false);
 
-  function drawMove(e){
-    if(!drawing) return;
-    e.preventDefault();
-    const pos = getPos(e);
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
-  }
+  canvas.addEventListener("touchstart",e=>{
+    e.preventDefault();draw=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);
+  },{passive:false});
+  canvas.addEventListener("touchmove",e=>{
+    e.preventDefault();if(!draw)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();
+  },{passive:false});
+  canvas.addEventListener("touchend",()=>draw=false);
 
-  function endDraw(){
-    drawing = false;
-  }
-
-  // Mouse
-  canvas.addEventListener("mousedown", startDraw);
-  canvas.addEventListener("mousemove", drawMove);
-  canvas.addEventListener("mouseup", endDraw);
-  canvas.addEventListener("mouseleave", endDraw);
-
-  // Touch (iOS)
-  canvas.addEventListener("touchstart", startDraw, {passive:false});
-  canvas.addEventListener("touchmove", drawMove, {passive:false});
-  canvas.addEventListener("touchend", endDraw);
-
-  // مسح التوقيع
-  window.clearSig = initCanvas;
+  window.clearSig=reset;
 });
