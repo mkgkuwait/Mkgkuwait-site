@@ -4,179 +4,81 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-ar="تسجيل متطوع" data-en="Volunteer Registration">تسجيل متطوع</title>
-
 <link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script>
 </head>
 
 <body>
 
-<!-- الشريط العلوي (شعار + لغة) -->
-<div class="top-bar">
-  <a href="index.html">
-    <img src="logo.png" alt="شعار محافظة مبارك الكبير">
-  </a>
-  <button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
-</div>
+<button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
 
 <div class="page">
-<header>
-  <h1 data-ar="تسجيل متطوع" data-en="Volunteer Registration">
-    تسجيل متطوع
-  </h1>
-</header>
+
+<a href="index.html">
+  <img src="logo.png" class="logo" alt="logo">
+</a>
+
+<h1 data-ar="تسجيل متطوع" data-en="Volunteer Registration">تسجيل متطوع</h1>
 
 <form id="volunteerForm">
 
-<input name="Full_Name"
-  data-ar="الاسم الكامل"
-  data-en="Full Name"
-  data-ph-ar="الاسم الكامل"
-  data-ph-en="Full Name"
-  placeholder="الاسم الكامل"
-  required>
+<input data-ph-ar="الاسم الكامل" data-ph-en="Full Name" required>
+<input data-ph-ar="الرقم المدني" data-ph-en="Civil ID" required>
+<input data-ph-ar="رقم هاتف المتطوع" data-ph-en="Volunteer Phone" required>
 
-<input name="Civil_ID"
-  data-ar="الرقم المدني"
-  data-en="Civil ID"
-  data-ph-ar="الرقم المدني"
-  data-ph-en="Civil ID"
-  placeholder="الرقم المدني"
-  required>
+<input type="number" id="age" data-ph-ar="العمر (10-70)" data-ph-en="Age (10-70)" required>
 
-<input name="Volunteer_Phone"
-  data-ar="رقم هاتف المتطوع"
-  data-en="Volunteer Phone"
-  data-ph-ar="رقم هاتف المتطوع"
-  data-ph-en="Volunteer Phone"
-  placeholder="رقم هاتف المتطوع"
-  required>
-
-<input type="number" id="age" name="Age"
-  data-ar="العمر"
-  data-en="Age"
-  data-ph-ar="العمر (10 – 70)"
-  data-ph-en="Age (10 – 70)"
-  placeholder="العمر (10 – 70)"
-  min="10" max="70"
-  required>
-
-<select name="Volunteer_Type" required>
-  <option value=""
-    data-ar="اختر مجال التطوع"
-    data-en="Select Volunteering Field">
-    اختر مجال التطوع
-  </option>
-  <option
-    data-ar="الزراعة التجميلية"
-    data-en="Landscape Beautification">
-    الزراعة التجميلية
-  </option>
-  <option
-    data-ar="صيانة مرافق وخدمات عامة"
-    data-en="Facilities Maintenance">
-    صيانة مرافق وخدمات عامة
-  </option>
+<select required>
+  <option data-ar="اختر مجال التطوع" data-en="Select Field">اختر مجال التطوع</option>
+  <option data-ar="الزراعة التجميلية" data-en="Beautification">الزراعة التجميلية</option>
+  <option data-ar="صيانة مرافق وخدمات عامة" data-en="Maintenance">صيانة مرافق وخدمات عامة</option>
 </select>
 
-<!-- بيانات ولي الأمر -->
 <div id="guardian" style="display:none">
+  <h3 data-ar="بيانات ولي الأمر" data-en="Guardian Info">بيانات ولي الأمر</h3>
 
-  <h3 data-ar="بيانات ولي الأمر" data-en="Guardian Information">
-    بيانات ولي الأمر
-  </h3>
-
-  <input name="Guardian_Name"
-    data-ph-ar="اسم ولي الأمر"
-    data-ph-en="Guardian Name"
-    placeholder="اسم ولي الأمر">
-
-  <input name="Guardian_Civil_ID"
-    data-ph-ar="الرقم المدني لولي الأمر"
-    data-ph-en="Guardian Civil ID"
-    placeholder="الرقم المدني لولي الأمر">
-
-  <input name="Guardian_Phone"
-    data-ph-ar="رقم هاتف ولي الأمر"
-    data-ph-en="Guardian Phone"
-    placeholder="رقم هاتف ولي الأمر">
+  <input data-ph-ar="اسم ولي الأمر" data-ph-en="Guardian Name">
+  <input data-ph-ar="رقم هاتف ولي الأمر" data-ph-en="Guardian Phone">
 
   <div class="consent-box">
     <label>
-      <input type="checkbox" id="guardianAgree">
-      <span
-        data-ar="أقر أنا ولي أمر المتقدم بموافقتي الكاملة وأتحمل المسؤولية القانونية."
-        data-en="I confirm as guardian my full consent and legal responsibility.">
-        أقر أنا ولي أمر المتقدم بموافقتي الكاملة وأتحمل المسؤولية القانونية.
+      <input type="checkbox" id="agree">
+      <span data-ar="أوافق بصفتي ولي الأمر" data-en="I approve as guardian">
+        أوافق بصفتي ولي الأمر
       </span>
     </label>
   </div>
 
-  <p>
-    <strong
-      data-ar="توقيع ولي الأمر:"
-      data-en="Guardian Signature:">
-      توقيع ولي الأمر:
-    </strong>
-  </p>
-
-  <canvas id="sig" width="380" height="150"></canvas>
-
-  <button type="button"
-    onclick="clearSig()"
-    data-ar="مسح التوقيع"
-    data-en="Clear Signature">
-    مسح التوقيع
-  </button>
-
+  <canvas id="sig"></canvas>
+  <button type="button" onclick="clearSig()">مسح التوقيع</button>
 </div>
 
-<button class="submit" type="submit"
-  data-ar="إرسال"
-  data-en="Submit">
-  إرسال
-</button>
+<button class="submit" type="submit" data-ar="إرسال" data-en="Submit">إرسال</button>
 
 </form>
 </div>
 
-<!-- البنر السفلي الرسمي -->
 <div class="footer-fixed">
-  <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7" aria-label="Location">
-    <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13z"/></svg>
+  <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7">
+    <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13z"/></svg>
   </a>
-  <a href="mailto:mkgkuwait@outlook.com" aria-label="Email">
+  <a href="mailto:mkgkuwait@outlook.com">
     <svg viewBox="0 0 24 24"><path d="M2 6h20v12H2z"/></svg>
   </a>
-  <a href="tel:25473556" aria-label="Phone">
-    <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6z"/></svg>
-  </a>
-  <a href="https://x.com/mkgkuwait" aria-label="X">
-    <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.8z"/></svg>
-  </a>
-  <a href="https://instagram.com/mkgkuwait" aria-label="Instagram">
-    <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10z"/></svg>
+  <a href="tel:25473556">
+    <svg viewBox="0 0 24 24"><path d="M6 10a14 14 0 0 0 8 8z"/></svg>
   </a>
 </div>
 
 <script>
-/* ===== منطق العمر فقط (بدون تكرار لغة) ===== */
-const age = document.getElementById("age");
-const guardian = document.getElementById("guardian");
-const agree = document.getElementById("guardianAgree");
+const age=document.getElementById("age");
+const guardian=document.getElementById("guardian");
+const agree=document.getElementById("agree");
 
 age.addEventListener("input",()=>{
-  const a = parseInt(age.value,10);
-
-  if(a < 10){
-    alert("لا يسمح بالتسجيل لمن هم أقل من 10 سنوات");
-    age.value = "";
-    guardian.style.display = "none";
-    return;
-  }
-
-  guardian.style.display = (a <= 17) ? "block" : "none";
-  agree.required = (a <= 17);
+  const a=parseInt(age.value,10);
+  guardian.style.display = (a>=10 && a<=17) ? "block":"none";
+  agree.required = (a>=10 && a<=17);
 });
 </script>
 
