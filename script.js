@@ -39,28 +39,32 @@ document.addEventListener("DOMContentLoaded",()=>{
   const canvas   = document.getElementById("sig");
 
   /* ===== ولي الأمر حسب العمر ===== */
-  if(age && guardian){
+  if age.addEventListener("blur", ()=>{
+  const a = parseInt(age.value,10);
+
+  if(isNaN(a)){
     guardian.style.display = "none";
+    agree.required = false;
+    return;
+  }
 
-    age.addEventListener("input",()=>{
-      const a = parseInt(age.value,10);
+  if(a < 10){
+    alert("لا يسمح بالتسجيل لمن هم أقل من 10 سنوات");
+    age.value = "";
+    guardian.style.display = "none";
+    agree.required = false;
+    return;
+  }
 
-      if(a < 10){
-        alert("لا يسمح بالتسجيل لمن هم أقل من 10 سنوات");
-        age.value = "";
-        guardian.style.display = "none";
-        if(agree) agree.required = false;
-        return;
-      }
+  if(a >= 10 && a <= 17){
+    guardian.style.display = "block";
+    agree.required = true;
+  } else {
+    guardian.style.display = "none";
+    agree.required = false;
+  }
+});
 
-      if(a <= 17){
-        guardian.style.display = "block";
-        if(agree) agree.required = true;
-      } else {
-        guardian.style.display = "none";
-        if(agree) agree.required = false;
-      }
-    });
   }
 
   /* ======================
