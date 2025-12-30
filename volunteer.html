@@ -2,48 +2,142 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-ar="تسجيل متطوع" data-en="Volunteer Registration">تسجيل متطوع</title>
 
-<style>
-body{
-  background:#0f1b24;
-  color:#fff;
-  font-family:Tahoma, Arial;
-  margin:0;
-  padding-bottom:90px;
-}
-.page{
-  max-width:520px;
-  margin:30px auto;
-  background:#13232f;
-  padding:25px;
-  border-radius:14px;
-}
-header{
- <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script>
 </head>
 
 <body>
 
-<!-- الشريط العلوي -->
+<!-- الشريط العلوي (شعار + لغة) -->
 <div class="top-bar">
   <a href="index.html">
-    <img src="logo.png" alt="logo">
+    <img src="logo.png" alt="شعار محافظة مبارك الكبير">
   </a>
   <button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
 </div>
 
 <div class="page">
 <header>
-  <!-- محتوى الصفحة هنا -->
+  <h1 data-ar="تسجيل متطوع" data-en="Volunteer Registration">
+    تسجيل متطوع
+  </h1>
 </header>
+
+<form id="volunteerForm">
+
+<input name="Full_Name"
+  data-ar="الاسم الكامل"
+  data-en="Full Name"
+  data-ph-ar="الاسم الكامل"
+  data-ph-en="Full Name"
+  placeholder="الاسم الكامل"
+  required>
+
+<input name="Civil_ID"
+  data-ar="الرقم المدني"
+  data-en="Civil ID"
+  data-ph-ar="الرقم المدني"
+  data-ph-en="Civil ID"
+  placeholder="الرقم المدني"
+  required>
+
+<input name="Volunteer_Phone"
+  data-ar="رقم هاتف المتطوع"
+  data-en="Volunteer Phone"
+  data-ph-ar="رقم هاتف المتطوع"
+  data-ph-en="Volunteer Phone"
+  placeholder="رقم هاتف المتطوع"
+  required>
+
+<input type="number" id="age" name="Age"
+  data-ar="العمر"
+  data-en="Age"
+  data-ph-ar="العمر (10 – 70)"
+  data-ph-en="Age (10 – 70)"
+  placeholder="العمر (10 – 70)"
+  min="10" max="70"
+  required>
+
+<select name="Volunteer_Type" required>
+  <option value=""
+    data-ar="اختر مجال التطوع"
+    data-en="Select Volunteering Field">
+    اختر مجال التطوع
+  </option>
+  <option
+    data-ar="الزراعة التجميلية"
+    data-en="Landscape Beautification">
+    الزراعة التجميلية
+  </option>
+  <option
+    data-ar="صيانة مرافق وخدمات عامة"
+    data-en="Facilities Maintenance">
+    صيانة مرافق وخدمات عامة
+  </option>
+</select>
+
+<!-- بيانات ولي الأمر -->
+<div id="guardian" style="display:none">
+
+  <h3 data-ar="بيانات ولي الأمر" data-en="Guardian Information">
+    بيانات ولي الأمر
+  </h3>
+
+  <input name="Guardian_Name"
+    data-ph-ar="اسم ولي الأمر"
+    data-ph-en="Guardian Name"
+    placeholder="اسم ولي الأمر">
+
+  <input name="Guardian_Civil_ID"
+    data-ph-ar="الرقم المدني لولي الأمر"
+    data-ph-en="Guardian Civil ID"
+    placeholder="الرقم المدني لولي الأمر">
+
+  <input name="Guardian_Phone"
+    data-ph-ar="رقم هاتف ولي الأمر"
+    data-ph-en="Guardian Phone"
+    placeholder="رقم هاتف ولي الأمر">
+
+  <div class="consent-box">
+    <label>
+      <input type="checkbox" id="guardianAgree">
+      <span
+        data-ar="أقر أنا ولي أمر المتقدم بموافقتي الكاملة وأتحمل المسؤولية القانونية."
+        data-en="I confirm as guardian my full consent and legal responsibility.">
+        أقر أنا ولي أمر المتقدم بموافقتي الكاملة وأتحمل المسؤولية القانونية.
+      </span>
+    </label>
+  </div>
+
+  <p>
+    <strong
+      data-ar="توقيع ولي الأمر:"
+      data-en="Guardian Signature:">
+      توقيع ولي الأمر:
+    </strong>
+  </p>
+
+  <canvas id="sig" width="380" height="150"></canvas>
+
+  <button type="button"
+    onclick="clearSig()"
+    data-ar="مسح التوقيع"
+    data-en="Clear Signature">
+    مسح التوقيع
+  </button>
+
+</div>
+
+<button class="submit" type="submit"
+  data-ar="إرسال"
+  data-en="Submit">
+  إرسال
+</button>
+
+</form>
 </div>
 
 <!-- البنر السفلي الرسمي -->
@@ -65,271 +159,24 @@ header{
   </a>
 </div>
 
-</body>
-</html>
-
-}
-header img{
-  max-width:140px;
-}
-input,select{
-  width:100%;
-  padding:14px;
-  margin:10px 0;
-  border-radius:8px;
-  border:none;
-  font-size:16px;
-}
-button{
-  padding:14px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:18px;
-}
-.submit{
-  width:100%;
-  background:#c9a24d;
-  color:#000;
-  margin-top:15px;
-}
-.consent-box{
-  background:#1d3342;
-  padding:15px;
-  border-radius:8px;
-  font-size:15px;
-  margin-top:10px;
-}
-canvas{
-  display:block;
-  margin-top:10px;
-  background:#fff;
-  border:1px solid #aaa;
-  touch-action:none;
-}
-.lang-toggle{
-  position:fixed;
-  top:15px;
-  right:15px;
-  background:#c9a24d;
-  color:#000;
-  border:none;
-  border-radius:20px;
-  padding:8px 14px;
-  z-index:9999;
-}
-.footer-fixed{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#000;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  padding:14px 0;
-  z-index:9999;
-}
-.footer-fixed a{
-  color:#fff;
-  font-size:20px;
-  text-decoration:none;
-}
-</style>
-</head>
-
-<body>
-
-<button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
-
-<div class="page">
-
-<header>
-  <img src="logo.png" alt="logo">
-  <h1 data-ar="تسجيل متطوع" data-en="Volunteer Registration">تسجيل متطوع</h1>
-</header>
-
-<form id="volunteerForm">
-
-<input name="Full_Name"
-  data-ar="الاسم الكامل"
-  data-en="Full Name"
-  placeholder="الاسم الكامل" required>
-
-<input name="Civil_ID"
-  data-ar="الرقم المدني"
-  data-en="Civil ID"
-  placeholder="الرقم المدني" required>
-
-<input name="Volunteer_Phone"
-  data-ar="رقم هاتف المتطوع"
-  data-en="Volunteer Phone"
-  placeholder="رقم هاتف المتطوع" required>
-
-<input type="number" id="age" name="Age"
-  data-ar="العمر"
-  data-en="Age"
-  placeholder="العمر" min="10" required>
-
-<select name="Volunteer_Type" required>
-  <option value="" data-ar="اختر مجال التطوع" data-en="Select Volunteering Field">اختر مجال التطوع</option>
-  <option data-ar="الزراعة التجميلية" data-en="Landscape Beautification">الزراعة التجميلية</option>
-  <option data-ar="صيانة مرافق وخدمات عامة" data-en="Facilities Maintenance">صيانة مرافق وخدمات عامة</option>
-</select>
-
-<!-- ولي الأمر -->
-<div id="guardian" style="display:none">
-
-  <h3 data-ar="بيانات ولي الأمر" data-en="Guardian Information">بيانات ولي الأمر</h3>
-
-  <input name="Guardian_Name"
-    data-ar="اسم ولي الأمر"
-    data-en="Guardian Name"
-    placeholder="اسم ولي الأمر">
-
-  <input name="Guardian_Civil_ID"
-    data-ar="الرقم المدني لولي الأمر"
-    data-en="Guardian Civil ID"
-    placeholder="الرقم المدني لولي الأمر">
-
-  <input name="Guardian_Phone"
-    data-ar="رقم هاتف ولي الأمر"
-    data-en="Guardian Phone"
-    placeholder="رقم هاتف ولي الأمر">
-
-  <div class="consent-box">
-    <label>
-      <input type="checkbox" id="guardianAgree">
-      <span
-        data-ar="أقر أنا ولي أمر المتقدم بموافقتي الكاملة وأتحمل المسؤولية القانونية."
-        data-en="I confirm as guardian my full consent and legal responsibility.">
-        أقر أنا ولي أمر المتقدم بموافقتي الكاملة وأتحمل المسؤولية القانونية.
-      </span>
-    </label>
-  </div>
-
-  <p data-ar="توقيع ولي الأمر:" data-en="Guardian Signature:"><strong>توقيع ولي الأمر:</strong></p>
-  <canvas id="sig" width="380" height="150"></canvas>
-  <button type="button" onclick="clearSig()" data-ar="مسح التوقيع" data-en="Clear Signature">مسح التوقيع</button>
-
-</div>
-
-<button class="submit" type="submit" data-ar="إرسال" data-en="Submit">إرسال</button>
-
-</form>
-</div>
-
-<!-- فوتر ثابت -->
-<div class="footer-fixed">
-  <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7">📍</a>
-  <a href="mailto:mkgkuwait@outlook.com">✉️</a>
-  <a href="tel:25473556">📞</a>
-  <a href="https://x.com/mkgkuwait">X</a>
-  <a href="https://instagram.com/mkgkuwait">📷</a>
-</div>
-
 <script>
-/* ===== اللغة ===== */
-const LANG_KEY="site_lang";
-function applyLang(l){
-  document.documentElement.dir = l==="ar"?"rtl":"ltr";
-  document.querySelectorAll("[data-ar]").forEach(el=>{
-    el.textContent = l==="ar"?el.dataset.ar:el.dataset.en;
-  });
-  document.querySelectorAll("[placeholder]").forEach(el=>{
-    if(el.dataset.ar){
-      el.placeholder = l==="ar"?el.dataset.ar:el.dataset.en;
-    }
-  });
-}
-function toggleLang(){
-  const n=(localStorage.getItem(LANG_KEY)||"ar")==="ar"?"en":"ar";
-  localStorage.setItem(LANG_KEY,n);
-  applyLang(n);
-}
-applyLang(localStorage.getItem(LANG_KEY)||"ar");
-
-/* ===== منطق العمر ===== */
-const age=document.getElementById("age");
-const guardian=document.getElementById("guardian");
-const agree=document.getElementById("guardianAgree");
+/* ===== منطق العمر فقط (بدون تكرار لغة) ===== */
+const age = document.getElementById("age");
+const guardian = document.getElementById("guardian");
+const agree = document.getElementById("guardianAgree");
 
 age.addEventListener("input",()=>{
-  const a=parseInt(age.value,10);
-  if(a<10){
+  const a = parseInt(age.value,10);
+
+  if(a < 10){
     alert("لا يسمح بالتسجيل لمن هم أقل من 10 سنوات");
-    age.value="";
-    guardian.style.display="none";
+    age.value = "";
+    guardian.style.display = "none";
     return;
   }
-  guardian.style.display = (a<=17)?"block":"none";
-  agree.required = (a<=17);
-});
 
-/* ===== التوقيع (Mouse + Touch) ===== */
-const canvas=document.getElementById("sig");
-const ctx=canvas.getContext("2d");
-let drawing=false;
-
-function resetCanvas(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="#fff";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.strokeStyle="#000";
-  ctx.lineWidth=2;
-  ctx.lineCap="round";
-}
-resetCanvas();
-
-function getPos(e){
-  const r=canvas.getBoundingClientRect();
-  if(e.touches){
-    return {x:e.touches[0].clientX-r.left,y:e.touches[0].clientY-r.top};
-  }
-  return {x:e.offsetX,y:e.offsetY};
-}
-
-function start(e){
-  e.preventDefault();
-  drawing=true;
-  const p=getPos(e);
-  ctx.beginPath();
-  ctx.moveTo(p.x,p.y);
-}
-function move(e){
-  if(!drawing) return;
-  e.preventDefault();
-  const p=getPos(e);
-  ctx.lineTo(p.x,p.y);
-  ctx.stroke();
-}
-function end(){drawing=false;}
-
-canvas.addEventListener("mousedown",start);
-canvas.addEventListener("mousemove",move);
-canvas.addEventListener("mouseup",end);
-canvas.addEventListener("mouseleave",end);
-canvas.addEventListener("touchstart",start,{passive:false});
-canvas.addEventListener("touchmove",move,{passive:false});
-canvas.addEventListener("touchend",end);
-
-function clearSig(){resetCanvas();}
-
-/* ===== الإرسال ===== */
-document.getElementById("volunteerForm").addEventListener("submit",e=>{
-  e.preventDefault();
-  const data=new FormData(e.target);
-  const a=parseInt(age.value,10);
-
-  if(a<=17){
-    if(!agree.checked){alert("يجب موافقة ولي الأمر");return;}
-    data.append("Guardian_Signature_Base64",canvas.toDataURL("image/png"));
-  }
-
-  fetch("https://script.google.com/macros/s/AKfycbygn8i590rV6sLcHtjZV2HrcUVSE-VILFyrqqj-bvpIotdPMxK9TpNbvSWeGuMtO_YYMA/exec",
-    {method:"POST",body:data})
-  .then(()=>location.href="thankyou.html")
-  .catch(()=>alert("فشل الإرسال"));
+  guardian.style.display = (a <= 17) ? "block" : "none";
+  agree.required = (a <= 17);
 });
 </script>
 
