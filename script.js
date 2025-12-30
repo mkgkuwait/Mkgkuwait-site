@@ -5,13 +5,11 @@ function applyLang(lang){
   document.documentElement.dir = lang==="ar"?"rtl":"ltr";
 
   document.querySelectorAll("[data-ar]").forEach(el=>{
-    el.textContent = lang==="ar"?el.dataset.ar:el.dataset.en;
+    el.textContent = lang==="ar" ? el.dataset.ar : el.dataset.en;
   });
 
-  document.querySelectorAll("[placeholder]").forEach(el=>{
-    if(el.dataset.ar){
-      el.placeholder = lang==="ar"?el.dataset.ar:el.dataset.en;
-    }
+  document.querySelectorAll("[data-ph-ar]").forEach(el=>{
+    el.placeholder = lang==="ar" ? el.dataset.phAr : el.dataset.phEn;
   });
 }
 
@@ -39,6 +37,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     ctx.fillRect(0,0,canvas.width,canvas.height);
     ctx.strokeStyle="#000";
     ctx.lineWidth=2;
+    ctx.lineCap="round";
   }
   reset();
 
@@ -48,9 +47,23 @@ document.addEventListener("DOMContentLoaded",()=>{
     return {x:t.clientX-r.left,y:t.clientY-r.top};
   }
 
-  function start(e){e.preventDefault();drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);}
-  function move(e){if(!drawing)return;e.preventDefault();const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();}
-  function end(){drawing=false;}
+  function start(e){
+    e.preventDefault();
+    drawing=true;
+    const p=pos(e);
+    ctx.beginPath();
+    ctx.moveTo(p.x,p.y);
+  }
+
+  function move(e){
+    if(!drawing) return;
+    e.preventDefault();
+    const p=pos(e);
+    ctx.lineTo(p.x,p.y);
+    ctx.stroke();
+  }
+
+  function end(){ drawing=false; }
 
   canvas.addEventListener("mousedown",start);
   canvas.addEventListener("mousemove",move);
