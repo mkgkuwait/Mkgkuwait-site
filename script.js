@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       }
 
       fetch(
-        "https://script.google.com/macros/s/AKfycbwvv1UCMcNhFy_LNV8FTBVBjsEpOnBA0Q1Ssjq5FdRBC41tCGBsqNxeKHuPKVI67T8oIQ/exec",
+        "https://script.google.com/macros/s/AKfycbwJQLOFZB-fala3st-O6O3Wq0Yky7KS91FXyV5GZbtc/dev",
         { method:"POST", body:data }
       )
       .then(()=> window.location.href = "thankyou.html")
