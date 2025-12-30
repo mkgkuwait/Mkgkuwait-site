@@ -54,9 +54,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
 
   /* ======================
-     Signature Canvas Script
+     Signature Canvas Script (FIXED)
   ====================== */
-  let ctx, drawing=false;
+  let ctx, drawing = false;
 
   if(canvas){
     ctx = canvas.getContext("2d");
@@ -71,12 +71,18 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
     resetCanvas();
 
+    /* ===== التعديل المهم هنا ===== */
     function getPos(e){
-      const r = canvas.getBoundingClientRect();
-      const t = e.touches ? e.touches[0] : e;
+      const rect = canvas.getBoundingClientRect();
+
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+
+      const point = e.touches ? e.touches[0] : e;
+
       return {
-        x: t.clientX - r.left,
-        y: t.clientY - r.top
+        x: (point.clientX - rect.left) * scaleX,
+        y: (point.clientY - rect.top) * scaleY
       };
     }
 
@@ -96,7 +102,9 @@ document.addEventListener("DOMContentLoaded",()=>{
       ctx.stroke();
     }
 
-    function endDraw(){ drawing = false; }
+    function endDraw(){
+      drawing = false;
+    }
 
     canvas.addEventListener("mousedown", startDraw);
     canvas.addEventListener("mousemove", drawMove);
