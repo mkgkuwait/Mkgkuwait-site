@@ -71,9 +71,8 @@ document.addEventListener("DOMContentLoaded",()=>{
      Signature Canvas (FIXED)
   ====================== */
 /* ======================
-   Signature Canvas (FINAL FIX)
+   Signature Canvas (STABLE)
 ====================== */
-
 document.addEventListener("DOMContentLoaded", () => {
 
   const canvas = document.getElementById("sig");
@@ -82,37 +81,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const ctx = canvas.getContext("2d");
   let drawing = false;
 
-  // تهيئة الكانفس
-  function initCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = "#000000";
+  // تأكيد أبعاد حقيقية
+  function fixCanvasSize(){
+    const rect = canvas.getBoundingClientRect();
+    canvas.width  = rect.width;
+    canvas.height = rect.height;
+  }
+
+  fixCanvasSize();
+  window.addEventListener("resize", fixCanvasSize);
+
+  function resetCanvas(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.strokeStyle = "#000";
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
   }
 
-  initCanvas();
+  resetCanvas();
 
-  function getPos(evt) {
+  function getPos(e){
     const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-
-    if (evt.touches && evt.touches.length > 0) {
-      return {
-        x: (evt.touches[0].clientX - rect.left) * scaleX,
-        y: (evt.touches[0].clientY - rect.top) * scaleY
-      };
-    }
-
+    const p = e.touches ? e.touches[0] : e;
     return {
-      x: (evt.clientX - rect.left) * scaleX,
-      y: (evt.clientY - rect.top) * scaleY
+      x: p.clientX - rect.left,
+      y: p.clientY - rect.top
     };
   }
 
-  function start(e) {
+  function start(e){
     e.preventDefault();
     drawing = true;
     const pos = getPos(e);
@@ -120,31 +119,33 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.moveTo(pos.x, pos.y);
   }
 
-  function move(e) {
-    if (!drawing) return;
+  function move(e){
+    if(!drawing) return;
     e.preventDefault();
     const pos = getPos(e);
     ctx.lineTo(pos.x, pos.y);
     ctx.stroke();
   }
 
-  function end() {
+  function end(){
     drawing = false;
   }
 
   // Mouse
   canvas.addEventListener("mousedown", start);
   canvas.addEventListener("mousemove", move);
-  window.addEventListener("mouseup", end);
+  canvas.addEventListener("mouseup", end);
+  canvas.addEventListener("mouseleave", end);
 
   // Touch
-  canvas.addEventListener("touchstart", start, { passive: false });
-  canvas.addEventListener("touchmove", move, { passive: false });
+  canvas.addEventListener("touchstart", start, {passive:false});
+  canvas.addEventListener("touchmove", move, {passive:false});
   canvas.addEventListener("touchend", end);
 
-  window.clearSig = initCanvas;
-});
+  // مسح التوقيع
+  window.clearSig = resetCanvas;
 
+});
 
   /* ======================
      Submit → Google Script
