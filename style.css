@@ -18,8 +18,8 @@ body{
   border:none;
   border-radius:20px;
   padding:6px 14px;
-  cursor:pointer;
   font-weight:600;
+  cursor:pointer;
 }
 
 /* الصفحة */
@@ -32,24 +32,18 @@ body{
 /* الشعار */
 .logo{
   display:block;
-  margin:0 auto 24px;
-  height:80px;
+  margin:0 auto 28px;
+  height:110px; /* أكبر شوي */
 }
 
 /* العناوين */
 h1{
   text-align:center;
-  margin:0 0 8px;
+  margin:0 0 20px;
   font-size:26px;
 }
-h2{
-  text-align:center;
-  margin:0 0 30px;
-  font-size:15px;
-  color:#bbb;
-}
 
-/* زر رسمي */
+/* زر رئيسي */
 .btn{
   display:inline-block;
   margin:0 auto;
@@ -58,12 +52,11 @@ h2{
   background:#d4af37;
   color:#000;
   font-size:18px;
-  text-decoration:none;
   font-weight:600;
+  text-decoration:none;
 }
 
 /* الفورم */
-form{width:100%}
 input,select{
   width:100%;
   padding:14px;
@@ -71,6 +64,15 @@ input,select{
   border-radius:10px;
   border:none;
   font-size:16px;
+}
+
+/* ولي الأمر */
+.consent-box{
+  background:#1a1a1a;
+  padding:14px;
+  border-radius:10px;
+  margin-top:10px;
+  font-size:14px;
 }
 
 /* التوقيع */
@@ -81,13 +83,13 @@ canvas{
   border-radius:10px;
   margin-top:10px;
   touch-action:none;
-  direction:ltr; /* الحل */
+  direction:ltr;
 }
 
-/* بنر التواصل */
+/* شريط التواصل */
 .footer-fixed{
   position:fixed;
-  bottom:14px;
+  bottom:12px;
   left:50%;
   transform:translateX(-50%);
   background:#000;
@@ -97,6 +99,7 @@ canvas{
   gap:18px;
   z-index:999;
 }
+
 .footer-fixed svg{
   width:18px;
   height:18px;
