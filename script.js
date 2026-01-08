@@ -192,3 +192,23 @@ document.addEventListener("DOMContentLoaded",()=>{
     slides[i].classList.add("active");
   }, 3000);
 });
+/* ======================
+   View Mode Switch
+====================== */
+function setView(mode){
+  document.body.classList.remove("view-official","view-art");
+
+  if(mode === "art"){
+    document.body.classList.add("view-art");
+    localStorage.setItem("view_mode","art");
+  }else{
+    document.body.classList.add("view-official");
+    localStorage.setItem("view_mode","official");
+  }
+}
+
+/* الوضع الافتراضي */
+document.addEventListener("DOMContentLoaded",()=>{
+  const saved = localStorage.getItem("view_mode") || "official";
+  setView(saved);
+});
