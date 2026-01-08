@@ -41,18 +41,19 @@ html,body{
    Page Wrapper
 ====================== */
 .page{
-  max-width:720px;
+  max-width:900px;
   margin:auto;
-  padding:110px 16px 150px;
+  padding:120px 16px 160px;
 }
 
 /* ======================
-   Logo
+   Official Logo
 ====================== */
 .logo{
   display:block;
-  margin:0 auto 22px;
-  height:110px;
+  margin:0 auto 30px;
+  height:160px;          /* كمبيوتر */
+  max-width:100%;
 }
 
 /* ======================
@@ -60,7 +61,7 @@ html,body{
 ====================== */
 h1{
   text-align:center;
-  margin:0 0 22px;
+  margin:0 0 26px;
   font-size:24px;
   font-weight:700;
 }
@@ -73,10 +74,10 @@ h1{
 button[type="button"]{
   display:block;
   width:100%;
-  max-width:320px;
-  margin:18px auto 0;
+  max-width:340px;
+  margin:22px auto 0;
   padding:16px;
-  border-radius:30px;
+  border-radius:32px;
   background:var(--gold);
   color:#000;
   font-size:18px;
@@ -95,7 +96,7 @@ select{
   width:100%;
   padding:16px;
   margin:10px 0;
-  border-radius:12px;
+  border-radius:14px;
   border:none;
   background:var(--field);
   color:#fff;
@@ -110,7 +111,7 @@ input::placeholder{
    Radio Buttons
 ====================== */
 .radio-group{
-  margin:14px 0;
+  margin:18px 0;
 }
 
 .radio-item{
@@ -136,7 +137,7 @@ input::placeholder{
   left:50%;
   transform:translateX(-50%);
   background:#000;
-  padding:10px 22px;
+  padding:10px 24px;
   border-radius:40px;
   display:flex;
   gap:22px;
@@ -152,52 +153,49 @@ input::placeholder{
 }
 
 /* ======================
-   FLAG DAY – NO CROP (FINAL)
+   FLAG DAY – OFFICIAL GALLERY
+   (NO CROP – GOVERNMENT STYLE)
 ====================== */
 
 /* الصورة الرئيسية */
-.flag-hero-main{
-  margin:20px auto 26px;
-  max-width:900px;
-  background:#000;
-  border-radius:22px;
-}
-
-.flag-hero-main img{
+.flag-main{
   width:100%;
-  height:420px;          /* ارتفاع ثابت */
-  object-fit:contain;    /* ⭐ لا قص نهائيًا */
+  height:420px;
   background:#000;
-  border-radius:22px;
-  display:block;
-}
-
-/* شريط الصور */
-.flag-strip{
-  max-width:900px;
-  margin:0 auto 34px;
+  border-radius:24px;
   display:flex;
-  gap:14px;
-  overflow-x:auto;
-  padding-bottom:8px;
+  align-items:center;
+  justify-content:center;
+  margin:20px 0 22px;
+  overflow:hidden;
 }
 
-.flag-strip::-webkit-scrollbar{
-  height:6px;
+.flag-main img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;   /* ⭐ بدون قص نهائيًا */
 }
 
-.flag-strip::-webkit-scrollbar-thumb{
-  background:#333;
-  border-radius:10px;
+/* الصور السفلية */
+.flag-thumbs{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:12px;
 }
 
-.flag-strip img{
-  flex:0 0 180px;
-  height:120px;
-  object-fit:contain;    /* ⭐ لا قص */
+.flag-thumbs img{
+  width:100%;
+  height:110px;
   background:#000;
   border-radius:16px;
-  padding:6px;           /* يعطي تنفس للصورة */
+  object-fit:contain;   /* ⭐ صورة كاملة */
+  padding:8px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.flag-thumbs img:hover{
+  transform:scale(1.04);
 }
 
 /* ======================
@@ -205,102 +203,10 @@ input::placeholder{
 ====================== */
 @media (max-width:768px){
 
-  .flag-hero-main img{
-    height:260px;
+  .logo{
+    height:120px;   /* موبايل */
   }
 
-  .flag-strip img{
-    flex:0 0 150px;
-    height:100px;
-  }
-}
-/* ======================
-   View Toggle Buttons
-====================== */
-.view-toggle{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  margin:20px 0;
-}
-
-.view-toggle button{
-  background:#222;
-  color:#fff;
-  border:1px solid var(--gold);
-  border-radius:20px;
-  padding:8px 16px;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.view-toggle button:hover{
-  background:var(--gold);
-  color:#000;
-}
-
-/* ======================
-   OFFICIAL VIEW (default)
-====================== */
-body.view-official .flag-hero img{
-  object-fit:contain;   /* ⭐ صورة كاملة */
-  background:#000;
-}
-
-/* ======================
-   ART VIEW
-====================== */
-/* ======================
-   Flag Day Gallery (FINAL)
-====================== */
-.flag-gallery-wrap{
-  margin:30px 0 40px;
-}
-
-/* الصورة الرئيسية */
-.flag-main{
-  width:100%;
-  height:380px;              /* إطار ثابت */
-  background:#000;
-  border-radius:20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
-
-.flag-main img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;        /* ⭐ بدون قص */
-}
-
-
-/* الصور السفلية */
-.flag-thumbs{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:10px;
-}
-
-.flag-thumbs img{
-  width:100%;
-  height:90px;               /* إطار موحّد */
-  background:#000;
-  border-radius:12px;
-  object-fit:contain;        /* ⭐ صورة كاملة */
-  padding:6px;               /* يعطي نفس الإحساس */
-  cursor:pointer;
-}
-
-
-.flag-thumbs img:hover{
-  opacity:1;
-  transform:scale(1.03);
-}
-
-/* موبايل */
-@media (max-width:768px){
   .flag-main{
     height:260px;
   }
@@ -310,11 +216,6 @@ body.view-official .flag-hero img{
   }
 
   .flag-thumbs img{
-    height:70px;
+    height:90px;
   }
-}
-
-
-body.view-art .flag-hero img{
-  object-fit:cover;     /* ⭐ قص جمالي */
 }
