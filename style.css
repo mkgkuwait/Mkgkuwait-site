@@ -223,11 +223,13 @@ canvas{
    Flag Day Hero Section
 ====================== */
 .flag-hero{
+  direction:ltr;              /* ⭐ هذا هو السطر الحاسم */
   display:grid;
   grid-template-columns: 1fr 2fr;
   gap:14px;
   margin:20px 0 30px;
 }
+
 
 /* الصورة الجانبية */
 .flag-side img{
