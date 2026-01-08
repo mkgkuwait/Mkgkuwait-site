@@ -214,3 +214,42 @@ input::placeholder{
     height:100px;
   }
 }
+/* ======================
+   View Toggle Buttons
+====================== */
+.view-toggle{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin:20px 0;
+}
+
+.view-toggle button{
+  background:#222;
+  color:#fff;
+  border:1px solid var(--gold);
+  border-radius:20px;
+  padding:8px 16px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.view-toggle button:hover{
+  background:var(--gold);
+  color:#000;
+}
+
+/* ======================
+   OFFICIAL VIEW (default)
+====================== */
+body.view-official .flag-hero img{
+  object-fit:contain;   /* ⭐ صورة كاملة */
+  background:#000;
+}
+
+/* ======================
+   ART VIEW
+====================== */
+body.view-art .flag-hero img{
+  object-fit:cover;     /* ⭐ قص جمالي */
+}
