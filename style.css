@@ -67,7 +67,7 @@ h1{
 }
 
 /* ======================
-   Buttons (Unified)
+   Buttons
 ====================== */
 .btn,
 .submit,
@@ -108,38 +108,10 @@ input::placeholder{
 }
 
 /* ======================
-   Guardian Consent
-====================== */
-.consent-box{
-  background:var(--field);
-  padding:16px;
-  border-radius:12px;
-  margin-top:12px;
-  font-size:14px;
-  line-height:1.6;
-}
-
-/* ======================
-   Signature Canvas
-====================== */
-canvas{
-  width:100%;
-  height:170px;
-  background:#fff;
-  border-radius:12px;
-  margin-top:10px;
-  touch-action:none;
-  -ms-touch-action:none;
-  pointer-events:auto;
-  position:relative;
-  z-index:5;
-}
-
-/* ======================
-   Radio Buttons (FIX)
+   Radio Buttons
 ====================== */
 .radio-group{
-  margin:14px 0 6px;
+  margin:14px 0;
 }
 
 .radio-item{
@@ -147,24 +119,17 @@ canvas{
   align-items:center;
   gap:12px;
   margin-bottom:14px;
-  cursor:pointer;
   font-size:16px;
 }
 
-.radio-item span{
-  line-height:1;
-}
-
-.radio-item input[type="radio"]{
-  margin:0;
+.radio-item input{
   width:18px;
   height:18px;
   accent-color:var(--gold);
-  flex-shrink:0;
 }
 
 /* ======================
-   Official Contact Bar
+   Footer Contact Bar
 ====================== */
 .footer-fixed{
   position:fixed;
@@ -180,12 +145,6 @@ canvas{
   z-index:1500;
 }
 
-.footer-fixed a{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
 .footer-fixed svg{
   width:20px;
   height:20px;
@@ -194,33 +153,32 @@ canvas{
 }
 
 /* ======================
-   Flag Day Hero Section
+   FLAG DAY HERO (FINAL)
 ====================== */
 .flag-hero{
-  direction:ltr;              /* ⭐ هذا هو السطر الحاسم */
+  direction:ltr;                    /* يثبت اليسار */
   display:grid;
-  grid-template-columns: 1fr 2fr;
-  gap:14px;
-  margin:20px 0 30px;
+  grid-template-columns: 240px 1fr; /* عمود يسار + محتوى */
+  gap:16px;
+  margin:30px 0 40px;
+  align-items:start;
 }
 
-
-/* الصورة الجانبية */
+/* الصورة الطولية (رقم 6) */
 .flag-side img{
   width:100%;
-  height:260px;
+  height:360px;                     /* أطول بوضوح */
   object-fit:cover;
-  object-position:left center;   /* ⭐ هذا السطر يحل المشكلة */
-  border-radius:14px;
+  object-position:left top;         /* قص من اليمين */
+  border-radius:18px;
 }
-
 
 /* السلايدر */
 .flag-slider{
   position:relative;
   height:260px;
   overflow:hidden;
-  border-radius:14px;
+  border-radius:18px;
 }
 
 .flag-slider .slide{
@@ -237,15 +195,17 @@ canvas{
   opacity:1;
 }
 
-/* موبايل */
-@media (max-width:700px){
-  .flag-side img{
-    object-position:center top;
+/* ======================
+   Mobile
+====================== */
+@media (max-width:768px){
+  .flag-hero{
+    grid-template-columns:1fr;
   }
-}
 
   .flag-side img{
-    height:220px;
+    height:260px;
+    object-position:center top;
   }
 
   .flag-slider{
