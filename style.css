@@ -210,8 +210,10 @@ canvas{
   width:100%;
   height:260px;
   object-fit:cover;
+  object-position:left center;   /* ⭐ هذا السطر يحل المشكلة */
   border-radius:14px;
 }
+
 
 /* السلايدر */
 .flag-slider{
@@ -237,9 +239,10 @@ canvas{
 
 /* موبايل */
 @media (max-width:700px){
-  .flag-hero{
-    grid-template-columns:1fr;
+  .flag-side img{
+    object-position:center top;
   }
+}
 
   .flag-side img{
     height:220px;
