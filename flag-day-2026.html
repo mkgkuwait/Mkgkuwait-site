@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title data-ar="احتفالات رفع العلم 2026" data-en="Flag Day Celebrations 2026">
+احتفالات رفع العلم 2026
+</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+
+<body>
+
+<!-- زر تغيير اللغة -->
+<button class="lang-toggle" onclick="toggleLang()">AR / EN</button>
+
+<div class="page">
+
+  <!-- الشعار -->
+  <a href="index.html">
+    <img src="logo.png" class="logo" alt="logo">
+  </a>
+
+  <h1
+    data-ar="تسجيل المدارس – احتفالات رفع العلم 2026"
+    data-en="School Registration – Flag Day 2026">
+    تسجيل المدارس – احتفالات رفع العلم 2026
+  </h1>
+
+  <!-- الفورم -->
+  <form id="volunteerForm">
+
+    <!-- نوع التسجيل (ثابت للتمييز في Google Sheet) -->
+    <input type="hidden" name="Registration_Type" value="Flag_Day_2026">
+
+    <!-- بيانات المدرسة -->
+    <input
+      name="School_Name"
+      required
+      data-ph-ar="اسم المدرسة"
+      data-ph-en="School Name"
+      placeholder="اسم المدرسة">
+
+    <select name="School_Type" required>
+      <option value="" data-ar="نوع المدرسة" data-en="School Type">نوع المدرسة</option>
+      <option value="Government" data-ar="حكومية" data-en="Government">حكومية</option>
+      <option value="Private" data-ar="خاصة" data-en="Private">خاصة</option>
+    </select>
+
+    <select name="School_Gender" required>
+      <option value="" data-ar="الجنس" data-en="Gender">الجنس</option>
+      <option value="Boys" data-ar="بنين" data-en="Boys">بنين</option>
+      <option value="Girls" data-ar="بنات" data-en="Girls">بنات</option>
+    </select>
+
+    <select name="School_Stage" required>
+      <option value="" data-ar="المرحلة الدراسية" data-en="School Stage">المرحلة الدراسية</option>
+      <option value="KG" data-ar="رياض الأطفال" data-en="Kindergarten">رياض الأطفال</option>
+      <option value="Primary" data-ar="المرحلة الابتدائية" data-en="Primary">المرحلة الابتدائية</option>
+      <option value="Middle" data-ar="المرحلة المتوسطة" data-en="Middle">المرحلة المتوسطة</option>
+      <option value="Secondary" data-ar="المرحلة الثانوية" data-en="Secondary">المرحلة الثانوية</option>
+    </select>
+
+    <input
+      type="number"
+      name="Students_Count"
+      required
+      data-ph-ar="عدد الطلاب المشاركين"
+      data-ph-en="Number of Participating Students"
+      placeholder="عدد الطلاب المشاركين">
+
+    <!-- نوع المشاركة -->
+    <div class="radio-group">
+      <label>
+        <input type="radio" name="Participation_Type" value="Attendance" required>
+        <span data-ar="حضور الفعالية فقط" data-en="Attend Event Only">حضور الفعالية فقط</span>
+      </label>
+
+      <label>
+        <input type="radio" name="Participation_Type" value="Operetta">
+        <span data-ar="المشاركة في الأوبريت الوطني" data-en="Participate in National Operetta">
+          المشاركة في الأوبريت الوطني
+        </span>
+      </label>
+    </div>
+
+    <!-- بيانات المسؤول -->
+    <h3
+      data-ar="بيانات المسؤول للتواصل"
+      data-en="Contact Person Information">
+      بيانات المسؤول للتواصل
+    </h3>
+
+    <input
+      name="Contact_Name"
+      required
+      data-ph-ar="اسم المسؤول"
+      data-ph-en="Contact Name"
+      placeholder="اسم المسؤول">
+
+    <input
+      name="Contact_Phone"
+      required
+      data-ph-ar="رقم الهاتف"
+      data-ph-en="Phone Number"
+      placeholder="رقم الهاتف">
+
+    <input
+      type="email"
+      name="Contact_Email"
+      required
+      data-ph-ar="البريد الإلكتروني"
+      data-ph-en="Email"
+      placeholder="البريد الإلكتروني">
+
+    <!-- زر الإرسال -->
+    <button
+      class="submit"
+      type="submit"
+      data-ar="إرسال التسجيل"
+      data-en="Submit Registration">
+      إرسال التسجيل
+    </button>
+
+  </form>
+</div>
+
+<!-- شريط التواصل (نفس الموقع) -->
+<div class="footer-fixed">
+
+  <a href="https://maps.app.goo.gl/bTJniQEpuuTrSxyu5" aria-label="Location">
+    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+  </a>
+
+  <a href="mailto:mkgkuwait@outlook.com" aria-label="Email">
+    <svg viewBox="0 0 24 24"><path d="M20 4H4v16h16z"/></svg>
+  </a>
+
+  <a href="tel:25473556" aria-label="Phone">
+    <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59z"/></svg>
+  </a>
+
+  <a href="https://x.com/mkgkuwait" aria-label="X">
+    <svg viewBox="0 0 24 24"><path d="M18.244 2H21l-6.524 7.457z"/></svg>
+  </a>
+
+  <a href="https://instagram.com/mkgkuwait" aria-label="Instagram">
+    <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5z"/></svg>
+  </a>
+
+</div>
+
+</body>
+</html>
 
