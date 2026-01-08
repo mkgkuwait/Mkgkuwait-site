@@ -314,6 +314,7 @@ body.view-official .flag-hero img{
   }
 }
 
+
 body.view-art .flag-hero img{
   object-fit:cover;     /* ⭐ قص جمالي */
 }
