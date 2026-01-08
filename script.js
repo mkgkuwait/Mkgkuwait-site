@@ -28,17 +28,21 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 
 /* ======================
-   Volunteer Form Logic
+   Forms Logic (SAFE)
 ====================== */
 document.addEventListener("DOMContentLoaded",()=>{
 
   const form     = document.getElementById("volunteerForm");
+  if(!form) return;   // ← لا يوجد فورم في الصفحة
+
   const age      = document.getElementById("age");
   const guardian = document.getElementById("guardian");
   const agree    = document.getElementById("agree");
   const canvas   = document.getElementById("sig");
 
-  /* ===== منطق العمر (بعد الكتابة) ===== */
+  /* ======================
+     AGE LOGIC (only if exists)
+  ====================== */
   if(age && guardian){
     guardian.style.display = "none";
 
@@ -70,7 +74,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
 
   /* ======================
-     SIGNATURE CANVAS (FIXED)
+     SIGNATURE CANVAS (only if exists)
   ====================== */
   if(canvas){
     const ctx = canvas.getContext("2d");
@@ -129,18 +133,19 @@ document.addEventListener("DOMContentLoaded",()=>{
     canvas.addEventListener("touchend", end);
 
     window.clearSig = init;
-
-    console.log("Signature READY");
   }
 
   /* ======================
-     Submit → Google Script
+     SUBMIT → Google Script
   ====================== */
-  if(form){
-    form.addEventListener("submit",(e)=>{
-      e.preventDefault();
+  form.addEventListener("submit",(e)=>{
+    e.preventDefault();
 
-      const a = parseInt(age.value,10);
+    /* ===== تحقق العمر فقط إذا موجود ===== */
+    let a = null;
+    if(age){
+      a = parseInt(age.value,10);
+
       if(isNaN(a) || a < 10 || a > 70){
         alert("يرجى إدخال عمر صحيح بين 10 و70");
         return;
@@ -152,23 +157,24 @@ document.addEventListener("DOMContentLoaded",()=>{
           return;
         }
       }
+    }
 
-      const data = new FormData(form);
+    const data = new FormData(form);
 
-      if(a <= 17 && canvas){
-        data.append(
-          "Guardian_Signature_Base64",
-          canvas.toDataURL("image/png")
-        );
-      }
+    /* ===== إضافة التوقيع فقط إذا موجود ===== */
+    if(a !== null && a <= 17 && canvas){
+      data.append(
+        "Guardian_Signature_Base64",
+        canvas.toDataURL("image/png")
+      );
+    }
 
-      fetch(
-        "https://script.google.com/macros/s/AKfycbx4mZh6Ygr-hi7HEz-P--ZrjNaryLV7dyVmpnI3xzZyVDJIbAYddEA36Yx8_OvkCy7tIA/exec",
-        { method:"POST", body:data }
-      )
-      .then(()=> window.location.href = "thankyou.html")
-      .catch(()=> alert("فشل إرسال البيانات، حاول مرة أخرى"));
-    });
-  }
+    fetch(
+      "https://script.google.com/macros/s/AKfycbx4mZh6Ygr-hi7HEz-P--ZrjNaryLV7dyVmpnI3xzZyVDJIbAYddEA36Yx8_OvkCy7tIA/exec",
+      { method:"POST", body:data }
+    )
+    .then(()=> window.location.href = "thankyou.html")
+    .catch(()=> alert("فشل إرسال البيانات، حاول مرة أخرى"));
+  });
 
 });
