@@ -212,3 +212,33 @@ document.addEventListener("DOMContentLoaded",()=>{
   const saved = localStorage.getItem("view_mode") || "official";
   setView(saved);
 });
+/* ======================
+   Image Preview Logic
+====================== */
+let mainTimeout = null;
+let defaultImage = null;
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const main = document.getElementById("mainImage");
+  if(main){
+    defaultImage = main.src;
+  }
+});
+
+function previewImage(img){
+  const main = document.getElementById("mainImage");
+  if(!main) return;
+
+  // أوقف أي تايمر سابق
+  if(mainTimeout){
+    clearTimeout(mainTimeout);
+  }
+
+  // غيّر الصورة الرئيسية
+  main.src = img.src;
+
+  // رجوع تلقائي بعد 3 ثواني
+  mainTimeout = setTimeout(()=>{
+    main.src = defaultImage;
+  },3000);
+}
