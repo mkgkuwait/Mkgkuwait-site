@@ -22,26 +22,27 @@
   <!-- الشعار -->
   <a href="index.html">
     <img src="logo.png" class="logo" alt="logo">
-</a>
-<!-- قسم صور احتفالات رفع العلم -->
-<div class="flag-hero">
+  </a>
 
-  <!-- الصورة الطولية (رقم 6) -->
-  <div class="flag-side">
-    <img src="images/flag6.jpg" alt="">
+  <!-- قسم صور احتفالات رفع العلم -->
+  <div class="flag-hero">
+
+    <!-- الصورة رقم 6 (يسار - طولية) -->
+    <div class="flag-side">
+      <img src="images/flag6.jpg" alt="">
+    </div>
+
+    <!-- السلايدر (باقي الصور) -->
+    <div class="flag-slider">
+      <img src="images/flag1.jpg" class="slide active" alt="">
+      <img src="images/flag2.jpg" class="slide" alt="">
+      <img src="images/flag3.jpg" class="slide" alt="">
+      <img src="images/flag4.jpg" class="slide" alt="">
+      <img src="images/flag5.jpg" class="slide" alt="">
+      <img src="images/flag7.jpg" class="slide" alt="">
+    </div>
+
   </div>
-
-  <!-- السلايدر -->
-  <div class="flag-slider">
-    <img src="images/flag1.jpg" class="slide active">
-    <img src="images/flag2.jpg" class="slide">
-    <img src="images/flag3.jpg" class="slide">
-    <img src="images/flag4.jpg" class="slide">
-    <img src="images/flag5.jpg" class="slide">
-    <img src="images/flag7.jpg" class="slide">
-  </div>
-
-</div>
 
   <h1
     data-ar="تسجيل المدارس – احتفالات رفع العلم 2026"
@@ -52,7 +53,6 @@
   <!-- الفورم -->
   <form id="volunteerForm">
 
-    <!-- نوع التسجيل (ثابت للتمييز في Google Sheet) -->
     <input type="hidden" name="Registration_Type" value="Flag_Day_2026">
 
     <!-- بيانات المدرسة -->
@@ -92,20 +92,17 @@
       placeholder="عدد الطلاب المشاركين">
 
     <!-- نوع المشاركة -->
-    <div class="ل="radio-group">
+    <div class="radio-group">
+      <label class="radio-item">
+        <input type="radio" name="Participation_Type" value="Attendance" required>
+        <span>حضور الفعالية فقط</span>
+      </label>
 
-  <label class="radio-item">
-    <input type="radio" name="Participation_Type" value="Attendance" required>
-    <span>حضور الفعالية فقط</span>
-  </label>
-
-  <label class="radio-item">
-    <input type="radio" name="Participation_Type" value="Operetta">
-    <span>المشاركة في الأوبريت الوطني</span>
-  </label>
-
-</div>
-
+      <label class="radio-item">
+        <input type="radio" name="Participation_Type" value="Operetta">
+        <span>المشاركة في الأوبريت الوطني</span>
+      </label>
+    </div>
 
     <!-- بيانات المسؤول -->
     <h3
@@ -136,7 +133,6 @@
       data-ph-en="Email"
       placeholder="البريد الإلكتروني">
 
-    <!-- زر الإرسال -->
     <button
       class="submit"
       type="submit"
@@ -151,35 +147,30 @@
 <!-- شريط التواصل (نفس الموقع) -->
 <div class="footer-fixed">
 
-  <!-- Location -->
   <a href="https://maps.app.goo.gl/Uh4Pe6vRAKwXzFHb7" aria-label="Location">
     <svg viewBox="0 0 24 24">
       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/>
     </svg>
   </a>
 
-  <!-- Email -->
   <a href="mailto:mkgkuwait@outlook.com" aria-label="Email">
     <svg viewBox="0 0 24 24">
       <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
     </svg>
   </a>
 
-  <!-- Phone -->
   <a href="tel:25473556" aria-label="Phone">
     <svg viewBox="0 0 24 24">
       <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V21c0 .55-.45 1-1 1C10.07 22 2 13.93 2 3c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
     </svg>
   </a>
 
-  <!-- X -->
   <a href="https://x.com/mkgkuwait" aria-label="X">
     <svg viewBox="0 0 24 24">
       <path d="M18.244 2H21l-6.524 7.457L22.5 22h-6.728l-5.27-6.513L4.78 22H2l6.984-7.97L1.5 2h6.89l4.763 5.88L18.244 2z"/>
     </svg>
   </a>
 
-  <!-- Instagram -->
   <a href="https://instagram.com/mkgkuwait" aria-label="Instagram">
     <svg viewBox="0 0 24 24">
       <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
@@ -190,4 +181,3 @@
 
 </body>
 </html>
-
