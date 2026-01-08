@@ -152,26 +152,29 @@ input::placeholder{
 }
 
 /* ======================
-   FLAG DAY – RESPONSIVE FIX
+   FLAG DAY – NO CROP (FINAL)
 ====================== */
 
 /* الصورة الرئيسية */
 .flag-hero-main{
   margin:20px auto 26px;
-  max-width:900px;          /* يمنع التضخم بالويندوز */
+  max-width:900px;
+  background:#000;
+  border-radius:22px;
 }
 
 .flag-hero-main img{
   width:100%;
-  height:360px;
-  object-fit:cover;         /* ويندوز */
+  height:420px;          /* ارتفاع ثابت */
+  object-fit:contain;    /* ⭐ لا قص نهائيًا */
+  background:#000;
   border-radius:22px;
   display:block;
 }
 
 /* شريط الصور */
 .flag-strip{
-  max-width:900px;          /* نفس عرض الهيرو */
+  max-width:900px;
   margin:0 auto 34px;
   display:flex;
   gap:14px;
@@ -189,41 +192,25 @@ input::placeholder{
 }
 
 .flag-strip img{
-  flex:0 0 180px;           /* حجم متزن للويندوز */
+  flex:0 0 180px;
   height:120px;
-  object-fit:cover;         /* ويندوز */
-  border-radius:16px;
+  object-fit:contain;    /* ⭐ لا قص */
   background:#000;
-  transition:.3s;
-}
-
-.flag-strip img:hover{
-  transform:scale(1.04);
+  border-radius:16px;
+  padding:6px;           /* يعطي تنفس للصورة */
 }
 
 /* ======================
-   MOBILE FIX (NO CROP)
+   Mobile
 ====================== */
 @media (max-width:768px){
 
-  .flag-hero-main{
-    max-width:100%;
-  }
-
   .flag-hero-main img{
-    height:240px;
-    object-fit:contain;     /* ⭐ حل القص */
-    background:#000;
-  }
-
-  .flag-strip{
-    max-width:100%;
+    height:260px;
   }
 
   .flag-strip img{
     flex:0 0 150px;
     height:100px;
-    object-fit:contain;     /* ⭐ حل القص */
-    background:#000;
   }
 }
