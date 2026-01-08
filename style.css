@@ -152,69 +152,61 @@ input::placeholder{
 }
 
 /* ======================
-   FLAG DAY HERO (FIXED)
+   FLAG DAY – HERO STYLE
 ====================== */
 
-/* غلاف يقيّد العرض */
-.flag-hero-wrap{
-  max-width:720px;
-  margin:0 auto 30px;
+/* الصورة الرئيسية */
+.flag-hero-main{
+  margin:20px 0 24px;
 }
 
-/* التخطيط الداخلي */
-.flag-hero{
-  direction:ltr;
-  display:grid;
-  grid-template-columns:220px 1fr;
-  gap:16px;
-  align-items:start;
-}
-
-/* الصورة الطولية (رقم 6) */
-.flag-side img{
+.flag-hero-main img{
   width:100%;
-  height:340px;
+  height:320px;
   object-fit:cover;
-  object-position:left top;
-  border-radius:18px;
+  border-radius:20px;
 }
 
-/* السلايدر */
-.flag-slider{
-  position:relative;
-  height:260px;
-  overflow:hidden;
-  border-radius:18px;
+/* شريط الصور */
+.flag-strip{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding-bottom:6px;
+  margin-bottom:30px;
 }
 
-.flag-slider .slide{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+.flag-strip::-webkit-scrollbar{
+  height:6px;
+}
+
+.flag-strip::-webkit-scrollbar-thumb{
+  background:#333;
+  border-radius:10px;
+}
+
+.flag-strip img{
+  flex:0 0 160px;
+  height:110px;
   object-fit:cover;
-  opacity:0;
-  transition:opacity .8s ease;
+  border-radius:14px;
+  opacity:.9;
+  transition:.3s;
 }
 
-.flag-slider .slide.active{
+.flag-strip img:hover{
   opacity:1;
+  transform:scale(1.04);
 }
 
-/* ======================
-   Mobile
-====================== */
+/* موبايل */
 @media (max-width:768px){
-  .flag-hero{
-    grid-template-columns:1fr;
+  .flag-hero-main img{
+    height:240px;
   }
 
-  .flag-side img{
-    height:260px;
-    object-position:center top;
-  }
-
-  .flag-slider{
-    height:220px;
+  .flag-strip img{
+    flex:0 0 140px;
+    height:100px;
   }
 }
