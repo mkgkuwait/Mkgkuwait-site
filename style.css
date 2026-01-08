@@ -44,7 +44,7 @@ html,body{
 .page{
   max-width:720px;
   margin:auto;
-  padding:110px 16px 150px; /* مساحة كافية للبنر السفلي */
+  padding:110px 16px 150px;
 }
 
 /* ======================
@@ -128,17 +128,43 @@ canvas{
   background:#fff;
   border-radius:12px;
   margin-top:10px;
-  touch-action:none;        /* مهم جداً للموبايل */
+  touch-action:none;
   -ms-touch-action:none;
-  pointer-events:auto;     /* يمنع التعطيل */
+  pointer-events:auto;
   position:relative;
   z-index:5;
 }
 
+/* ======================
+   Radio Buttons (FIX)
+====================== */
+.radio-group{
+  margin:14px 0 6px;
+}
+
+.radio-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.radio-item span{
+  line-height:1;
+}
+
+.radio-item input[type="radio"]{
+  margin:0;
+  width:18px;
+  height:18px;
+  accent-color:var(--gold);
+  flex-shrink:0;
+}
 
 /* ======================
    Official Contact Bar
-   (مثل الصورة تمامًا)
 ====================== */
 .footer-fixed{
   position:fixed;
@@ -154,14 +180,12 @@ canvas{
   z-index:1500;
 }
 
-/* Links */
 .footer-fixed a{
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
-/* SVG Icons */
 .footer-fixed svg{
   width:20px;
   height:20px;
