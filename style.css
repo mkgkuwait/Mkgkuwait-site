@@ -285,13 +285,14 @@ body.view-official .flag-hero img{
 
 .flag-thumbs img{
   width:100%;
-  height:90px;
-  object-fit:cover;
+  height:90px;               /* إطار موحّد */
+  background:#000;
   border-radius:12px;
+  object-fit:contain;        /* ⭐ صورة كاملة */
+  padding:6px;               /* يعطي نفس الإحساس */
   cursor:pointer;
-  opacity:0.9;
-  transition:.3s;
 }
+
 
 .flag-thumbs img:hover{
   opacity:1;
