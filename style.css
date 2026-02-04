@@ -1,221 +1,48 @@
-*{
-  box-sizing:border-box;
-}
-
 /* ======================
-   Colors & Base
+   CLOSED REGISTRATION BOX
+   (Flag Day 2026 schools)
 ====================== */
-:root{
-  --gold:#d4af37;
-  --dark:#0b0b0b;
-  --field:#1a1a1a;
+.closed-box{
+  max-width: 780px;
+  margin: 18px auto 0;
+  padding: 22px 18px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 22px;
+  background: rgba(255,255,255,.04);
+  text-align: center;
 }
 
-html,body{
-  margin:0;
-  padding:0;
-  background:var(--dark);
-  color:#fff;
-  font-family:"Segoe UI",Tahoma,Arial;
+.closed-box h2{
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 800;
 }
 
-/* ======================
-   Language Toggle
-====================== */
-.lang-toggle{
-  position:fixed;
-  top:14px;
-  right:14px;
-  z-index:2000;
-  background:var(--gold);
-  color:#000;
-  border:none;
-  border-radius:22px;
-  padding:8px 18px;
-  font-weight:700;
-  font-size:14px;
-  cursor:pointer;
+.closed-box p{
+  margin: 8px 0;
+  line-height: 1.9;
+  color: rgba(255,255,255,.92);
 }
 
-/* ======================
-   Page Wrapper
-====================== */
-.page{
-  max-width:900px;
-  margin:auto;
-  padding:120px 16px 160px;
+.closed-actions{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
 }
 
-/* ======================
-   Official Logo
-====================== */
-.logo{
-  display:block;
-  margin:0 auto 30px;
-  height:160px;          /* كمبيوتر */
-  max-width:100%;
+.closed-actions .btn{
+  width: auto;                 /* مهم: لا يصير 100% داخل الصندوق */
+  max-width: none;
+  margin: 0;
+  padding: 12px 18px;
+  font-size: 16px;
+  border-radius: 22px;
 }
 
-/* ======================
-   Headings
-====================== */
-h1{
-  text-align:center;
-  margin:0 0 26px;
-  font-size:24px;
-  font-weight:700;
-}
-
-/* ======================
-   Buttons
-====================== */
-.btn,
-.submit,
-button[type="button"]{
-  display:block;
-  width:100%;
-  max-width:340px;
-  margin:22px auto 0;
-  padding:16px;
-  border-radius:32px;
-  background:var(--gold);
-  color:#000;
-  font-size:18px;
-  font-weight:700;
-  border:none;
-  cursor:pointer;
-  text-align:center;
-  text-decoration:none;
-}
-
-/* ======================
-   Form Fields
-====================== */
-input,
-select{
-  width:100%;
-  padding:16px;
-  margin:10px 0;
-  border-radius:14px;
-  border:none;
-  background:var(--field);
-  color:#fff;
-  font-size:16px;
-}
-
-input::placeholder{
-  color:#aaa;
-}
-
-/* ======================
-   Radio Buttons
-====================== */
-.radio-group{
-  margin:18px 0;
-}
-
-.radio-item{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:14px;
-  font-size:16px;
-}
-
-.radio-item input{
-  width:18px;
-  height:18px;
-  accent-color:var(--gold);
-}
-
-/* ======================
-   Footer Contact Bar
-====================== */
-.footer-fixed{
-  position:fixed;
-  bottom:14px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#000;
-  padding:10px 24px;
-  border-radius:40px;
-  display:flex;
-  gap:22px;
-  align-items:center;
-  z-index:1500;
-}
-
-.footer-fixed svg{
-  width:20px;
-  height:20px;
-  fill:#fff;
-  opacity:.95;
-}
-
-/* ======================
-   FLAG DAY – OFFICIAL GALLERY
-   (NO CROP – GOVERNMENT STYLE)
-====================== */
-
-/* الصورة الرئيسية */
-.flag-main{
-  width:100%;
-  height:420px;
-  background:#000;
-  border-radius:24px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:20px 0 22px;
-  overflow:hidden;
-}
-
-.flag-main img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;   /* ⭐ بدون قص نهائيًا */
-}
-
-/* الصور السفلية */
-.flag-thumbs{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:12px;
-}
-
-.flag-thumbs img{
-  width:100%;
-  height:110px;
-  background:#000;
-  border-radius:16px;
-  object-fit:contain;   /* ⭐ صورة كاملة */
-  padding:8px;
-  cursor:pointer;
-  transition:.25s;
-}
-
-.flag-thumbs img:hover{
-  transform:scale(1.04);
-}
-
-/* ======================
-   Mobile
-====================== */
-@media (max-width:768px){
-
-  .logo{
-    height:120px;   /* موبايل */
-  }
-
-  .flag-main{
-    height:260px;
-  }
-
-  .flag-thumbs{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .flag-thumbs img{
-    height:90px;
-  }
+.closed-actions .btn.outline{
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid rgba(212,175,55,.55);
 }
