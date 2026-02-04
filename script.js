@@ -29,20 +29,26 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 /* ======================
    Forms Logic (SAFE)
+   - يعمل فقط إذا وجد form#volunteerForm
 ====================== */
 document.addEventListener("DOMContentLoaded",()=>{
 
-  const form     = document.getElementById("volunteerForm");
-  if(!form) return;   // ← لا يوجد فورم في الصفحة
+  const form = document.getElementById("volunteerForm");
+  if(!form) return;
+
+  // إذا الصفحة موقّفة (مستقبلاً)، تقدر تضيف data-closed="1" في الـ form
+  if(form.dataset.closed === "1"){
+    form.querySelectorAll("input,select,button,textarea").forEach(el=> el.disabled = true);
+    alert("التسجيل مغلق لهذه الصفحة");
+    return;
+  }
 
   const age      = document.getElementById("age");
   const guardian = document.getElementById("guardian");
   const agree    = document.getElementById("agree");
   const canvas   = document.getElementById("sig");
 
-  /* ======================
-     AGE LOGIC (only if exists)
-  ====================== */
+  /* ===== AGE LOGIC (only if exists) ===== */
   if(age && guardian){
     guardian.style.display = "none";
 
@@ -73,9 +79,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     });
   }
 
-  /* ======================
-     SIGNATURE CANVAS (only if exists)
-  ====================== */
+  /* ===== SIGNATURE CANVAS (only if exists) ===== */
   if(canvas){
     const ctx = canvas.getContext("2d");
     let drawing = false;
@@ -119,9 +123,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       ctx.stroke();
     }
 
-    function end(){
-      drawing = false;
-    }
+    function end(){ drawing = false; }
 
     canvas.addEventListener("mousedown", start);
     canvas.addEventListener("mousemove", move);
@@ -135,13 +137,11 @@ document.addEventListener("DOMContentLoaded",()=>{
     window.clearSig = init;
   }
 
-  /* ======================
-     SUBMIT → Google Script
-  ====================== */
+  /* ===== SUBMIT → Google Script ===== */
   form.addEventListener("submit",(e)=>{
     e.preventDefault();
 
-    /* ===== تحقق العمر فقط إذا موجود ===== */
+    // تحقق العمر فقط إذا موجود
     let a = null;
     if(age){
       a = parseInt(age.value,10);
@@ -161,12 +161,9 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     const data = new FormData(form);
 
-    /* ===== إضافة التوقيع فقط إذا موجود ===== */
+    // إضافة التوقيع فقط إذا موجود
     if(a !== null && a <= 17 && canvas){
-      data.append(
-        "Guardian_Signature_Base64",
-        canvas.toDataURL("image/png")
-      );
+      data.append("Guardian_Signature_Base64", canvas.toDataURL("image/png"));
     }
 
     fetch(
@@ -178,42 +175,11 @@ document.addEventListener("DOMContentLoaded",()=>{
   });
 
 });
-/* ======================
-   Flag Day Slider
-====================== */
-document.addEventListener("DOMContentLoaded",()=>{
-  const slides = document.querySelectorAll(".flag-slider .slide");
-  if(!slides.length) return;
 
-  let i = 0;
-  setInterval(()=>{
-    slides[i].classList.remove("active");
-    i = (i + 1) % slides.length;
-    slides[i].classList.add("active");
-  }, 3000);
-});
-/* ======================
-   View Mode Switch
-====================== */
-function setView(mode){
-  document.body.classList.remove("view-official","view-art");
 
-  if(mode === "art"){
-    document.body.classList.add("view-art");
-    localStorage.setItem("view_mode","art");
-  }else{
-    document.body.classList.add("view-official");
-    localStorage.setItem("view_mode","official");
-  }
-}
-
-/* الوضع الافتراضي */
-document.addEventListener("DOMContentLoaded",()=>{
-  const saved = localStorage.getItem("view_mode") || "official";
-  setView(saved);
-});
 /* ======================
-   Image Preview Logic
+   Flag Day (Gallery Preview)
+   - يعمل فقط إذا وجد #mainImage
 ====================== */
 let mainTimeout = null;
 let defaultImage = null;
@@ -229,16 +195,32 @@ function previewImage(img){
   const main = document.getElementById("mainImage");
   if(!main) return;
 
-  // أوقف أي تايمر سابق
-  if(mainTimeout){
-    clearTimeout(mainTimeout);
-  }
+  if(mainTimeout) clearTimeout(mainTimeout);
 
-  // غيّر الصورة الرئيسية
   main.src = img.src;
 
-  // رجوع تلقائي بعد 3 ثواني
   mainTimeout = setTimeout(()=>{
     main.src = defaultImage;
   },3000);
 }
+
+
+/* ======================
+   View Mode Switch
+====================== */
+function setView(mode){
+  document.body.classList.remove("view-official","view-art");
+
+  if(mode === "art"){
+    document.body.classList.add("view-art");
+    localStorage.setItem("view_mode","art");
+  }else{
+    document.body.classList.add("view-official");
+    localStorage.setItem("view_mode","official");
+  }
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const saved = localStorage.getItem("view_mode") || "official";
+  setView(saved);
+});
