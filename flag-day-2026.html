@@ -24,27 +24,26 @@
     <img src="logo.png" class="logo" alt="logo">
   </a>
 
+  <!-- ===== Flag Day Gallery ===== -->
+  <div class="flag-gallery-wrap">
 
-<!-- ===== Flag Day Gallery ===== -->
-<div class="flag-gallery-wrap">
+    <!-- الصورة الرئيسية -->
+    <div class="flag-main">
+      <img id="mainImage" src="images/flag1.jpg" alt="">
+    </div>
 
-  <!-- الصورة الرئيسية -->
-  <div class="flag-main">
-    <img id="mainImage" src="images/flag1.jpg" alt="">
+    <!-- الصور السفلية (بدون سكرول) -->
+    <div class="flag-thumbs">
+      <img src="images/flag1.jpg" onclick="previewImage(this)">
+      <img src="images/flag2.jpg" onclick="previewImage(this)">
+      <img src="images/flag3.jpg" onclick="previewImage(this)">
+      <img src="images/flag4.jpg" onclick="previewImage(this)">
+      <img src="images/flag5.jpg" onclick="previewImage(this)">
+      <img src="images/flag6.jpg" onclick="previewImage(this)">
+      <img src="images/flag7.jpg" onclick="previewImage(this)">
+    </div>
+
   </div>
-
-  <!-- الصور السفلية (بدون سكرول) -->
-  <div class="flag-thumbs">
-    <img src="images/flag1.jpg" onclick="previewImage(this)">
-    <img src="images/flag2.jpg" onclick="previewImage(this)">
-    <img src="images/flag3.jpg" onclick="previewImage(this)">
-    <img src="images/flag4.jpg" onclick="previewImage(this)">
-    <img src="images/flag5.jpg" onclick="previewImage(this)">
-    <img src="images/flag6.jpg" onclick="previewImage(this)">
-    <img src="images/flag7.jpg" onclick="previewImage(this)">
-  </div>
-
-</div>
 
   <h1
     data-ar="تسجيل المدارس – احتفالات رفع العلم 2026"
@@ -52,109 +51,43 @@
     تسجيل المدارس – احتفالات رفع العلم 2026
   </h1>
 
-  <!-- الفورم -->
-  <form id="volunteerForm">
+  <!-- صفحة مقفلة -->
+  <div class="closed-box">
 
-    <input type="hidden" name="Registration_Type" value="Flag_Day_2026">
+    <h2
+      data-ar="تم إغلاق التسجيل لهذه الفعالية"
+      data-en="Registration for this event is closed">
+      تم إغلاق التسجيل لهذه الفعالية
+    </h2>
 
-    <!-- بيانات المدرسة -->
-    <input
-      name="School_Name"
-      required
-      data-ph-ar="اسم المدرسة"
-      data-ph-en="School Name"
-      placeholder="اسم المدرسة">
+    <p
+      data-ar="نشكر المدارس الحكومية والخاصة التابعة لمحافظة مبارك الكبير على اهتمامهم بالمشاركة."
+      data-en="We thank all public and private schools in Mubarak Al-Kabeer Governorate for their interest in participating.">
+      نشكر المدارس الحكومية والخاصة التابعة لمحافظة مبارك الكبير على اهتمامهم بالمشاركة.
+    </p>
 
-    <select name="School_Type" required>
-      <option value="" data-ar="نوع المدرسة" data-en="School Type">نوع المدرسة</option>
-      <option value="Government" data-ar="حكومية" data-en="Government">حكومية</option>
-      <option value="Private" data-ar="خاصة" data-en="Private">خاصة</option>
-    </select>
+    <p
+      data-ar="سيتم التواصل مع المدارس المسجلة مسبقًا عبر بيانات التواصل المعتمدة."
+      data-en="Registered schools will be contacted using the provided official contact information.">
+      سيتم التواصل مع المدارس المسجلة مسبقًا عبر بيانات التواصل المعتمدة.
+    </p>
 
-    <select name="School_Gender" required>
-      <option value="" data-ar="الجنس" data-en="Gender">الجنس</option>
-      <option value="Boys" data-ar="بنين" data-en="Boys">بنين</option>
-      <option value="Girls" data-ar="بنات" data-en="Girls">بنات</option>
-    </select>
+    <div class="closed-actions">
+      <a class="btn" href="index.html"
+         data-ar="العودة للصفحة الرئيسية"
+         data-en="Back to Home">
+        العودة للصفحة الرئيسية
+      </a>
 
-    <select name="School_Stage" required>
-      <option value="" data-ar="المرحلة الدراسية" data-en="School Stage">المرحلة الدراسية</option>
-      <option value="KG" data-ar="رياض الأطفال" data-en="Kindergarten">رياض الأطفال</option>
-      <option value="Primary" data-ar="المرحلة الابتدائية" data-en="Primary">المرحلة الابتدائية</option>
-      <option value="Middle" data-ar="المرحلة المتوسطة" data-en="Middle">المرحلة المتوسطة</option>
-      <option value="Secondary" data-ar="المرحلة الثانوية" data-en="Secondary">المرحلة الثانوية</option>
-    </select>
+      <a class="btn outline" href="contact.html"
+         data-ar="التواصل والاستفسار"
+         data-en="Contact & Inquiries">
+        التواصل والاستفسار
+      </a>
+    </div>
 
-    <input
-      type="number"
-      name="Students_Count"
-      required
-      data-ph-ar="عدد الطلاب المشاركين"
-      data-ph-en="Number of Participating Students"
-      placeholder="عدد الطلاب المشاركين">
+  </div>
 
-    <!-- نوع المشاركة -->
-   <div class="radio-group">
-
-  <label class="radio-item">
-    <input type="radio" name="Participation_Type" value="Attendance" required>
-    <span
-      data-ar="حضور الفعالية فقط"
-      data-en="Attend Event Only">
-      حضور الفعالية فقط
-    </span>
-  </label>
-
-  <label class="radio-item">
-    <input type="radio" name="Participation_Type" value="Operetta">
-    <span
-      data-ar="المشاركة في الأوبريت الوطني"
-      data-en="Participate in the National Operetta">
-      المشاركة في الأوبريت الوطني
-    </span>
-  </label>
-
-</div>
-
-
-    <!-- بيانات المسؤول -->
-    <h3
-      data-ar="بيانات المسؤول للتواصل"
-      data-en="Contact Person Information">
-      بيانات المسؤول للتواصل
-    </h3>
-
-    <input
-      name="Contact_Name"
-      required
-      data-ph-ar="اسم المسؤول"
-      data-ph-en="Contact Name"
-      placeholder="اسم المسؤول">
-
-    <input
-      name="Contact_Phone"
-      required
-      data-ph-ar="رقم الهاتف"
-      data-ph-en="Phone Number"
-      placeholder="رقم الهاتف">
-
-    <input
-      type="email"
-      name="Contact_Email"
-      required
-      data-ph-ar="البريد الإلكتروني"
-      data-ph-en="Email"
-      placeholder="البريد الإلكتروني">
-
-    <button
-      class="submit"
-      type="submit"
-      data-ar="إرسال التسجيل"
-      data-en="Submit Registration">
-      إرسال التسجيل
-    </button>
-
-  </form>
 </div>
 
 <!-- شريط التواصل (نفس الموقع) -->
